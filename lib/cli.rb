@@ -2,11 +2,27 @@
 
 require 'rubygems'
 require 'commander/import'
-require 'hyperkit'
 
 program :name, 'gsc-cli'
 program :version, '0.0.1'
 program :description, 'A cli to manage gsc servers'
+
+command :deploy do |c|
+  c.syntax = 'gsc-cli deploy [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    `rm -rf /tmp/gsd`
+    tmp_dir = '/tmp/gsd'
+    unit_file = "#{tmp_dir}/7days/sevendays.service"
+    `git clone https://github.com/Egeeio/gsd.git #{tmp_dir}`
+    text = File.read(unit_file)
+    new_contents = text.gsub(/_USER_/, 'egee')
+    File.open(unit_file, 'w') { |file| file.puts new_contents }
+  end
+end
 
 command :create do |c|
   c.syntax = 'gsc-cli create [options]'
@@ -33,7 +49,6 @@ command :delete do |c|
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
     # Do something or c.when_called Gsc-cli::Commands::Create
-    puts 'nahh'
   end
 end
 

@@ -16,7 +16,8 @@ command :deploy do |c|
     clone_repo(tmp_dir)
     token_replace_daemon(tmp_dir)
     token_replace_run_script(tmp_dir)
-    # TODO: Move unit file to /etc/systemd/system (root required😬😬)
+    system("sudo -p 'sudo password: '
+            cp -f /tmp/gsd/7days/sevendays.service /etc/systemd/system/")
   end
 end
 

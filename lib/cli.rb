@@ -1,11 +1,11 @@
 require 'commander/import'
 
-def deploy_sevendays()
+def deploy(game)
   tmp_dir = '/tmp/gsd'
   clone_repo(tmp_dir)
-  token_replace_daemon(tmp_dir)
-  token_replace_run_script(tmp_dir)
-  system("sudo -p 'sudo password: ' cp -f /tmp/gsd/gsd.service /etc/systemd/system/sevendays.service")
+  token_replace_daemon(tmp_dir, game)
+  token_replace_run_script(tmp_dir, game)
+  system("sudo -p 'sudo password: ' cp -f /tmp/gsd/gsd.service /etc/systemd/system/#{game}.service")
 end
 
 def clone_repo(tmp_dir)
@@ -14,26 +14,22 @@ def clone_repo(tmp_dir)
   `git clone https://github.com/Egeeio/gsd.git #{tmp_dir}`
 end
 
-def token_replace_run_script(tmp_dir)
+def token_replace_run_script(tmp_dir, game)
   # TODO: Consildate to a single token replace method
-  run_script = "#{tmp_dir}/7days/run.sh"
+  run_script = "#{tmp_dir}/#{game}/run.sh"
   contents = File.read(run_script)
-  new_contents = contents.gsub(/_POSTBUILDIR_/, "#{tmp_dir}/7days/post_build")
+  new_contents = contents.gsub(/_POSTBUILDIR_/, "#{tmp_dir}/#{game}/post_build")
                          .gsub(/_WORKDIR_/, tmp_dir)
   File.open(run_script, 'w') { |file| file.puts new_contents }
 end
 
-def token_replace_daemon(tmp_dir)
+def token_replace_daemon(tmp_dir, game)
   unit_file = "#{tmp_dir}/gsd.service"
   text = File.read(unit_file)
   new_contents = text.gsub(/_USER_/, 'egee')
-                     .gsub(/_EXECSTART_/, "#{tmp_dir}/7days/run.sh")
+                     .gsub(/_EXECSTART_/, "#{tmp_dir}/#{game}/run.sh")
   File.open(unit_file, 'w') { |file| file.puts new_contents }
 end
-
-@games = {
-  'sevendays' => deploy_sevendays
-}
 
 program :name, 'gsc-cli'
 program :version, '0.0.1'
@@ -46,6 +42,6 @@ command :deploy do |c|
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    @games[args.first]
+    deploy(args.first)
   end
 end

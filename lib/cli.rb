@@ -1,33 +1,32 @@
 require 'commander/import'
 
 def deploy(game)
-  tmp_dir = '/tmp/gsd'
-  clone_repo(tmp_dir)
-  token_replace_daemon(tmp_dir, game)
-  token_replace_run_script(tmp_dir, game)
-  system("sudo -p 'sudo password: ' cp -f /tmp/gsd/gsd.service /etc/systemd/system/#{game}.service")
+  work_dir = '/tmp/gsd'
+  clone_repo(work_dir)
+  token_replace_daemon(work_dir, game)
+  token_replace(work_dir, game, run)
+  token_replace(work_dir, game, update)
+  system("sudo -p 'sudo password: ' cp -f #{work_dir}/gsd.service /etc/systemd/system/#{game}.service")
 end
 
-def clone_repo(tmp_dir)
+def clone_repo(work_dir)
   # TODO: Add logic around existing folder discovery
   `rm -rf /tmp/gsd`
-  `git clone https://github.com/Egeeio/gsd.git #{tmp_dir}`
+  `git clone https://github.com/Egeeio/gsd.git #{work_dir}`
 end
 
-def token_replace_run_script(tmp_dir, game)
-  # TODO: Consildate to a single token replace method
-  run_script = "#{tmp_dir}/#{game}/run.sh"
+def token_replace(work_dir, game, script)
+  script = "#{work_dir}/#{game}/#{script}.sh"
   contents = File.read(run_script)
-  new_contents = contents.gsub(/_POSTBUILDIR_/, "#{tmp_dir}/#{game}/post_build")
-                         .gsub(/_WORKDIR_/, tmp_dir)
-  File.open(run_script, 'w') { |file| file.puts new_contents }
+  new_contents = contents.gsub(/_WORKDIR_/, work_dir)
+  File.open(script, 'w') { |file| file.puts new_contents }
 end
 
-def token_replace_daemon(tmp_dir, game)
-  unit_file = "#{tmp_dir}/gsd.service"
+def token_replace_daemon(work_dir, game)
+  unit_file = "#{work_dir}/gsd.service"
   text = File.read(unit_file)
   new_contents = text.gsub(/_USER_/, 'egee')
-                     .gsub(/_EXECSTART_/, "#{tmp_dir}/#{game}/run.sh")
+                     .gsub(/_EXECSTART_/, "#{work_dir}/#{game}/run.sh")
   File.open(unit_file, 'w') { |file| file.puts new_contents }
 end
 

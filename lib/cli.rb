@@ -4,8 +4,8 @@ def deploy(game)
   work_dir = '/tmp/gsd'
   clone_repo(work_dir)
   token_replace_daemon(work_dir, game)
-  token_replace(work_dir, game, run)
-  token_replace(work_dir, game, update)
+  token_replace_script(work_dir, game, 'run')
+  token_replace_script(work_dir, game, 'update')
   system("sudo -p 'sudo password: ' cp -f #{work_dir}/gsd.service /etc/systemd/system/#{game}.service")
 end
 
@@ -15,19 +15,19 @@ def clone_repo(work_dir)
   `git clone https://github.com/Egeeio/gsd.git #{work_dir}`
 end
 
-def token_replace(work_dir, game, script)
-  script = "#{work_dir}/#{game}/#{script}.sh"
-  contents = File.read(run_script)
-  new_contents = contents.gsub(/_WORKDIR_/, work_dir)
-  File.open(script, 'w') { |file| file.puts new_contents }
-end
-
 def token_replace_daemon(work_dir, game)
   unit_file = "#{work_dir}/gsd.service"
   text = File.read(unit_file)
   new_contents = text.gsub(/_USER_/, 'egee')
                      .gsub(/_EXECSTART_/, "#{work_dir}/#{game}/run.sh")
   File.open(unit_file, 'w') { |file| file.puts new_contents }
+end
+
+def token_replace_script(work_dir, game, script)
+  script = "#{work_dir}/#{game}/#{script}.sh"
+  contents = File.read(script)
+  new_contents = contents.gsub(/_WORKDIR_/, work_dir)
+  File.open(script, 'w') { |file| file.puts new_contents }
 end
 
 program :name, 'gsc-cli'

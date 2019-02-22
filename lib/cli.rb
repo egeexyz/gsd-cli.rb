@@ -27,7 +27,8 @@ def token_replace_script(work_dir, game, script)
   script = "#{work_dir}/#{game}/#{script}.sh"
   contents = File.read(script)
   new_contents = contents.gsub(/_WORKDIR_/, work_dir)
-  File.open(script, 'w') { |file| file.puts new_contents }
+  newer_contents = new_contents.gsub(/_POSTBUILD_/, "#{work_dir}/post_build")
+  File.open(script, 'w') { |file| file.puts newer_contents }
 end
 
 program :name, 'gsc-cli'

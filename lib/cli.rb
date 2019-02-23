@@ -1,9 +1,11 @@
 require 'commander/import'
 
-def deploy(game)
+def deploy(args)
   work_dir = '/tmp/gsd'
+  game = args.first
+  user = args.last
   clone_repo(work_dir)
-  token_replace_daemon(work_dir, game)
+  token_replace_daemon(work_dir, game, user)
   token_replace_script(work_dir, game, 'run')
   token_replace_script(work_dir, game, 'update')
   system("sudo -p 'sudo password: ' cp -f #{work_dir}/gsd.service /etc/systemd/system/#{game}.service")
@@ -15,10 +17,10 @@ def clone_repo(work_dir)
   `git clone https://github.com/Egeeio/gsd.git #{work_dir}`
 end
 
-def token_replace_daemon(work_dir, game)
+def token_replace_daemon(work_dir, game, user)
   unit_file = "#{work_dir}/gsd.service"
   text = File.read(unit_file)
-  new_contents = text.gsub(/_USER_/, 'egee')
+  new_contents = text.gsub(/_USER_/, user)
                      .gsub(/_EXECSTART_/, "#{work_dir}/#{game}/run.sh")
   File.open(unit_file, 'w') { |file| file.puts new_contents }
 end
@@ -42,6 +44,6 @@ command :deploy do |c|
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    deploy(args.first)
+    deploy(args)
   end
 end

@@ -1,42 +1,9 @@
 require 'commander/import'
-
-def deploy(args)
-  work_dir = '/tmp/gsd'
-  game = args.first
-  user = args.last
-  clone_repo(work_dir)
-  token_replace_daemon(work_dir, game, user)
-  token_replace_script(work_dir, game, 'run')
-  token_replace_script(work_dir, game, 'update')
-  system("sudo -p 'sudo password: ' cp -f #{work_dir}/gsd.service /etc/systemd/system/#{game}.service")
-end
-
-def clone_repo(work_dir)
-  # TODO: Add logic around existing folder discovery
-  `rm -rf /tmp/gsd`
-  `git clone https://github.com/Egeeio/gsd.git #{work_dir}`
-end
-
-def token_replace_daemon(work_dir, game, user)
-  unit_file = "#{work_dir}/gsd.service"
-  text = File.read(unit_file)
-  new_contents = text.gsub(/_USER_/, user)
-                     .gsub(/_EXECSTART_/, "#{work_dir}/#{game}/run.sh")
-  File.open(unit_file, 'w') { |file| file.puts new_contents }
-end
-
-def token_replace_script(work_dir, game, script)
-  script = "#{work_dir}/#{game}/#{script}.sh"
-  contents = File.read(script)
-  new_contents = contents.gsub(/_WORKDIR_/, work_dir)
-  newer_contents = new_contents.gsub(/_POSTBUILDIR_/, "#{work_dir}/#{game}/post_build")
-  File.open(script, 'w') { |file| file.puts newer_contents }
-end
+require './lib/deploy'
 
 program :name, 'gsc-cli'
 program :version, '0.0.1'
 program :description, 'A cli to manage gsc servers'
-
 command :deploy do |c|
   c.syntax = 'gsc-cli deploy [options]'
   c.summary = 'Deploy a game server as a systemd unit'
@@ -44,6 +11,7 @@ command :deploy do |c|
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    deploy(args)
+    deploy = Deploy.new('/tmp/gsd', args.first)
+    deploy.it(args.first, args.last)
   end
 end

@@ -28,14 +28,14 @@ command :build do |c|
     desc = 'test desc'
     game = 'tf2'
     user = 'ubuntu'
-    exec_post = '-/usr/bin/tail -f /tmp/gsd/tf2/server_files/tf/console.log'
     exec_start = '/tmp/gsd/tf2/server_files/srcds_run \
     -console \
     -game tf \
     +sv_pure 1 \
     +map ctf_2fort \
     +maxplayers 24 \
-    -condebug &'
+    -condebug & \
+    /usr/bin/tail -f /tmp/gsd/tf2/server_files/tf/console.log'
 
     daemonize = Daemonize.new(desc, game, user, exec_post, exec_start)
     daemonize.it

@@ -1,10 +1,9 @@
 #
 class Daemonize
-  def initialize(desc,game, user, exec_post, exec_start)
+  def initialize(desc,game, user, exec_start)
     @desc = desc
     @user = user
     @game = game
-    @exec_post = exec_post
     @exec_start = exec_start
   end
 
@@ -30,7 +29,6 @@ class Daemonize
     [Service]
     Type=simple
     User=#{@user}
-    ExecStartPost=#{@exec_post}
     ExecStart=#{@exec_start}"
   end
 end

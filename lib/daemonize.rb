@@ -1,24 +1,34 @@
 #
 class Daemonize
-  def initialize(desc,game, user, exec_start)
+  def initialize(exec_start = nil,
+                 game = "tf2",
+                 desc = "Description",
+                 user = "ubuntu")
+    abort("Error: daemonize what game?") if exec_start.nil?
+    @exec_start = exec_start
+    @file_path = "/tmp/#{game}.service"
     @desc = desc
     @user = user
     @game = game
-    @exec_start = exec_start
   end
 
-  def it
-    file_path = '/tmp/test.service'
-    File.delete(file_path) if File.file?(file_path)
-    out_file = File.new(file_path, 'w')
-    out_file.puts(build_unit_file)
+  def build()
+    ensure_delete_unit_file()
+    create_unit_file()
+    # system("sudo -p "sudo password: " cp -f #{file_path} /etc/systemd/system/#{@game}.service")
+  end
+
+  private
+
+  def create_unit_file()
+    out_file = File.new(@file_path, "w")
+    out_file.puts(build_unit_file())
     out_file.close
-    system("sudo -p 'sudo password: ' cp -f #{file_path} /etc/systemd/system/#{@game}.service")
   end
 
-  # Just call systemctl from backticks
-
-
+  def ensure_delete_unit_file()
+    File.delete(@file_path) if File.file?(@file_path)
+  end
 
   def build_unit_file
     "[Unit]

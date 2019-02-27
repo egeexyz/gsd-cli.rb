@@ -1,19 +1,34 @@
+require './lib/servers/TeamFortress2.rb'
+require './lib/daemonize'
+
 # Just a class that deploys stuff
 class Deploy
-  def initialize(work_dir, game)
-    @work_dir = work_dir
-    @contents = {}
-    @files = { unit_file: "#{@work_dir}/gsd.service",
-               run_script: "#{@work_dir}/#{game}/run.sh",
-               update_script: "#{@work_dir}/#{game}/run.sh" }
+  def initialize(game,
+                 user = 'ubuntu',
+                 desc = 'Description')
+    @game = game
+    @user = user
+    @desc = desc
   end
 
-  def it(game, user)
-    clone_repo
-    read_files
-    replace_tokens(game, user)
-    write_files
-    system("sudo -p 'sudo password: ' cp -f #{@work_dir}/gsd.service /etc/systemd/system/#{game}.service")
+  def team_fortress_2
+    tf2 = TeamFortress2.new
+    daemonize = Daemonize.new(@desc,
+                              @game,
+                              @user,
+                              tf2.exec_start)
+    daemonize.it
+  end
+
+  def it
+    tf2 = TeamFortress2.new()
+    Daemonize.new()
+    
+  #   clone_repo
+  #   read_files
+  #   replace_tokens(game, user)
+  #   write_files
+  #   system("sudo -p 'sudo password: ' cp -f #{@work_dir}/gsd.service /etc/systemd/system/#{game}.service")
   end
 
   def clone_repo

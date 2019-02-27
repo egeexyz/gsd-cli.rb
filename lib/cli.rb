@@ -13,8 +13,8 @@ command :deploy do |c|
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    deploy = Deploy.new('/tmp/gsd', args.first)
-    deploy.it(args.first, args.last)
+    deploy = Deploy.new('tf2')
+    deploy.it()
   end
 end
 

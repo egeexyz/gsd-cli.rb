@@ -1,34 +1,11 @@
-require './lib/servers/TeamFortress2.rb'
-require './lib/daemonize'
+require "./lib/servers/team_fortress.rb"
+require "./lib/daemonize"
 
-# Just a class that deploys stuff
-class Deploy
-  def initialize(game,
-                 user = 'ubuntu',
-                 desc = 'Description')
-    @game = game
-    @user = user
-    @desc = desc
-  end
+# The class that deploys the game servers as daemons
+module Deploy
 
-  def team_fortress_2
-    tf2 = TeamFortress2.new
-    daemonize = Daemonize.new(@desc,
-                              @game,
-                              @user,
-                              tf2.exec_start)
-    daemonize.it
-  end
-
-  def it
-    tf2 = TeamFortress2.new()
-    Daemonize.new()
-    
-  #   clone_repo
-  #   read_files
-  #   replace_tokens(game, user)
-  #   write_files
-  #   system("sudo -p 'sudo password: ' cp -f #{@work_dir}/gsd.service /etc/systemd/system/#{game}.service")
+  def self.it(game, file_path)
+    system("sudo -p 'sudo password: ' cp -f #{file_path} /etc/systemd/system/#{game}.service")
   end
 
   def clone_repo
@@ -45,7 +22,7 @@ class Deploy
 
   def replace_tokens(game, user)
     @contents[:unit_file] = @contents[:unit_file].gsub(/_USER_/, user)
-                                                 .gsub(/_DESC_/, 'Just a thing')
+                                                 .gsub(/_DESC_/, "Just a thing")
                                                  .gsub(/_EXECSTART_/, "#{@work_dir}/#{game}/run.sh")
 
     @contents[:run_script] = @contents[:run_script].gsub(/_WORKDIR_/, @work_dir)
@@ -56,7 +33,7 @@ class Deploy
 
   def write_files
     @contents.each do |key, value|
-      File.open(@files[key], 'w') { |file| file.puts value }
+      File.open(@files[key], "w") { |file| file.puts value }
     end
   end
 end

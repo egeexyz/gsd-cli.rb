@@ -12,21 +12,22 @@ class Daemonize
     @game = game
   end
 
-  def build()
+  def build
     ensure_delete_unit_file()
     create_unit_file()
+    @file_path
     # system("sudo -p "sudo password: " cp -f #{file_path} /etc/systemd/system/#{@game}.service")
   end
 
   private
 
-  def create_unit_file()
+  def create_unit_file
     out_file = File.new(@file_path, "w")
     out_file.puts(build_unit_file())
     out_file.close
   end
 
-  def ensure_delete_unit_file()
+  def ensure_delete_unit_file
     File.delete(@file_path) if File.file?(@file_path)
   end
 

@@ -1,15 +1,27 @@
 # A module to produce resources for a Team Fortress 2 server
 class TeamFortress
-  attr_reader :name
-  def initialize
+  attr_reader :name, :app_id, :install_path, :log_path
+  def initialize(install_path = "")
+    install_path = "/tmp/#{@name}" if install_path.empty?
     @name = "tf2"
+    @app_id = "232250"
+    @install_path = install_path
+    @log_path = "#{install_path}/tf/console.log"
   end
 
-  def exec_start(file_path = "/tmp/gsd/tf2/server_files",
-                      log_path = "/tmp/gsd/tf2/server_files/tf/console.log",
-                      map = "ctf_2fort",
-                      players = 24)
-    "#{file_path}/srcds_run \
+  def install
+    puts "Beginning installation process. This may take a while..."
+    system("/usr/games/steamcmd +login anonymous +quit")
+    `/usr/games/steamcmd +login anonymous +force_install_dir #{install_path} +app_update #{app_id} validate +quit`
+    system("touch #{@log_path}")
+    puts "Install complete."
+  end
+
+  def exec_start(install_path = @install_path,
+                 log_path = @log_path,
+                 map = "ctf_2fort",
+                 players = 24)
+    "#{install_path}/srcds_run \
     -console \
     -game tf \
     +sv_pure 1 \

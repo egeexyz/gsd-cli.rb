@@ -3,9 +3,8 @@ require "./lib/daemonize"
 
 # The class that deploys the game servers as daemons
 module Deploy
-
-  def self.it(game, file_path)
-    system("sudo -p 'sudo password: ' cp -f #{file_path} /etc/systemd/system/#{game}.service")
+  def self.it(daemon)
+    system("sudo -p 'sudo password: ' cp -f #{daemon.file_path} /etc/systemd/system/#{daemon.game}.service")
   end
 
   def clone_repo

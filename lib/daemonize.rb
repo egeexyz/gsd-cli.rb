@@ -1,22 +1,20 @@
-#
+# Utility class that creates the systemd unit file (the daemon)
 class Daemonize
-  def initialize(exec_start = nil,
-                 game = "tf2",
-                 desc = "Description",
+  attr_reader :game, :file_path
+  def initialize(game,
+                 desc = "MissingDescription",
                  user = "ubuntu")
-    abort("Error: daemonize what game?") if exec_start.nil?
-    @exec_start = exec_start
-    @file_path = "/tmp/#{game}.service"
+    abort("Error: daemonize what game?") if game.exec_start.nil?
     @desc = desc
     @user = user
-    @game = game
+    @game = game.name
+    @exec_start = game.exec_start
+    @file_path = "/tmp/#{@game}.service"
   end
 
   def build
     ensure_delete_unit_file()
     create_unit_file()
-    @file_path
-    # system("sudo -p "sudo password: " cp -f #{file_path} /etc/systemd/system/#{@game}.service")
   end
 
   private

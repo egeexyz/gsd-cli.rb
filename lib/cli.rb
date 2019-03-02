@@ -2,7 +2,6 @@ require "commander/import"
 require "./lib/deploy"
 require "./lib/daemonize"
 require "./lib/servers/team_fortress"
-require "./lib/servers"
 
 @game = {
   "tf2" => TeamFortress.new

@@ -11,13 +11,13 @@ class TeamFortress
   def install
     puts "Beginning installation process. This may take a while..."
     system("/usr/games/steamcmd +login anonymous +quit")
-    `/usr/games/steamcmd +login anonymous +force_install_dir #{install_path} +app_update #{app_id} validate +quit`
+    `/usr/games/steamcmd +login anonymous +force_install_dir #{@install_path} +app_update #{@app_id} validate +quit`
     system("touch #{@log_path}")
     puts "Install complete."
   end
 
   def exec_start(map = "ctf_2fort", players = 24)
-    "#{@install_path}/srcds_run \
+    "#{@install_path}/tf/srcds_run \
     -console \
     -game tf \
     +sv_pure 1 \

@@ -1,12 +1,11 @@
 # A module to produce resources for a Team Fortress 2 server
 class TeamFortress
-  attr_reader :name, :app_id, :install_path, :log_path
+  attr_reader :name
   def initialize(install_path = "")
-    install_path = "/tmp/#{@name}" if install_path.empty?
     @name = "tf2"
     @app_id = "232250"
-    @install_path = install_path
-    @log_path = "#{install_path}/tf/console.log"
+    @install_path = "/tmp/#{@name}" if install_path.empty?
+    @log_path = "#{@install_path}/tf/console.log"
   end
 
   def install
@@ -17,17 +16,14 @@ class TeamFortress
     puts "Install complete."
   end
 
-  def exec_start(install_path = @install_path,
-                 log_path = @log_path,
-                 map = "ctf_2fort",
-                 players = 24)
-    "#{install_path}/srcds_run \
+  def exec_start(map = "ctf_2fort", players = 24)
+    "#{@install_path}/srcds_run \
     -console \
     -game tf \
     +sv_pure 1 \
     +map #{map} \
     +maxplayers #{players} \
     -condebug & \
-    /usr/bin/tail -f #{log_path}"
+    /usr/bin/tail -f #{@log_path}"
   end
 end

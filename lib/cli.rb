@@ -2,9 +2,11 @@ require "commander/import"
 require "./lib/deploy"
 require "./lib/daemonize"
 require "./lib/servers/team_fortress"
+require "./lib/servers/seven_days.rb"
 
 @games = {
-  "tf2" => TeamFortress.new
+  "tf2" => TeamFortress.new,
+  "sdtd" => SevenDays.new
 }
 
 program :name, "gsc-cli"

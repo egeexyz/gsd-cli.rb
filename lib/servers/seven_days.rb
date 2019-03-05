@@ -20,7 +20,7 @@ class SevenDays
     puts "Install complete."
   end
 
-  def exec_start(map = "ctf_2fort", players = 24)
+  def exec_start()
     "#{@install_path}/sdtd/server_files/startserver.sh -configfile=serverconfig.xml & /usr/bin/tail -f #{@log_path}"
   end
 end

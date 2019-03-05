@@ -8,6 +8,7 @@ class Daemonize
     @desc = desc
     @user = user
     @game = game.name
+    @env_vars = game.env_vars
     @exec_start = game.exec_start
     @file_path = "/tmp/#{@game}.service"
   end
@@ -38,6 +39,7 @@ class Daemonize
     [Service]
     Type=simple
     User=#{@user}
-    ExecStart=#{@exec_start}"
+    ExecStart=#{@exec_start}
+    Environment=#{@env_vars}"
   end
 end

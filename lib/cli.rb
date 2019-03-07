@@ -38,3 +38,14 @@ command :install do |c|
     game = @games[args.first].install()
   end
 end
+
+command :start do |c|
+  c.syntax = "gsc-cli start [options]"
+  c.summary = "Starts a game server"
+  c.description = "Start a game server"
+  c.example "description", "command example"
+  c.option "--some-switch", "Some switch that does something"
+  c.action do |args, options|
+    game = @games[args.first].start()
+  end
+end

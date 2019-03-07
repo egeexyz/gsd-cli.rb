@@ -8,6 +8,10 @@ class Rust
     @log_path = "#{@install_path}/server.log"
   end
 
+  def start
+    system("/bin/sh -c 'cd #{@install_path} && ./RustDedicated +server.ip 0.0.0.0 +server.port 28015 +server.identity rust +rcon.web 1 +rcon.ip 0.0.0.0 +rcon.port 28016 +rcon.password 101'")
+  end
+
   def install
     puts "Beginning installation process. This may take a while..."
     system("/usr/games/steamcmd +login anonymous +quit")

@@ -9,7 +9,16 @@ class Rust
   end
 
   def start
-    system("/bin/sh -c 'cd #{@install_path} && ./RustDedicated +server.ip 0.0.0.0 +server.port 28015 +server.identity rust +rcon.web 1 +rcon.ip 0.0.0.0 +rcon.port 28016 +rcon.password 101'")
+    system("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:#{@install_path}/RustDedicated_Data/Plugins/x86_64 &&
+            cd #{@install_path} &&
+            ./RustDedicated
+            +server.ip 0.0.0.0
+            +server.port 28015
+            +server.identity rust
+            +rcon.web 1
+            +rcon.ip 0.0.0.0
+            +rcon.port 28016
+            +rcon.password 101")
   end
 
   def install

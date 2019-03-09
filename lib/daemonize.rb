@@ -10,6 +10,7 @@ class Daemonize
     @game = game.name
     @env_vars = game.env_vars
     @exec_start = game.exec_start
+    @install_path = game.install_path
     @file_path = "/tmp/#{@game}.service"
   end
 
@@ -37,9 +38,10 @@ class Daemonize
     [Install]
     WantedBy=default.target
     [Service]
+    Environment=#{@env_vars}
+    WorkingDirectory=#{Dir.pwd}
     Type=simple
     User=#{@user}
-    ExecStart=#{@exec_start}
-    Environment=#{@env_vars}"
+    ExecStart=#{@exec_start}"
   end
 end

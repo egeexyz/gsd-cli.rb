@@ -54,6 +54,6 @@ class Rust
   end
 
   def exec_start
-    "/home/egee/Source/gsd-cli/bin/gsd run rust"
+    "#{Dir.pwd}/bin/gsd run rust"
   end
 end

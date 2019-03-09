@@ -40,7 +40,7 @@ class Daemonize
     [Service]
     Environment=#{@env_vars}
     WorkingDirectory=#{Dir.pwd}
-    Type=simple
+    Type=forking
     User=#{@user}
     ExecStart=#{@exec_start}"
   end

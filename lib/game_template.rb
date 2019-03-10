@@ -58,7 +58,7 @@ class GameTemplate
   def install_path(path = "")
     if path.empty?
       install_path = "/tmp/#{@game.name}"
-      puts "Install path not defined: installing to /tmp/#{@game.name}".yellow
+      # puts "Install path not defined: installing to /tmp/#{@game.name}".yellow # TODO: dont repeat this each time a command is run
     else
       install_path = path
     end

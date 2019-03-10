@@ -17,4 +17,8 @@ class TeamFortress
     -condebug & \
     /usr/bin/tail -f #{install_path}/tf/console.log"
   end
+
+  def post_install(install_path)
+    system("touch #{install_path}/tf/console.log")
+  end
 end

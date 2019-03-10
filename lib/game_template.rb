@@ -40,7 +40,7 @@ class GameTemplate
   def install
     puts "Beginning installation process. This may take a while..."
     ensure_delete_unit_file()
-    install()
+    install_server()
     create_unit_file()
     system("sudo -p 'sudo password: ' cp -f #{@file_path} /etc/systemd/system/#{@game.name}.service")
     puts "Server installation & deployment complete!".green
@@ -48,7 +48,7 @@ class GameTemplate
 
   private
 
-  def install
+  def install_server
     system("/usr/games/steamcmd +login anonymous +quit")
     `/usr/games/steamcmd +login anonymous +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit`
     system("touch #{@install_path}/server.log") # TODO: This won't scale

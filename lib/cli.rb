@@ -17,9 +17,7 @@ command :deploy do |c|
   c.summary = "Install and deploy a dedicated game server as a daemon"
   c.description = "Install and deploy a dedicated game server as a daemon (systemd unit)."
   c.action do |args|
-    game = GameTemplate.new(@games[args.first()])
-    game.install()
-    game.deploy()
+    GameTemplate.new(@games[args.first()]).deploy()
   end
 end
 

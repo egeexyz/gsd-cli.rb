@@ -7,13 +7,14 @@ class SevenDays
   end
 
   def launch(install_path)
-    "#{install_path}/startserver.sh -configfile=serverconfig.xml & /usr/bin/tail -f #{install_path}/server.log"
+    "cd #{install_path} &&
+     export LD_LIBRARY_PATH=. &&
+     #{install_path}/7DaysToDieServer.x86_64 -logfile #{install_path}/console.log \
+     -quit -batchmode -nographics -dedicated & /usr/bin/tail -f #{install_path}/server.log"
   end
 
   def post_install(install_path)
     system("rm #{install_path}/serverconfig.xml")
-    system("rm #{install_path}/startserver.sh")
-    system("curl https://s3-us-west-2.amazonaws.com/gsd-sdtd/serverconfig.xml > #{install_path}/serverconfig.xml")
-    system("curl https://s3-us-west-2.amazonaws.com/gsd-sdtd/startserver.sh > #{install_path}/startserver.sh")
+    system("cp #{Dir.pwd}/conf/sdtd.xml #{install_path}/serverconfig.xml")
   end
 end

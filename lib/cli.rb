@@ -1,6 +1,6 @@
 require "commander/import"
-require "./lib/game_servers/rust"
 require "./lib/game_template"
+require "./lib/game_servers/rust"
 
 @games = {
   # "tf2" => TeamFortress.new,
@@ -14,86 +14,72 @@ program :description, "A cli tool to manage dedicated game servers on Linux"
 
 command :deploy do |c|
   c.syntax = "gsd deploy [args]"
-  c.summary = "Install and deploy a dedicated game server as a daemon"
-  c.description = "Install and deploy a dedicated game server as a daemon (systemd unit)."
+  c.summary = "Install and deploy a dedicated game server as a daemon."
+  c.description = "Installs and deploys a dedicated game server as a daemon (systemd unit)."
   c.action do |args|
     GameTemplate.new(@games[args.first()]).deploy()
   end
 end
 
 command :run do |c|
-  c.syntax = "gsc-cli start [options]"
-  c.summary = "Starts a game server"
-  c.description = "Start a game server"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
+  c.syntax = "gsd run [args]"
+  c.summary = "Run an installed dedicated game server as a new process."
+  c.description = "Runs an installed dedicated game server as a new process. This command is used by the daemon and is not designed to be run manually."
+  c.action do |args|
     GameTemplate.new(@games[args.first()]).run()
   end
 end
 
 command :start do |c|
-  c.syntax = "gsc-cli start [options]"
-  c.summary = "Starts a game server"
-  c.description = "Start a game server"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
+  c.syntax = "gsd start [args]"
+  c.summary = "Start a deployed dedicated game server."
+  c.description = "Starts a dedicated game server daemon that has already been deployed to the system."
+  c.action do |args|
     GameTemplate.new(@games[args.first()]).start()
   end
 end
 
 command :restart do |c|
-  c.syntax = "gsc-cli start [options]"
-  c.summary = "Starts a game server"
-  c.description = "Start a game server"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
+  c.syntax = "gsd restart [args]"
+  c.summary = "Restart a deployed dedicated game server."
+  c.description = "Restarts a dedicated game server daemon that has already been deployed to the system."
+  c.action do |args|
     GameTemplate.new(@games[args.first()]).restart()
   end
 end
 
 command :status do |c|
-  c.syntax = "gsc-cli start [options]"
-  c.summary = "Starts a game server"
-  c.description = "Start a game server"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
+  c.syntax = "gsd status [args]"
+  c.summary = "Display the status of a deployed dedicated game server."
+  c.description = "Requests and returns the status of a deployed dedicated game server from systemd."
+  c.action do |args|
     GameTemplate.new(@games[args.first()]).status()
   end
 end
 
 command :stop do |c|
-  c.syntax = "gsc-cli start [options]"
-  c.summary = "Starts a game server"
-  c.description = "Start a game server"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
+  c.syntax = "gsd stop [args]"
+  c.summary = "Stop running dedicated game server."
+  c.description = "Stops a running dedicated game server daemon."
+  c.action do |args|
     GameTemplate.new(@games[args.first()]).stop()
   end
 end
 
 command :enable do |c|
-  c.syntax = "gsc-cli start [options]"
-  c.summary = "Starts a game server"
-  c.description = "Start a game server"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
+  c.syntax = "gsd enable [args]"
+  c.summary = "Force a dedicated game server daemon to launch at system start."
+  c.description = "Enables a dedicated game server daemon to start when the system starts."
+  c.action do |args|
     GameTemplate.new(@games[args.first()]).stop()
   end
 end
 
 command :disable do |c|
-  c.syntax = "gsc-cli start [options]"
-  c.summary = "Starts a game server"
-  c.description = "Start a game server"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
+  c.syntax = "gsd disable [args]"
+  c.summary = "Disable a dedicated game server daemon from starting at system start."
+  c.description = "Disables a dedicated game server daemon from starting when the system starts."
+  c.action do |args|
     GameTemplate.new(@games[args.first()]).stop()
   end
 end

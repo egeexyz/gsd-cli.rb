@@ -6,7 +6,7 @@ class SevenDays
     @app_id = "294420"
   end
 
-  def launch(install_path, log_path)
+  def launch(install_path)
     "#{install_path}/startserver.sh -configfile=serverconfig.xml & /usr/bin/tail -f #{install_path}/server.log"
   end
 

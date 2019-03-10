@@ -84,7 +84,7 @@ class GameTemplate
     [Service]
     WorkingDirectory=#{Dir.pwd}
     Type=forking
-    User=#{@user}
+    User=#{`whoami`}
     ExecStart=#{Dir.pwd}/bin/gsd run #{@game.name}"
   end
 end

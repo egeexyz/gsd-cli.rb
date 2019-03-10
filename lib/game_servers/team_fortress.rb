@@ -8,7 +8,7 @@ class TeamFortress
 
   def launch(install_path, map = "ctf_2fort", players = 24)
     "cd #{install_path} &&
-    #{install_path}/tf/srcds_run \
+    #{install_path}/srcds_run \
     -console \
     -game tf \
     +sv_pure 1 \

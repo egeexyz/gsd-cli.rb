@@ -19,7 +19,6 @@
   <property name="GameDifficulty" 			value="4"/>  				<!-- 0 - 5, 0=easiest, 5=hardest -->
   <property name="GameMode"					value="GameModeSurvivalMP"/>	<!-- GameModeSurvivalMP, GameModeSurvivalSP (MP has land protection) -->
 
-  <property name="ZombiesRun"				value="0" />				<!-- 0 = default day/night walk/run, 1 = never run, 2 = always run -->
   <property name="BuildCreate"				value="false" />				<!-- cheat mode on/off -->
   <property name="DayNightLength"			value="60" />				<!-- real time minutes per in game day: 60 minutes -->
   <property name="DayLightLength"			value="18" />				<!-- in game hours the sun shines per day: 18 hours day light per day-->

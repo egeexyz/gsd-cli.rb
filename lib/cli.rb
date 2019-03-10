@@ -39,7 +39,7 @@ command :start do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    game = @games[args.first].start()
+    GameTemplate.new(@games[args.first()]).start()
   end
 end
 
@@ -50,7 +50,7 @@ command :restart do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    game = @games[args.first].restart()
+    GameTemplate.new(@games[args.first()]).restart()
   end
 end
 
@@ -61,7 +61,7 @@ command :status do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    game = @games[args.first].status()
+    GameTemplate.new(@games[args.first()]).status()
   end
 end
 
@@ -72,7 +72,7 @@ command :stop do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    game = @games[args.first].stop()
+    GameTemplate.new(@games[args.first()]).stop()
   end
 end
 
@@ -83,7 +83,7 @@ command :enable do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    game = @games[args.first].stop()
+    GameTemplate.new(@games[args.first()]).stop()
   end
 end
 
@@ -94,6 +94,6 @@ command :disable do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    game = @games[args.first].stop()
+    GameTemplate.new(@games[args.first()]).stop()
   end
 end

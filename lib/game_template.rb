@@ -8,31 +8,28 @@ class GameTemplate
     @file_path = "/tmp/#{@game.name}.service"
   end
 
-  # TODO: This solution "works" in that it forks a new sub process but...
-  # It leaves a dangling Ruby process running
-  # When the terminal is closed, it deletes stdout (1) from /proc/
   def start
-    system("sudo -p 'sudo password: ' systemctl start #{daemon.game}")
+    system("sudo -p 'sudo password: ' systemctl start #{@game.name}")
   end
 
   def restart
-    system("sudo -p 'sudo password: ' systemctl restart #{daemon.game}")
+    system("sudo -p 'sudo password: ' systemctl restart #{@game.name}")
   end
 
   def status
-    system("sudo -p 'sudo password: ' systemctl status #{daemon.game}")
+    system("sudo -p 'sudo password: ' systemctl status #{@game.name}")
   end
 
   def stop
-    system("sudo -p 'sudo password: ' systemctl stop #{daemon.game}")
+    system("sudo -p 'sudo password: ' systemctl stop #{@game.name}")
   end
 
   def enable
-    system("sudo -p 'sudo password: ' systemctl enable #{daemon.game}")
+    system("sudo -p 'sudo password: ' systemctl enable #{@game.name}")
   end
 
   def disable
-    system("sudo -p 'sudo password: ' systemctl disable #{daemon.game}")
+    system("sudo -p 'sudo password: ' systemctl disable #{@game.name}")
   end
 
   def run

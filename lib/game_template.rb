@@ -49,10 +49,10 @@ class GameTemplate
   private
 
   def install
-    @log_path = "#{@install_path}/server.log" # TODO: This won't scale
     system("/usr/games/steamcmd +login anonymous +quit")
     `/usr/games/steamcmd +login anonymous +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit`
-    system("touch #{@log_path}")
+    system("touch #{@install_path}/server.log") # TODO: This won't scale
+    @game.post_install(@install_path) if defined? @game.post_install
   end
 
   def install_path(path = "")
@@ -71,7 +71,20 @@ class GameTemplate
 
   def create_unit_file
     out_file = File.new(@file_path, "w")
-    out_file.puts(@game.unit_file_contents()) # TODO: Pass in map with config
+    out_file.puts(unit_file_contents()) # TODO: Pass in map with config
     out_file.close()
+  end
+
+  def unit_file_contents
+    "[Unit]
+    After=network.target
+    Description=#{@desc}
+    [Install]
+    WantedBy=default.target
+    [Service]
+    WorkingDirectory=#{Dir.pwd}
+    Type=forking
+    User=#{@user}
+    ExecStart=#{Dir.pwd}/bin/gsd run #{@name}"
   end
 end

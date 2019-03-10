@@ -85,6 +85,6 @@ class GameTemplate
     WorkingDirectory=#{Dir.pwd}
     Type=forking
     User=#{@user}
-    ExecStart=#{Dir.pwd}/bin/gsd run #{@name}"
+    ExecStart=#{Dir.pwd}/bin/gsd run #{@game.name}"
   end
 end

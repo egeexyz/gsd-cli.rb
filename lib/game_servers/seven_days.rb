@@ -9,7 +9,7 @@ class SevenDays
   def launch(install_path)
     "cd #{install_path} &&
      export LD_LIBRARY_PATH=. &&
-     #{install_path}/7DaysToDieServer.x86_64 -logfile #{install_path}/console.log \
+     #{install_path}/7DaysToDieServer.x86_64 -logfile #{install_path}/server.log \
      -quit -batchmode -nographics -dedicated & /usr/bin/tail -f #{install_path}/server.log"
   end
 

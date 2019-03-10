@@ -15,6 +15,6 @@ class TeamFortress
     +map #{map} \
     +maxplayers #{players} \
     -condebug & \
-    /usr/bin/tail -f #{install_path}/server.log"
+    /usr/bin/tail -f #{install_path}/tf/console.log"
   end
 end

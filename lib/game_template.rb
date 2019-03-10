@@ -37,13 +37,13 @@ class GameTemplate
     Process.detach(pid)
   end
 
-  def deploy
-    puts "Beginning deployment process. This may take a while..."
-    install()
+  def install
+    puts "Beginning installation process. This may take a while..."
     ensure_delete_unit_file()
+    install()
     create_unit_file()
     system("sudo -p 'sudo password: ' cp -f #{@file_path} /etc/systemd/system/#{@game.name}.service")
-    puts "Deployment complete!".green
+    puts "Server installation & deployment complete!".green
   end
 
   private

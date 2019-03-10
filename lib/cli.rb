@@ -14,12 +14,12 @@ program :name, "gsc-cli"
 program :version, "0.1.0"
 program :description, "A cli tool to manage dedicated game servers on Linux"
 
-command :deploy do |c|
-  c.syntax = "gsd deploy [args]"
+command :install do |c|
+  c.syntax = "gsd install [args]"
   c.summary = "Install and deploy a dedicated game server as a daemon."
-  c.description = "Installs and deploys a dedicated game server as a daemon (systemd unit)."
+  c.description = "Installs and deploy a dedicated game server as a daemon (systemd unit)."
   c.action do |args|
-    GameTemplate.new(@games[args.first()]).deploy()
+    GameTemplate.new(@games[args.first()]).install()
   end
 end
 
@@ -34,8 +34,8 @@ end
 
 command :start do |c|
   c.syntax = "gsd start [args]"
-  c.summary = "Start a deployed dedicated game server."
-  c.description = "Starts a dedicated game server daemon that has already been deployed to the system."
+  c.summary = "Start a installed dedicated game server."
+  c.description = "Starts a dedicated game server daemon that has already been installed to the system."
   c.action do |args|
     GameTemplate.new(@games[args.first()]).start()
   end
@@ -43,8 +43,8 @@ end
 
 command :restart do |c|
   c.syntax = "gsd restart [args]"
-  c.summary = "Restart a deployed dedicated game server."
-  c.description = "Restarts a dedicated game server daemon that has already been deployed to the system."
+  c.summary = "Restart a installed dedicated game server."
+  c.description = "Restarts a dedicated game server daemon that has already been installed to the system."
   c.action do |args|
     GameTemplate.new(@games[args.first()]).restart()
   end
@@ -52,8 +52,8 @@ end
 
 command :status do |c|
   c.syntax = "gsd status [args]"
-  c.summary = "Display the status of a deployed dedicated game server."
-  c.description = "Requests and returns the status of a deployed dedicated game server from systemd."
+  c.summary = "Display the status of a installed dedicated game server."
+  c.description = "Requests and returns the status of a installed dedicated game server from systemd."
   c.action do |args|
     GameTemplate.new(@games[args.first()]).status()
   end

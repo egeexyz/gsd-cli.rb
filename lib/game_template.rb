@@ -12,10 +12,27 @@ class GameTemplate
   # It leaves a dangling Ruby process running
   # When the terminal is closed, it deletes stdout (1) from /proc/
   def start
-    pid = fork do
-      `#{@game.bootstrap()}`
-    end
-    Process.detach(pid)
+    system("sudo -p 'sudo password: ' systemctl start #{daemon.game}")
+  end
+
+  def restart
+    system("sudo -p 'sudo password: ' systemctl restart #{daemon.game}")
+  end
+
+  def status
+    system("sudo -p 'sudo password: ' systemctl status #{daemon.game}")
+  end
+
+  def stop
+    system("sudo -p 'sudo password: ' systemctl stop #{daemon.game}")
+  end
+
+  def enable
+    system("sudo -p 'sudo password: ' systemctl enable #{daemon.game}")
+  end
+
+  def disable
+    system("sudo -p 'sudo password: ' systemctl disable #{daemon.game}")
   end
 
   def run
@@ -31,6 +48,8 @@ class GameTemplate
     system("sudo -p 'sudo password: ' cp -f #{@file_path} /etc/systemd/system/#{@game.name}.service")
     puts "Deployment complete!".green
   end
+
+  private
 
   def install
     @log_path = "#{@install_path}/server.log" # TODO: This won't scale
@@ -48,8 +67,6 @@ class GameTemplate
     end
     install_path
   end
-
-  private
 
   def ensure_delete_unit_file
     File.delete(@file_path) if File.file?(@file_path)

@@ -1,13 +1,10 @@
 require "commander/import"
-require "./lib/deploy"
-require "./lib/daemonize"
-require "./lib/servers/team_fortress"
-require "./lib/servers/seven_days"
-require "./lib/servers/rust"
+require "./lib/game_servers/rust"
+require "./lib/game_template"
 
 @games = {
-  "tf2" => TeamFortress.new,
-  "sdtd" => SevenDays.new,
+  # "tf2" => TeamFortress.new,
+  # "sdtd" => SevenDays.new,
   "rust" => Rust.new
 }
 
@@ -22,20 +19,9 @@ command :deploy do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    daemon = Daemonize.new(@games[args.first])
-    daemon.build()
-    Deploy.it(daemon)
-  end
-end
-
-command :install do |c|
-  c.syntax = "gsc-cli deploy [options]"
-  c.summary = "Installs a game server onto the local file system"
-  c.description = "Installs a game server onto the local file system"
-  c.example "description", "command example"
-  c.option "--some-switch", "Some switch that does something"
-  c.action do |args, options|
-    game = @games[args.first].install()
+    game = GameTemplate.new(@games[args.first()])
+    game.install()
+    game.deploy()
   end
 end
 
@@ -46,7 +32,7 @@ command :run do |c|
   c.example "description", "command example"
   c.option "--some-switch", "Some switch that does something"
   c.action do |args, options|
-    game = @games[args.first].run()
+    GameTemplate.new(@games[args.first()]).run()
   end
 end
 

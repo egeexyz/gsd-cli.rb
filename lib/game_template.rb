@@ -33,8 +33,8 @@ class GameTemplate
   end
 
   def run
-    pid = spawn(@game.launch(@install_path))
-    Process.detach(pid)
+    pid = exec(@game.launch(@install_path))
+    # Process.detach(pid)
   end
 
   def install
@@ -82,8 +82,9 @@ class GameTemplate
     [Install]
     WantedBy=default.target
     [Service]
+    LimitNPROC=infinity
     WorkingDirectory=#{Dir.pwd}
-    Type=forking
+    Type=simple
     User=#{`whoami`}
     ExecStart=#{Dir.pwd}/bin/gsd run #{@game.name}"
   end

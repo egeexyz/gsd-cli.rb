@@ -7,15 +7,15 @@ class TeamFortress
   end
 
   def launch(install_path, map = "ctf_2fort", players = 24)
-    "cd #{install_path} &&
+    "/usr/bin/tail -f #{install_path}/tf/console.log & \
+    cd #{install_path} &&
     #{install_path}/srcds_run \
     -console \
     -game tf \
     +sv_pure 1 \
     +map #{map} \
     +maxplayers #{players} \
-    -condebug & \
-    /usr/bin/tail -f #{install_path}/tf/console.log"
+    -condebug"
   end
 
   def post_install(install_path)

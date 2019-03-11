@@ -1,5 +1,6 @@
 require "commander/import"
 require "./lib/game_template"
+require "./lib/game_servers/gmod"
 require "./lib/game_servers/rust"
 require "./lib/game_servers/seven_days"
 require "./lib/game_servers/team_fortress"
@@ -7,6 +8,7 @@ require "./lib/game_servers/team_fortress"
 @games = {
   "tf2" => TeamFortress.new,
   "sdtd" => SevenDays.new,
+  "gmod" => GarrysMod.new,
   "rust" => Rust.new
 }
 

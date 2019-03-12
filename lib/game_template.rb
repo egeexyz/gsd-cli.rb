@@ -36,10 +36,10 @@ class GameTemplate
     exec(@game.launch(@install_path))
   end
 
-  def install(user)
+  def install(steamuser, steampassword)
     puts "Beginning installation process. This may take a while..."
     ensure_delete_unit_file()
-    install_server(user)
+    install_server(steamuser, steampassword)
     create_unit_file()
     system("sudo -p 'sudo password: ' cp -f #{@file_path} /etc/systemd/system/#{@game.name}.service")
     puts "Server installation & deployment complete!".green
@@ -47,20 +47,24 @@ class GameTemplate
 
   private
 
-  def install_server(user)
-    user = "anonymous" unless user.nil? == false
+  def install_server(steamuser, steampassword)
+    login = if steamuser.nil?
+              "+login #{steamuser}"
+            else
+              "+login #{steamuser} #{steampassword}"
+            end
     system("/usr/games/steamcmd +login anonymous +quit")
-    `/usr/games/steamcmd +login #{user} +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit`
+    system("/usr/games/steamcmd #{login} +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit")
     @game.post_install(@install_path) if defined? @game.post_install
   end
 
   def get_install_path(path)
-    if path.nil?
-      install_path = "#{path}/#{@game.name}"
-      puts "Install path not defined: installing to #{path}/#{@game.name}".yellow
-    else
-      install_path = path
-    end
+    install_path = if path.nil?
+                     puts "Install path not defined: installing to #{path}/#{@game.name}".yellow
+                     "/tmp/#{@game.name}"
+                   else
+                     path
+                   end
     install_path
   end
 

@@ -7,7 +7,7 @@ class Starbound
   end
 
   def launch(install_path)
-    "cd #{install_path} &&
+    "cd #{install_path}/linux &&
     #{install_path}/linux/starbound_server"
   end
 end

@@ -20,6 +20,7 @@ class SevenDays
   end
 
   def post_install(install_path)
+    system("touch #{@install_path}/server.log") # TODO: This won't scale
     system("rm #{install_path}/serverconfig.xml")
     system("cp #{Dir.pwd}/conf/sdtd.xml #{install_path}/serverconfig.xml")
   end

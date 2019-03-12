@@ -2,7 +2,7 @@ require "colorize"
 
 # Create a Rust server
 class GameTemplate
-  def initialize(game, path)
+  def initialize(game, path = nil)
     @game = game
     @install_path = get_install_path(path)
     @file_path = "/tmp/#{@game.name}.service"
@@ -33,6 +33,7 @@ class GameTemplate
   end
 
   def run
+    puts @install_path
     exec(@game.launch(@install_path))
   end
 
@@ -49,7 +50,7 @@ class GameTemplate
 
   def install_server(steamuser, steampassword)
     login = if steamuser.nil?
-              "+login #{steamuser}"
+              "+login anonymous"
             else
               "+login #{steamuser} #{steampassword}"
             end
@@ -60,7 +61,7 @@ class GameTemplate
 
   def get_install_path(path)
     install_path = if path.nil?
-                     puts "Install path not defined: installing to #{path}/#{@game.name}".yellow
+                    #  puts "Install path not defined: installing to /tmp/#{@game.name}".yellow
                      "/tmp/#{@game.name}"
                    else
                      path
@@ -89,6 +90,6 @@ class GameTemplate
     WorkingDirectory=#{Dir.pwd}
     Type=simple
     User=#{`whoami`}
-    ExecStart=#{Dir.pwd}/bin/gsd run #{@game.name}"
+    ExecStart=#{Dir.pwd}/bin/gsd run #{@game.name} --path #{@install_path}"
   end
 end

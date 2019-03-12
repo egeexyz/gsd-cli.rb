@@ -2,9 +2,9 @@ require "colorize"
 
 # Create a Rust server
 class GameTemplate
-  def initialize(game, path = "")
+  def initialize(game, path)
     @game = game
-    @install_path = install_path(path)
+    @install_path = get_install_path(path)
     @file_path = "/tmp/#{@game.name}.service"
   end
 
@@ -36,7 +36,7 @@ class GameTemplate
     exec(@game.launch(@install_path))
   end
 
-  def install(user = "anonymous")
+  def install(user)
     puts "Beginning installation process. This may take a while..."
     ensure_delete_unit_file()
     install_server(user)
@@ -48,15 +48,16 @@ class GameTemplate
   private
 
   def install_server(user)
+    user = "anonymous" unless user.nil? == false
     system("/usr/games/steamcmd +login anonymous +quit")
     `/usr/games/steamcmd +login #{user} +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit`
     @game.post_install(@install_path) if defined? @game.post_install
   end
 
-  def install_path(path)
-    if defined? path
-      install_path = "/tmp/#{@game.name}"
-      puts "Install path not defined: installing to /tmp/#{@game.name}".yellow
+  def get_install_path(path)
+    if path.nil?
+      install_path = "#{path}/#{@game.name}"
+      puts "Install path not defined: installing to #{path}/#{@game.name}".yellow
     else
       install_path = path
     end

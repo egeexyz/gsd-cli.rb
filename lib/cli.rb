@@ -5,11 +5,13 @@ require "./lib/game_servers/rust"
 require "./lib/game_servers/starbound"
 require "./lib/game_servers/seven_days"
 require "./lib/game_servers/team_fortress"
+require "./lib/game_servers/ftb_minecraft"
 
 def userdata
   {
     "starbound" => Starbound.new,
     "tf2" => TeamFortress.new,
+    "ftb" => FtbMinecraft.new,
     "sdtd" => SevenDays.new,
     "gmod" => GarrysMod.new,
     "rust" => Rust.new

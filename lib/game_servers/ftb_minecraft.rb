@@ -1,26 +1,23 @@
 # A class for Feed The Beast Minecraft Server
-class Minecraft
+class FtbMinecraft
   attr_reader :name, :app_id
   def initialize
-    @name = "minecraft"
-    @app_id = "feed_the_beast"
+    @name = "ftb"
+    @app_id = nil
   end
 
   def launch(install_path)
-    "cd #{install_path} &&
-    #{install_path}/srcds_run \
-    -console \
-    -game garrysmod \
-    +map #{map} \
-    +maxplayers #{players} \
-    +host_workshop_collection #{collection_id} \
-    -condebug & \
-    /usr/bin/tail -f #{install_path}/garrysmod/console.log"
+    "cd #{install_path} && /bin/bash #{install_path}/ServerStart.sh"
   end
 
-  def install(install_path)
+  def install_server(install_path)
     system("wget https://media.forgecdn.net/files/2516/475/FTBRevelationServer_1.2.0.zip -O /tmp/server.zip")
-    system("unzip /tmp/server.zip #{install_path}")
-    system("echo eula=false > #{install_path}/eula.txt")
+    system("mkdir #{install_path}")
+    system("unzip /tmp/server.zip -d#{install_path}")
+    system("chmod +x #{install_path}/ServerStart.sh")
+    system("chmod +x #{install_path}/FTBInstall.sh")
+    system("/bin/bash #{install_path}/FTBInstall.sh")
+    system("rm #{install_path}/eula.txt")
+    system("echo eula=true > #{install_path}/eula.txt")
   end
 end

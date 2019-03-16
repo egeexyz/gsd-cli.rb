@@ -40,7 +40,11 @@ class GameTemplate
   def install(steamuser, steampassword)
     puts "Beginning installation process. This may take a while..."
     ensure_delete_unit_file()
-    install_server(steamuser, steampassword)
+    if @game.app_id.nil?
+      @game.install_server(@install_path)
+    else
+      install_steam_server(steamuser, steampassword)
+    end
     create_unit_file()
     system("sudo -p 'sudo password: ' cp -f #{@file_path} /etc/systemd/system/#{@game.name}.service")
     puts "Server installation & deployment complete!".green
@@ -48,7 +52,7 @@ class GameTemplate
 
   private
 
-  def install_server(steamuser, steampassword)
+  def install_steam_server(steamuser, steampassword)
     login = if steamuser.nil?
               "+login anonymous"
             else

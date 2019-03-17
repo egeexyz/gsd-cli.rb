@@ -6,4 +6,4 @@ gsd-cli is written in Ruby so you'll need the Ruby development headers (probably
 
 Once you have the dependencies, run the command `bundle` from the repo directory.
 
-Assuming bundler installed the required gems, you can run the cli directly from the repo directory like so `./bin/gsd --help
+Assuming bundler installed the required gems, you can run the cli directly from the repo directory like so `./bin/gsd install tf2`.

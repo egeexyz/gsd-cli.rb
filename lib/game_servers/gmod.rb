@@ -6,7 +6,7 @@ class GarrysMod
     @app_id = "4020"
   end
 
-  def launch(install_path, map = "gm_construct", players = 16, collection_id = "776121544")
+  def launch(install_path, map = "gm_construct", players = 16, collection_id = "1270037458")
     "cd #{install_path} &&
     #{install_path}/srcds_run \
     -console \

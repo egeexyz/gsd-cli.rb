@@ -5,16 +5,20 @@ require "./lib/game_servers/rust"
 require "./lib/game_servers/starbound"
 require "./lib/game_servers/seven_days"
 require "./lib/game_servers/team_fortress"
-require "./lib/game_servers/ftb_minecraft"
+require "./lib/game_servers/minecraft_ftb"
+require "./lib/game_servers/minecraft_spigot"
 
 def userdata
   {
-    "starbound" => Starbound.new,
-    "tf2" => TeamFortress.new,
-    "ftb" => FtbMinecraft.new,
+    "rust" => Rust.new,
     "sdtd" => SevenDays.new,
     "gmod" => GarrysMod.new,
-    "rust" => Rust.new
+    "aos" => AceOfSpades.new,
+    "tf2" => TeamFortress.new,
+    "ftb" => MinecraftFtb.new,
+    "terraria" => Terraria.new,
+    "starbound" => Starbound.new,
+    "minecraft" => MinecraftSpigot.new
   }
 end
 

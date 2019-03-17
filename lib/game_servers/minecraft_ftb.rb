@@ -1,5 +1,5 @@
 # A class for Feed The Beast Minecraft Server
-class FtbMinecraft
+class MinecraftFtb
   attr_reader :name, :app_id
   def initialize
     @name = "ftb"

@@ -33,7 +33,6 @@ class GameTemplate
   end
 
   def run
-    puts @install_path
     exec(@game.launch(@install_path))
   end
 

@@ -10,7 +10,7 @@ class MinecraftSpigot
   end
 
   def launch(install_path, version = "1.13.2")
-    "cd #{install_path} && java -Xms1G -Xmx2G -jar $WORK_DIR/spigot-#{version}.jar --noconsole"
+    "cd #{install_path} && java -Xms1G -Xmx2G -jar spigot-#{version}.jar --noconsole"
   end
 
   def install_server(install_path, version = "1.13.2")

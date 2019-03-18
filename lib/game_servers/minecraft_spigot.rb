@@ -1,4 +1,5 @@
 require "open-uri"
+require "fileutils"
 
 # A class for Feed The Beast Minecraft Server
 class MinecraftSpigot
@@ -13,8 +14,9 @@ class MinecraftSpigot
   end
 
   def install_server(install_path, version = "1.13.2")
+    FileUtils.mkdir_p(install_path)
     File.open("#{install_path}/BuildTools.jar", "wb") do |file|
-      file.write open("https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar").read()
+      file.write(open("https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar").read())
     end
     system("cd #{install_path} && java -jar #{install_path}/BuildTools.jar --rev #{version}")
   end

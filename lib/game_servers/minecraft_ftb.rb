@@ -11,7 +11,7 @@ class MinecraftFtb
   end
 
   def install_server(install_path)
-    system("wget https://media.forgecdn.net/files/2516/475/FTBRevelationServer_1.2.0.zip -O /tmp/server.zip")
+    system("wget https://media.forgecdn.net/files/2658/240/FTBRevelationServer_2.7.0.zip -O /tmp/server.zip")
     system("mkdir #{install_path}")
     system("unzip /tmp/server.zip -d#{install_path}")
     system("chmod +x #{install_path}/ServerStart.sh")

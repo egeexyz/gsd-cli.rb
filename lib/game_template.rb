@@ -62,7 +62,7 @@ class GameTemplate
   private
 
   # Installs or Updates a dedicated game server via Steamcmd
-  def install_steam_server(steamuser, steampassword)
+  def install_steam_server(steamuser = nil, steampassword = nil)
     login = if steamuser.nil?
               "+login anonymous"
             else

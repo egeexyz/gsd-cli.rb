@@ -55,7 +55,7 @@ class GameTemplate
     if @game.app_id.nil?
       puts "Non-Steam games not supported."
     else
-      install_steam_server(steamuser, steampassword)
+      install_steam_server()
     end
   end
 

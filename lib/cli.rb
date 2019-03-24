@@ -52,6 +52,16 @@ command :run do |c|
   end
 end
 
+command :update do |c|
+  c.syntax = "gsd install [args] [options]"
+  c.summary = "Updates an installed dedicated game server."
+  c.description = "Updates an installed dedicated game server."
+  c.option "--path STRING", String, "Path that the game server will be update to."
+  c.action do |args, options|
+    GameTemplate.new(@games[args.first()], options.path).update()
+  end
+end
+
 command :start do |c|
   c.syntax = "gsd start [args]"
   c.summary = "Start a installed dedicated game server."

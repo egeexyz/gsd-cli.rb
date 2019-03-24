@@ -49,8 +49,19 @@ class GameTemplate
     puts "Server installation & deployment complete!".green
   end
 
+  # Generic cli-facing update function
+  # for updating installed dedicated game servers
+  def update
+    if @game.app_id.nil?
+      puts "Non-Steam games not supported."
+    else
+      install_steam_server(steamuser, steampassword)
+    end
+  end
+
   private
 
+  # Installs or Updates a dedicated game server via Steamcmd
   def install_steam_server(steamuser, steampassword)
     login = if steamuser.nil?
               "+login anonymous"

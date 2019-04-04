@@ -16,5 +16,3 @@ end
 task :clean do
   sh "rm -r gsd-cli*.gem"
 end
-
-task default: :run

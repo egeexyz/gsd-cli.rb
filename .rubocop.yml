@@ -1,3 +1,6 @@
+AllCops:
+  TargetRubyVersion: 2.5
+
 Style/MethodCallWithoutArgsParentheses:
   Enabled: false
 

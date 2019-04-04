@@ -13,8 +13,8 @@ jobs:
       - run:
           name: Ensure bundler is up to date
           command: |
-            gem update --system
-            bundle update --bundler
+            gem uninstall bundler
+            gem install bundler -v2.0.1
       - run:
           name: install dependencies
           command: bundle install

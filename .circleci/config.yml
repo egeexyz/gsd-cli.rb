@@ -6,10 +6,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6
+      - image: circleci/ruby:2.2
     working_directory: ~/project
     steps:
       - checkout
+      - run:
+          name: Ensure bundler is up to date
+          command: |
+            gem update --system
+            bundle update --bundler
       - run:
           name: install dependencies
           command: bundle install

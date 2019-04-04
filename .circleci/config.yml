@@ -16,5 +16,11 @@ jobs:
             gem uninstall bundler
             gem install bundler -v2.0.1
       - run:
-          name: install dependencies
+          name: Install dependencies
           command: bundle install
+      - run:
+          name: Run tests
+          command: rake test
+      - run:
+          name: Build gemfile
+          command: rake build

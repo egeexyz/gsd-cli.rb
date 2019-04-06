@@ -16,6 +16,10 @@ task :help do
   sh "./bin/gsd-cli help"
 end
 
+task :list do
+  sh "./bin/gsd-cli list"
+end
+
 task :install do
   ARGV.each { |a| task a.to_sym do ; end }
   sh "./bin/gsd-cli install #{ARGV[1..-1].join(' ')}"
@@ -38,11 +42,7 @@ end
 
 task :uninstall do
   ARGV.each { |a| task a.to_sym do ; end }
-  sh "./bin/gsd-cli restart #{ARGV[1..-1].join(' ')}"
-end
-
-task :list do
-  sh "./bin/gsd-cli stop #{ARGV[1..-1].join(' ')}"
+  sh "./bin/gsd-cli uninstall #{ARGV[1..-1].join(' ')}"
 end
 
 task :test do

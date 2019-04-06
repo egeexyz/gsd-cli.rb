@@ -117,3 +117,22 @@ command :disable do |c|
     GameTemplate.new(@games[args.first()]).stop()
   end
 end
+
+command :list do |c|
+  c.syntax = "gsd list"
+  c.summary = "Provides a list of supported dedicated game servers."
+  c.description = "Provides a list of available dedicated game servers and their status."
+  c.action do
+    puts "Not Implemented"
+  end
+end
+
+command :uninstall do |c|
+  c.syntax = "gsd uninstall [args]"
+  c.summary = "Uninstall a dedicated game server."
+  c.description = "Uninstalls and removes all files associated with a dedicated game server."
+  c.option "--name STRING", String, "Name of the dedicated game server."
+  c.action do |args, options|
+    puts "Not Implemented"
+  end
+end

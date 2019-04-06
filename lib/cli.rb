@@ -26,9 +26,9 @@ end
 
 @games = userdata
 
-program :name, "gsc-cli"
-program :version, "0.1.0"
-program :description, "A cli tool to manage dedicated game servers on Linux"
+program :name, "gsd-cli"
+program :version, "0.1.9"
+program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 command :install do |c|
   c.syntax = "gsd install [args] [options]"

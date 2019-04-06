@@ -108,6 +108,6 @@ class GameTemplate
     WorkingDirectory=#{Dir.pwd}
     Type=simple
     User=#{`whoami`}
-    ExecStart=#{binary_path} #{@game.name} --path #{@install_path}"
+    ExecStart=#{binary_path} run #{@game.name} --path #{@install_path}"
   end
 end

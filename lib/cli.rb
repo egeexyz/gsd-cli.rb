@@ -34,11 +34,13 @@ command :install do |c|
   c.syntax = "gsd install [args] [options]"
   c.summary = "Install and deploy a dedicated game server as a daemon."
   c.description = "Installs and deploy a dedicated game server as a daemon (systemd unit)."
-  c.option "--path STRING", String, "Path that the game server will be installed to."
-  c.option "--steamuser STRING", String, "Steam user account required to install certain games."
-  c.option "--steampassword STRING", String, "Steam account password for installing certain games."
+  c.option "--path OPTIONAL", String, "Path that the game server will be installed to."
+  c.option "--devmode OPTIONAL", String, "To run from source or as a Gem. ('y' to run from source)"
+  c.option "--steamuser OPTIONAL", String, "Steam user account required to install certain games."
+  c.option "--steampassword OPTIONAL", String, "Steam account password for installing certain games."
   c.action do |args, options|
-    GameTemplate.new(@games[args.first()], options.path).install(options.steamuser, options.steampassword)
+    GameTemplate.new(@games[args.first()], options.path)
+                .install(options.steamuser, options.steampassword, options.devmode)
   end
 end
 

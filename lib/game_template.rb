@@ -36,7 +36,7 @@ class GameTemplate
     exec(@game.launch(@install_path))
   end
 
-  def install(steamuser, steampassword)
+  def install(steamuser, steampassword, dev_mode)
     puts "Beginning installation process. This may take a while..."
     ensure_delete_unit_file()
     if @game.app_id.nil?
@@ -44,13 +44,17 @@ class GameTemplate
     else
       install_steam_server(steamuser, steampassword)
     end
-    create_unit_file()
+    binary_path = if dev_mode.nil?
+                    "/usr/local/bin/gsd-cli"
+                  else
+                    puts "Dev mode enabled - running from source"
+                    "#{Dir.pwd}/bin/gsd-cli"
+                  end
+    create_unit_file(binary_path)
     system("sudo -p 'sudo password: ' cp -f #{@file_path} /etc/systemd/system/#{@game.name}.service")
     puts "Server installation & deployment complete!".green
   end
 
-  # Generic cli-facing update function
-  # for updating installed dedicated game servers
   def update
     if @game.app_id.nil?
       puts "Non-Steam games not supported."
@@ -87,13 +91,13 @@ class GameTemplate
     File.delete(@file_path) if File.file?(@file_path)
   end
 
-  def create_unit_file
+  def create_unit_file(binary_path)
     out_file = File.new(@file_path, "w")
-    out_file.puts(unit_file_contents()) # TODO: Pass in map with config
+    out_file.puts(unit_file_contents(binary_path)) # TODO: Pass in map with config
     out_file.close()
   end
 
-  def unit_file_contents
+  def unit_file_contents(binary_path)
     "[Unit]
     After=network.target
     Description=#{@desc}
@@ -104,6 +108,6 @@ class GameTemplate
     WorkingDirectory=#{Dir.pwd}
     Type=simple
     User=#{`whoami`}
-    ExecStart=#{Dir.pwd}/bin/gsd run #{@game.name} --path #{@install_path}"
+    ExecStart=#{binary_path} #{@game.name} --path #{@install_path}"
   end
 end

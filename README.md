@@ -1,7 +1,8 @@
 # gsd-cli
 
-[![Chat / Support](https://img.shields.io/badge/Chat%20%2F%20Support-discord-7289DA.svg?style=flat)](https://discord.gg/EMbcgR8)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/Egeeio/game-server-containers/blob/master/LICENSE)
+[![Maintainability](https://api.codeclimate.com/v1/badges/004676926e67e920ef77/maintainability)](https://codeclimate.com/github/Egeeio/gsd-cli/maintainability)
+[![Discord](https://discordapp.com/api/guilds/183740337976508416/widget.png?style=shield)](https://discord.gg/tVyBHAU)
+[![CircleCI](https://circleci.com/gh/Egeeio/gsd-cli.svg?style=svg)](https://circleci.com/gh/Egeeio/gsd-cli)
 
 gsd (Game Server Daemon) is a cli tool for deploying dedicated game servers as systemd units (daemons) on Linux (WSL also) systems running systemd.
 

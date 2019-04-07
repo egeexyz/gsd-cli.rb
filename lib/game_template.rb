@@ -72,8 +72,8 @@ class GameTemplate
             else
               "+login #{steamuser} #{steampassword}"
             end
-    system("/usr/games/steamcmd +login anonymous +quit")
-    system("/usr/games/steamcmd #{login} +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit")
+    system("$(which steamcmd) +login anonymous +quit")
+    system("$(which steamcmd) #{login} +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit")
     @game.post_install(@install_path) if defined? @game.post_install
   end
 
@@ -105,7 +105,7 @@ class GameTemplate
     WantedBy=default.target
     [Service]
     LimitNPROC=infinity
-    WorkingDirectory=#{Dir.pwd}
+    WorkingDirectory=#{@install_path}
     Type=simple
     User=#{`whoami`}
     ExecStart=#{binary_path} run #{@game.name} --path #{@install_path}"

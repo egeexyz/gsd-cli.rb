@@ -1,3 +1,5 @@
+require "yaml"
+require "colorize"
 require "commander/import"
 require "game_template"
 require "game_servers/gmod"
@@ -123,7 +125,11 @@ command :list do |c|
   c.summary = "Provides a list of supported dedicated game servers."
   c.description = "Provides a list of available dedicated game servers and their status."
   c.action do
-    puts "Not Implemented"
+    puts "The following games are currently supported by gsd:".yellow.bold
+    YAML.safe_load(File.read("#{File.dirname(__FILE__)}/../conf/supported_games.yml"))["games"]
+        .each do |game|
+      puts game.light_blue
+    end
   end
 end
 

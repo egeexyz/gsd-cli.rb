@@ -72,6 +72,7 @@ class GameTemplate
             else
               "+login #{steamuser} #{steampassword}"
             end
+    abort("STEAMCMD does not appear to be installed! Aborting...".red) if `which steamcmd`.empty?
     system("$(which steamcmd) +login anonymous +quit")
     system("$(which steamcmd) #{login} +force_install_dir #{@install_path} +app_update #{@game.app_id} validate +quit")
     @game.post_install(@install_path) if defined? @game.post_install

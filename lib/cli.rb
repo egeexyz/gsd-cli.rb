@@ -29,7 +29,7 @@ end
 @games = userdata
 
 program :name, "gsd-cli"
-program :version, "0.1.11"
+program :version, "0.1.12"
 program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 command :install do |c|

@@ -45,7 +45,7 @@ class GameTemplate
       install_steam_server(steamuser, steampassword)
     end
     binary_path = if dev_mode.nil?
-                    "/usr/local/bin/gsd-cli"
+                    `which gsd-cli`.strip()
                   else
                     puts "Dev mode enabled - running from source"
                     "#{Dir.pwd}/bin/gsd-cli"
@@ -99,6 +99,7 @@ class GameTemplate
   end
 
   def unit_file_contents(binary_path)
+    puts binary_path
     "[Unit]
     After=network.target
     Description=#{@desc}

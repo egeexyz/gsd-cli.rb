@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Create a 7 Days to Die server
 class SevenDays
   attr_reader :name, :app_id
@@ -21,7 +23,5 @@ class SevenDays
 
   def post_install(install_path)
     system("touch #{install_path}/server.log") # TODO: This won't scale
-    system("rm #{install_path}/serverconfig.xml")
-    system("cp #{Dir.pwd}/conf/sdtd.xml #{install_path}/serverconfig.xml")
   end
 end

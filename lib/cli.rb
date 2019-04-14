@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "yaml"
 require "colorize"
 require "commander/import"
@@ -29,7 +31,7 @@ end
 @games = userdata
 
 program :name, "gsd-cli"
-program :version, "0.1.13"
+program :version, "0.1.16"
 program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 command :install do |c|
@@ -41,9 +43,11 @@ command :install do |c|
   c.option "--steamuser OPTIONAL", String, "Steam user account required to install certain games."
   c.option "--steampassword OPTIONAL", String, "Steam account password for installing certain games."
   c.action do |args, options|
-    GameTemplate.new(@games[args.first()], options.path)
-                .install(options.steamuser, options.steampassword, options.devmode)
+    puts "Beginning installation process. This may take a while..."
+    GameTemplate.new(@games[args.first()])
+                .install(options.path, options.steamuser, options.steampassword, options.devmode)
   end
+  puts "Server installation & deployment complete!".green
 end
 
 command :run do |c|
@@ -79,8 +83,9 @@ command :restart do |c|
   c.syntax = "gsd restart [args]"
   c.summary = "Restart a installed dedicated game server."
   c.description = "Restarts a dedicated game server daemon that has already been installed to the system."
-  c.action do |args|
-    GameTemplate.new(@games[args.first()]).restart()
+  c.option "--remote OPTIONAL", String, "Connection string to a remote host server."
+  c.action do |args, options|
+    GameTemplate.new(@games[args.first()], options.remote).restart()
   end
 end
 
@@ -138,7 +143,7 @@ command :uninstall do |c|
   c.summary = "Uninstall a dedicated game server."
   c.description = "Uninstalls and removes all files associated with a dedicated game server."
   c.option "--name STRING", String, "Name of the dedicated game server."
-  c.action do |args, options|
+  c.action do |_args, _options|
     puts "Not Implemented"
   end
 end

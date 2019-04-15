@@ -31,7 +31,7 @@ end
 @games = userdata
 
 program :name, "gsd-cli"
-program :version, "0.1.16"
+program :version, "0.1.18"
 program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 command :install do |c|
@@ -56,7 +56,7 @@ command :run do |c|
   c.description = "Runs an installed dedicated game server as a new process. This command is used by the daemon and is not designed to be run manually."
   c.option "--path STRING", String, "Path that the game server will be installed to."
   c.action do |args, options|
-    GameTemplate.new(@games[args.first()], options.path).run()
+    GameTemplate.new(@games[args.first()]).run(options.path)
   end
 end
 

@@ -9,11 +9,11 @@ class MinecraftSpigot
     @app_id = nil
   end
 
-  def launch(install_path, version = "1.13.2")
+  def launch(install_path, version = "1.14")
     "cd #{install_path} && java -Xms1G -Xmx2G -jar spigot-#{version}.jar --noconsole"
   end
 
-  def install_server(install_path, version = "1.13.2")
+  def install_server(install_path, version = "1.14")
     FileUtils.mkdir_p(install_path)
     File.open("#{install_path}/BuildTools.jar", "wb") do |file|
       file.write(open("https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar").read())

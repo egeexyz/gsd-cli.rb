@@ -46,7 +46,7 @@ class GameTemplate
   end
 
   def install(install_path, steamuser, steampassword, dev_mode)
-    ensure_delete_unit_file(install_path)
+    ensure_delete_unit_file(install_path) if install_path.nil? == false
     if @game.app_id.nil?
       @game.install_server(get_install_path(install_path))
     else

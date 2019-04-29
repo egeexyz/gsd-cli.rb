@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name                     = "gsd-cli"
-  s.version                  = "0.1.19"
+  s.version                  = "0.1.20"
   s.date                     = "2019-04-03"
   s.required_ruby_version    = ">= 2.5"
   s.summary                  = "A cli for launching servers"
@@ -13,4 +13,6 @@ Gem::Specification.new do |s|
   s.homepage                 = "https://github.com/Egeeio/gsd-cli"
   s.license                  = "MIT"
   s.executables << "gsd-cli"
+  s.add_runtime_dependency "colorize", "~> 0.8.1"
+  s.add_runtime_dependency "commander", "~> 4.4"
 end

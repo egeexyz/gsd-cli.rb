@@ -31,7 +31,7 @@ end
 @games = userdata
 
 program :name, "gsd-cli"
-program :version, "0.1.18"
+program :version, "0.1.19"
 program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 command :install do |c|
@@ -61,7 +61,7 @@ command :run do |c|
 end
 
 command :update do |c|
-  c.syntax = "gsd install [args] [options]"
+  c.syntax = "gsd update [args] [options]"
   c.summary = "Updates an installed dedicated game server."
   c.description = "Updates an installed dedicated game server."
   c.option "--path STRING", String, "Path that the game server will be update to."

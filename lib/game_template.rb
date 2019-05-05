@@ -61,18 +61,18 @@ class GameTemplate
     create_unit_file(cli_path, install_path)
   end
 
-  def update
+  def update(install_path)
     if @game.app_id.nil?
       puts "Non-Steam games not supported."
     else
-      install_steam_server()
+      install_steam_server(install_path)
     end
   end
 
   private
 
   # Installs or Updates a dedicated game server via Steamcmd
-  def install_steam_server(install_path, steamuser = nil, steampassword = nil)
+  def install_steam_server(install_path = "/tmp/#{@game.name}", steamuser = nil, steampassword = nil)
     login = if steamuser.nil?
               "+login anonymous"
             else

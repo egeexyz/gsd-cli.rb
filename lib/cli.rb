@@ -31,7 +31,7 @@ end
 @games = userdata
 
 program :name, "gsd-cli"
-program :version, "0.1.20"
+program :version, "0.1.21"
 program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 command :install do |c|
@@ -66,7 +66,7 @@ command :update do |c|
   c.description = "Updates an installed dedicated game server."
   c.option "--path STRING", String, "Path that the game server will be update to."
   c.action do |args, options|
-    GameTemplate.new(@games[args.first()], options.path).update()
+    GameTemplate.new(@games[args.first()], options.path).update(options.path)
   end
 end
 

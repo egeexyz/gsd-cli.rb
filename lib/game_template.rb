@@ -103,7 +103,7 @@ class GameTemplate
     out_file = File.new(file_path, "w")
     out_file.puts(unit_file_contents(cli_path, install_path)) # TODO: Pass in map with config
     out_file.close()
-    system("sudo -p 'sudo password: ' mv -f #{"/tmp/#{@game.name}.service"} /etc/systemd/system/#{@game.name}.service")
+    system("mv -f #{"/tmp/#{@game.name}.service"} /etc/systemd/system/#{@game.name}.service")
   end
 
   def unit_file_contents(cli_path, install_path)

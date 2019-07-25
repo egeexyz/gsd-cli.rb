@@ -52,6 +52,7 @@ class GameTemplate
     else
       install_steam_server(install_path, steamuser, steampassword)
     end
+    @game.post_install(install_path) if defined? @game.post_install
     cli_path = `which gsd-cli`.strip()
     create_unit_file(cli_path, install_path)
   end
@@ -76,7 +77,7 @@ class GameTemplate
     abort("STEAMCMD does not appear to be installed! Aborting...".red) if `which steamcmd`.empty?
     system("$(which steamcmd) +login anonymous +quit")
     system("$(which steamcmd) #{login} +force_install_dir #{install_path} +app_update #{@game.app_id} validate +quit")
-    @game.post_install(install_path) if defined? @game.post_install
+    # @game.post_install(install_path) if defined? @game.post_install
   end
 
   def get_install_path(path)

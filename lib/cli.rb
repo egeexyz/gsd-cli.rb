@@ -43,11 +43,12 @@ command :install do |c|
   c.option "--steamuser OPTIONAL", String, "Steam user account required to install certain games."
   c.option "--steampassword OPTIONAL", String, "Steam account password for installing certain games."
   c.action do |args, options|
+    abort("Install what? Provide a game name argument!") if (args.first().nil?)
     puts "Beginning installation process. This may take a while..."
     GameTemplate.new(@games[args.first()])
                 .install(options.path, options.steamuser, options.steampassword, options.devmode)
-  end
-  puts "Server installation & deployment complete!".green
+    end
+    puts "Server installation & deployment complete!".green
 end
 
 command :run do |c|

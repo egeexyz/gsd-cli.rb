@@ -46,7 +46,7 @@ class GameTemplate
   end
 
   def install(install_path, steamuser, steampassword, dev_mode)
-    ensure_delete_unit_file(install_path) if install_path.nil? == false
+    # ensure_delete_unit_file(install_path) if install_path.nil? == false
     if @game.app_id.nil?
       @game.install_server(get_install_path(install_path))
     else
@@ -72,7 +72,7 @@ class GameTemplate
   private
 
   # Installs or Updates a dedicated game server via Steamcmd
-  def install_steam_server(install_path = "/tmp/#{@game.name}", steamuser = nil, steampassword = nil)
+  def install_steam_server(install_path = "/opt/#{@game.name}", steamuser = nil, steampassword = nil)
     login = if steamuser.nil?
               "+login anonymous"
             else
@@ -87,7 +87,7 @@ class GameTemplate
   def get_install_path(path)
     install_path = if path.nil?
                      #  puts "Install path not defined: installing to /tmp/#{@game.name}".yellow
-                     "/tmp/#{@game.name}"
+                     "/opt/#{@game.name}"
                    else
                      path
                    end
@@ -113,9 +113,7 @@ class GameTemplate
     [Install]
     WantedBy=default.target
     [Service]
-    LimitNPROC=infinity
     Type=simple
-    User=#{`whoami`}
     ExecStart=#{cli_path} run #{@game.name} --path #{install_path}"
   end
 end

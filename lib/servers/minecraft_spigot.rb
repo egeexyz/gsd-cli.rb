@@ -22,4 +22,10 @@ class MinecraftSpigot
     end
     system("cd #{install_path} && java -jar #{install_path}/BuildTools.jar --rev #{version}")
   end
+
+  def post_install(install_path)
+    system("rm -f #{install_path}/eula.txt")
+    system("touch #{install_path}/eula.txt")
+    system("echo 'eula=true' >> #{install_path}/eula.txt")
+  end
 end

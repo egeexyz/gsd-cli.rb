@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name                     = "gsd-cli"
-  s.version                  = "0.1.22"
-  s.date                     = "2019-04-03"
+  s.version                  = "0.1.24"
+  s.date                     = "2019-07-25"
   s.required_ruby_version    = ">= 2.5"
   s.summary                  = "A cli for launching servers"
   s.description              = "A simple cli for launching dedicated game servers"

@@ -31,7 +31,7 @@ end
 @games = userdata
 
 program :name, "gsd-cli"
-program :version, "0.1.22"
+program :version, "0.1.24"
 program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 command :install do |c|
@@ -45,10 +45,11 @@ command :install do |c|
   c.action do |args, options|
     abort("Install what? Provide a game name argument!") if (args.first().nil?)
     puts "Beginning installation process. This may take a while..."
-    GameTemplate.new(@games[args.first()])
-                .install(options.path, options.steamuser, options.steampassword, options.devmode)
-    end
+    game = @games[args.first()]
+    GameTemplate.new(game)
+                .install("/opt/#{game.name}", options.steamuser, options.steampassword)
     puts "Server installation & deployment complete!".green
+    end
 end
 
 command :run do |c|

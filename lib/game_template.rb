@@ -45,19 +45,14 @@ class GameTemplate
     exec(@game.launch(install_path))
   end
 
-  def install(install_path, steamuser, steampassword, dev_mode)
+  def install(install_path, steamuser, steampassword)
     # ensure_delete_unit_file(install_path) if install_path.nil? == false
     if @game.app_id.nil?
       @game.install_server(get_install_path(install_path))
     else
       install_steam_server(install_path, steamuser, steampassword)
     end
-    cli_path = if dev_mode.nil?
-                 `which gsd-cli`.strip()
-               else
-                 puts "Dev mode enabled - running from source"
-                 "#{Dir.pwd}/bin/gsd-cli"
-               end
+    cli_path = `which gsd-cli`.strip()
     create_unit_file(cli_path, install_path)
   end
 

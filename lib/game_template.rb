@@ -55,14 +55,6 @@ class GameTemplate
     create_unit_file(install_path)
   end
 
-  def update(install_path)
-    if @game.app_id.nil?
-      puts "Non-Steam games not supported."
-    else
-      install_steam_server(install_path)
-    end
-  end
-
   private
 
   # Installs or Updates a dedicated game server via Steamcmd

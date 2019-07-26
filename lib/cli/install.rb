@@ -20,7 +20,7 @@ end
 def install(game, path, steam_user, steam_password)
   puts "Beginning installation process. This may take a while...".yellow
   install_path = if path.nil?
-                   puts "Install path was not provided: installing to /opt/#{game.name}".yellow
+                   puts "Install path was not provided: defaulting to /opt/#{game.name}".yellow
                   "/opt/#{game.name}"
                 else
                   path

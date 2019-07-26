@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+## TODO: Write a test for cli.update. Just test for the output string - that's it. Super easy.
+
 require "./lib/helpers"
 
 RSpec.describe "Helpers" do

@@ -20,9 +20,9 @@ jobs:
           command: | 
             bundle install
             gem install rspec
-      - run:
-          name: Run tests
-          command: rake test
+      # - run:
+      #     name: Run tests
+      #     command: rake test
       - run:
           name: Build gemfile
           command: rake build

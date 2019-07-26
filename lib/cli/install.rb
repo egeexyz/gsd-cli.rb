@@ -3,6 +3,7 @@
 require "commander/import"
 require "game_template"
 require "cli/game_hash"
+require "helpers"
 
 command :install do |c|
   c.syntax = "gsd install [args] [options]"
@@ -30,6 +31,10 @@ def install(game, path, steam_user, steam_password)
                 else
                   "+login #{steam_user} #{steam_password}"
                 end
-  GameTemplate.new(game).install(install_path, steam_login)
+  system("rm -f #{"/tmp/#{game.name}.service"}")
+  system("rm -f /etc/systemd/system/#{game.name}.service")
+  GameTemplate.new(game)
+              .install(Helpers.get_install_path(path, game.name),
+                       Helpers.get_steamcmd_login(steam_user, steam_password))
   puts "Server installation & deployment complete!".green
 end

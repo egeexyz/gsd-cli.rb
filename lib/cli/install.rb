@@ -19,22 +19,11 @@ command :install do |c|
 end
 
 def install(game, path, steam_user, steam_password)
-  puts "Beginning installation process. This may take a while...".blue
-  install_path = if path.nil?
-                   puts "Install path was not provided: defaulting to /opt/#{game.name}".yellow
-                  "/opt/#{game.name}"
-                else
-                  path
-                end
-  steam_login = if steam_user.nil?
-                "+login anonymous"
-                else
-                  "+login #{steam_user} #{steam_password}"
-                end
+  puts "Beginning to install dedicated server for #{game.name}. This may take a while...".blue #TODO: Implement & use friendly name property
   system("rm -f #{"/tmp/#{game.name}.service"}")
   system("rm -f /etc/systemd/system/#{game.name}.service")
   GameTemplate.new(game)
               .install(Helpers.get_install_path(path, game.name),
                        Helpers.get_steamcmd_login(steam_user, steam_password))
-  puts "Server installation complete. Check the output for messages or warnings.".green
+  puts "Dedicated server installation for #{game.name} complete. Check the output for messages or warnings.".green
 end

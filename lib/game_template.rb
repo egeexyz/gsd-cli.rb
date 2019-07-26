@@ -75,11 +75,11 @@ class GameTemplate
   def create_unit_file(install_path)
     file_path = "/tmp/#{@game.name}.service"
     `touch #{file_path}`
-    `echo #{unit_file_contents(install_path)} >> #{file_path}`
+    `echo "#{unit_file_contents(install_path)}" >> #{file_path}`
     system("mv -f #{"/tmp/#{@game.name}.service"} /etc/systemd/system/#{@game.name}.service")
   end
 
-  def unit_file_contents(cli_path, install_path)
+  def unit_file_contents(install_path)
     "[Unit]
     After=network.target
     Description=Daemon for #{@game.name} dedicated server

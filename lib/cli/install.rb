@@ -19,7 +19,7 @@ command :install do |c|
 end
 
 def install(game, path, steam_user, steam_password)
-  puts "Beginning installation process. This may take a while...".yellow
+  puts "Beginning installation process. This may take a while...".blue
   install_path = if path.nil?
                    puts "Install path was not provided: defaulting to /opt/#{game.name}".yellow
                   "/opt/#{game.name}"
@@ -36,5 +36,5 @@ def install(game, path, steam_user, steam_password)
   GameTemplate.new(game)
               .install(Helpers.get_install_path(path, game.name),
                        Helpers.get_steamcmd_login(steam_user, steam_password))
-  puts "Server installation & deployment complete!".green
+  puts "Server installation complete. Check the output for messages or warnings.".green
 end

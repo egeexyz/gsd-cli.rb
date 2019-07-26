@@ -35,7 +35,7 @@ Usage examples:
 
 `gsd-cli update gmod` - will update a Garry's Mod server installed with gsd-cli.
 
-Currently Supported:
+**Supported Games:**
 
 * 7 Days to Die
 * Garrys Mod

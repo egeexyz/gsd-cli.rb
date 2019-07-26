@@ -9,7 +9,7 @@ task :clean do
 end
 
 task :push do
-  sh "gem push gsd-cli-0.2.*.gem"
+  sh "gem push gsd-cli-1.*.*.gem"
 end
 
 task :test do

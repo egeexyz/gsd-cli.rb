@@ -9,40 +9,7 @@ task :clean do
 end
 
 task :push do
-  sh "gem push gsd-cli-0.1.*.gem"
-end
-
-task :help do
-  sh "./bin/gsd-cli help"
-end
-
-task :list do
-  sh "./bin/gsd-cli list"
-end
-
-task :install do
-  ARGV.each { |a| task a.to_sym do ; end }
-  sh "./bin/gsd-cli install #{ARGV[1..-1].join(' ')}"
-end
-
-task :start do
-  ARGV.each { |a| task a.to_sym do ; end }
-  sh "./bin/gsd-cli start #{ARGV[1..-1].join(' ')}"
-end
-
-task :restart do
-  ARGV.each { |a| task a.to_sym do ; end }
-  sh "./bin/gsd-cli restart #{ARGV[1..-1].join(' ')}"
-end
-
-task :stop do
-  ARGV.each { |a| task a.to_sym do ; end }
-  sh "./bin/gsd-cli stop #{ARGV[1..-1].join(' ')}"
-end
-
-task :uninstall do
-  ARGV.each { |a| task a.to_sym do ; end }
-  sh "./bin/gsd-cli uninstall #{ARGV[1..-1].join(' ')}"
+  sh "gem push gsd-cli-0.2.*.gem"
 end
 
 task :test do

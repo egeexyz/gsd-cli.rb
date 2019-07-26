@@ -13,17 +13,17 @@ gsd-cli is designed to be installed as a Ruby Gem [![Gem Version](https://badge.
 
 ## Usage
 
-### Root Required:
+### Root Required
 
 gsd-cli is *currently* designed to be run as root.
 
-Dedicated game servers are installed to `/opt` by default (which generally required elevated permissions on most Linux systems) and installing new systemd daemons also typically required elevated permissions.
+Dedicated game servers are installed to `/opt/` by default (which requires elevated permissions on most distros) and installing new systemd units also requires elevated permissions.
 
-This pattern is handy for LXC containers or dedicated host servers in Cloud environments. This pattern is _not_ practical for general or home-server use and will be [fixed](https://github.com/Egeeio/gsd-cli/issues/12) in the future.
+This pattern is handy for LXD containers or dedicated server hosts in Cloud environments. This pattern is _not_ practical for general or home-server use and will be [fixed](https://github.com/Egeeio/gsd-cli/issues/12) in the future.
 
 ### Getting Started
 
-The target deployment environment for dedicated servers installed with gsd-cli are LXC containers or cloud hosts, such as AWS EC2 or Linode instances.
+The target deployment environment for dedicated servers installed with gsd-cli are LXD containers or Cloud server hosts, such as AWS EC2s or Linode instances.
 
 Dedicated servers are installed to `/opt/` by default. So installing a minecraft server will result in a new folder at `/opt/minecraft` and a new systemd unit file at `/etc/systemd/system/minecraft.service`.
 

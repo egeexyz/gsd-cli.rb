@@ -45,16 +45,14 @@ class GameTemplate
     exec(@game.launch(install_path))
   end
 
-  def install(install_path, steamuser, steampassword)
-    # ensure_delete_unit_file(install_path) if install_path.nil? == false
+  def install(install_path, steam_login)
     if @game.app_id.nil?
-      @game.install_server(get_install_path(install_path))
+      @game.install_server(install_path)
     else
-      install_steam_server(install_path, steamuser, steampassword)
+      install_steam_server(install_path, steam_login)
     end
     @game.post_install(install_path) if defined? @game.post_install
-    cli_path = `which gsd-cli`.strip()
-    create_unit_file(cli_path, install_path)
+    create_unit_file(install_path)
   end
 
   def update(install_path)
@@ -68,48 +66,27 @@ class GameTemplate
   private
 
   # Installs or Updates a dedicated game server via Steamcmd
-  def install_steam_server(install_path = "/opt/#{@game.name}", steamuser = nil, steampassword = nil)
-    login = if steamuser.nil?
-              "+login anonymous"
-            else
-              "+login #{steamuser} #{steampassword}"
-            end
+  def install_steam_server(install_path, steam_login)
     abort("STEAMCMD does not appear to be installed! Aborting...".red) if `which steamcmd`.empty?
-    system("$(which steamcmd) +login anonymous +quit")
-    system("$(which steamcmd) #{login} +force_install_dir #{install_path} +app_update #{@game.app_id} validate +quit")
-    # @game.post_install(install_path) if defined? @game.post_install
+    system("$(which steamcmd) #{steam_login} +quit")
+    system("$(which steamcmd) #{steam_login} +force_install_dir #{install_path} +app_update #{@game.app_id} validate +quit")
   end
 
-  def get_install_path(path)
-    install_path = if path.nil?
-                     #  puts "Install path not defined: installing to /tmp/#{@game.name}".yellow
-                     "/opt/#{@game.name}"
-                   else
-                     path
-                   end
-    install_path
-  end
-
-  def ensure_delete_unit_file(unit_file_path)
-    File.delete(unit_file_path) if File.file?(unit_file_path)
-  end
-
-  def create_unit_file(cli_path, install_path)
+  def create_unit_file(install_path)
     file_path = "/tmp/#{@game.name}.service"
-    out_file = File.new(file_path, "w")
-    out_file.puts(unit_file_contents(cli_path, install_path)) # TODO: Pass in map with config
-    out_file.close()
+    `touch #{file_path}`
+    `echo #{unit_file_contents(install_path)} >> #{file_path}`
     system("mv -f #{"/tmp/#{@game.name}.service"} /etc/systemd/system/#{@game.name}.service")
   end
 
   def unit_file_contents(cli_path, install_path)
     "[Unit]
     After=network.target
-    Description=#{@desc}
+    Description=Daemon for #{@game.name} dedicated server
     [Install]
     WantedBy=default.target
     [Service]
     Type=simple
-    ExecStart=#{cli_path} run #{@game.name} --path #{install_path}"
+    ExecStart=#{`which gsd-cli`.strip()} run #{@game.name} --path #{install_path}"
   end
 end

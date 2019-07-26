@@ -9,7 +9,7 @@
 require "commander/import"
 
 program :name, "gsd-cli"
-program :version, "0.1.40"
+program :version, "0.2.0"
 program :description, "A cli tool to deploy & manage dedicated game servers on Linux"
 
 require "cli/install"

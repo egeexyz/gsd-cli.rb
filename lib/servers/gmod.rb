@@ -7,7 +7,7 @@ class GarrysMod
     @friendly_name = "Garry's Mod" #TODO: Add friendly name to all server objects
   end
 
-  def launch(install_path, map = "gm_construct", players = 16, collection_id = "1270037458")
+  def launch(install_path, map = "gm_construct", players = 16, collection_id = "1838303608")
     "cd #{install_path} &&
     #{install_path}/srcds_run \
     -console \

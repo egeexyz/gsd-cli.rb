@@ -6,7 +6,7 @@ class TeamFortress
     @app_id = "232250"
   end
 
-  def launch(install_path, map = "ctf_2fort", players = 24)
+  def launch(install_path, players = 24)
     "cd #{install_path} &&
     #{install_path}/srcds_run \
     -console \

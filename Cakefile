@@ -1,7 +1,7 @@
 { exec } = require 'child_process'
 
 task 'build', 'Description of task', ->
-  exec 'coffee --compile --out'
+  exec 'coffee --compile --map --output dist/ lib/'
 
 task 'rebuild', 'Description of task', ->
   console.log 'Hello World!'
@@ -13,5 +13,6 @@ task 'restart', 'Description of task', ->
   console.log 'Hello World!'
 
 task 'clean', 'Description of task', ->
-  console.log 'Hello World!'
+  exec 'rm -rf dist/*'
+  exec 'touch dist/.gitkeep'
 

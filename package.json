@@ -13,13 +13,16 @@
     "@oclif/plugin-help": "^2.2.2"
   },
   "devDependencies": {
-    "coffeelint": "^2.1.0"
+    "coffeelint": "^2.1.0",
+    "globby": "^10.0.1"
   },
   "engines": {
     "node": ">=8.0.0"
   },
   "files": [
     "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
     "/dist"
   ],
   "homepage": "https://github.com/Egeeio/gsd-cli#readme",
@@ -27,7 +30,11 @@
   "description": "",
   "main": "./dist/index.js",
   "oclif": {
-    "bin": "gsd-cli"
+    "commands": "./dist/commands",
+    "bin": "gsd-cli",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
   },
   "repository": {
     "type": "git",
@@ -39,6 +46,9 @@
     "rebuild": "./node_modules/.bin/cake rebuild",
     "build": "./node_modules/.bin/cake build",
     "clean": "./node_modules/.bin/cake clean",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "version": "oclif-dev readme && git add README.md",
+    "test": "echo No Tests Found :("
   }
 }

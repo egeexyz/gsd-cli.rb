@@ -3,14 +3,15 @@
 class UpdateCommand extends Command
   run: ->
     { flags } = this.parse(UpdateCommand)
-    name = flags.name || 'world'
-    this.log("hello #{name} from ./dist/index.js")
+    flags.path = "/opt/#{flags.name}" if !flags.path
+    this.log("You want to launch #{flags.name} installed at: #{flags.path}")
 
 
-UpdateCommand.description = "Basically just chillin"
+UpdateCommand.description = "Updates an installed dedicated game server"
 
 UpdateCommand.flags = {
-  name: flags.string({char: 'n', description: 'name to print'}),
+  name: flags.string({char: 'n', description: 'game server to launch'}),
+  path: flags.string({char: 'p', description: 'path the game server is installed at'}),
 }
 
 module.exports = UpdateCommand

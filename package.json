@@ -1,8 +1,38 @@
 {
   "name": "gsd-cli",
   "version": "0.1.0",
+  "author": "egee-irl @egee-irl",
+  "bin": {
+    "gsd-cli": "./bin/run"
+  },
+  "bugs": "https://github.com/Egeeio/gsd-cli/issues",
+  "dependencies": {
+    "coffeescript": "^2.4.1",
+    "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.13.3",
+    "@oclif/plugin-help": "^2.2.2"
+  },
+  "devDependencies": {
+    "coffeelint": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/dist"
+  ],
+  "homepage": "https://github.com/Egeeio/gsd-cli#readme",
+  "license": "MIT",
   "description": "",
   "main": "./dist/index.js",
+  "oclif": {
+    "bin": "gsd-cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Egeeio/gsd-cli.git"
+  },
   "scripts": {
     "start": "node ./dist/index.js",
     "restart": "npm run rebuild && npm start",
@@ -10,21 +40,5 @@
     "build": "./node_modules/.bin/cake build",
     "clean": "./node_modules/.bin/cake clean",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Egeeio/gsd-cli.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Egeeio/gsd-cli/issues"
-  },
-  "homepage": "https://github.com/Egeeio/gsd-cli#readme",
-  "dependencies": {
-    "coffeescript": "^2.4.1"
-  },
-  "devDependencies": {
-    "coffeelint": "^2.1.0"
   }
 }

@@ -1,0 +1,28 @@
+{
+  "name": "gsd-cli",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "start": "",
+    "restart": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Egeeio/gsd-cli.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Egeeio/gsd-cli/issues"
+  },
+  "homepage": "https://github.com/Egeeio/gsd-cli#readme",
+  "dependencies": {
+    "coffeescript": "^2.4.1"
+  },
+  "devDependencies": {
+    "coffeelint": "^2.1.0"
+  }
+}

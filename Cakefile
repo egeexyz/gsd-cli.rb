@@ -1,18 +1,19 @@
-{ exec } = require 'child_process'
+{ exec, spawn } = require 'child_process'
 
-task 'build', 'Description of task', ->
+build = () ->
   exec 'coffee --compile --map --output dist/ lib/'
 
-task 'rebuild', 'Description of task', ->
-  console.log 'Hello World!'
-
-task 'start', 'Description of task', ->
-  console.log 'Hello World!'
-
-task 'restart', 'Description of task', ->
-  console.log 'Hello World!'
-
-task 'clean', 'Description of task', ->
+clean = () ->
   exec 'rm -rf dist/*'
   exec 'touch dist/.gitkeep'
+
+task 'build', 'Description of task', ->
+  build()
+
+task 'rebuild', 'Description of task', ->
+  build()
+  clean()
+
+task 'clean', 'Description of task', ->
+  clean()
 

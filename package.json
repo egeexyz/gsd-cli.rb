@@ -2,11 +2,13 @@
   "name": "gsd-cli",
   "version": "0.1.0",
   "description": "",
-  "main": "index.coffee",
+  "main": "./dist/index.js",
   "scripts": {
-    "build": "",
-    "start": "",
-    "restart": "",
+    "start": "node ./dist/index.js",
+    "restart": "npm run rebuild && npm start",
+    "rebuild": "./node_modules/.bin/cake rebuild",
+    "build": "./node_modules/.bin/cake build",
+    "clean": "./node_modules/.bin/cake clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

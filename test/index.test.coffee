@@ -17,5 +17,8 @@ describe 'gsd-cli api', ->
 
 describe 'gsd-cli install', ->
   it 'should include an Install command', ->
-    api = execSync('node ./bin/run install -n test')
-    assert.ok api.includes 'You want to install'
+    game = 'rust'
+    path = "/home/#{process.env.USER}/.config/systemd/user"
+    execSync("mkdir -p #{path}")
+    sdout = execSync("node ./bin/run install -n #{game}")
+    assert.ok(sdout.includes('You want to install'))

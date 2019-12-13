@@ -14,3 +14,8 @@ describe 'gsd-cli api', ->
   it 'should include a Launch command', ->
     api = execSync('node ./bin/run')
     assert.ok api.includes 'launch'
+
+describe 'gsd-cli install', ->
+  it 'should include an Install command', ->
+    api = execSync('node ./bin/run install -n test')
+    assert.ok api.includes 'You want to install'

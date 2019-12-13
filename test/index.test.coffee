@@ -16,9 +16,9 @@ describe 'gsd-cli api', ->
     assert.ok api.includes 'launch'
 
 describe 'gsd-cli install', ->
-  it 'should include an Install command', ->
+  it 'should support Rust', ->
     game = 'rust'
     path = "/home/#{process.env.USER}/.config/systemd/user"
     execSync("mkdir -p #{path}")
     sdout = execSync("node ./bin/run install -n #{game}")
-    assert.ok(sdout.includes('You want to install'))
+    assert.ok(sdout.includes('Installing, please wait'))

@@ -53,6 +53,6 @@
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "oclif-dev manifest && oclif-dev readme",
     "version": "oclif-dev readme && git add README.md",
-    "test": "./node_modules/mocha/bin/mocha --require coffeescript/register test/**/*.coffee"
+    "test": "npm run rebuild && ./node_modules/mocha/bin/mocha --require coffeescript/register test/**/*.coffee"
   }
 }

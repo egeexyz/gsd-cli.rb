@@ -1,5 +1,5 @@
-Gmod = require("./games/gmod")
-Tf2 = require("./games/tf2")
+Chalk = require("chalk")
+SrcdsServer = require("./srcds_server")
 
 class GameServer
   @install: (flags) ->
@@ -10,18 +10,20 @@ class GameServer
         flags.internal_name = "garrysmod"
         flags.app_id        = "4020"
         flags.steam_login   = "anonymous"
-        flags.collection_id = "1838303608"
         flags.map           = "gm_construct"
         flags.players       = "16"
-        Gmod.install(flags)
+        flags.custom_params = "+host_workshop_collection 1838303608"
+        SrcdsServer.install(flags)
       when "tf2"
         flags.internal_name = "tf"
         flags.app_id        = "232250"
         flags.steam_login   = "anonymous"
         flags.map           = "ctf_turbine"
         flags.players       = "24"
-        Tf2.install(flags)
+        flags.custom_params = "+sv_pure 1"
+        SrcdsServer.install(flags)
       # when "sdtd" then return "Installing, please wait"
       else return "That game isn't supported yet"
+    console.info(Chalk.green("Installation of #{flags.name} complete! 🚀"))
 
 module.exports = GameServer

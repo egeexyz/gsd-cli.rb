@@ -9,6 +9,8 @@ class GameServer
         flags.app_id        = "4020"
         flags.steam_login   = "anonymous"
         flags.collection_id = "1838303608"
+        flags.map           = "gm_construct"
+        flags.players       = "16"
         Gmod.install(flags)
       # when "tf2" then return "Installing, please wait"
       # when "sdtd" then return "Installing, please wait"

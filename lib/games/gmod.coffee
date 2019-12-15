@@ -3,6 +3,7 @@ GameServer   = require("./game_server")
 
 class Gmod
   @install: (flags) ->
+    execSync("mkdir -p /home/#{process.env.USER}/#{flags.name}-server")
     install_cmd = "steamcmd +login #{flags.steam_login} +force_install_dir #{flags.path} +app_update #{flags.app_id} validate +quit"
     execSync(install_cmd) unless flags.dryrun == true
     this.createUnitFile(flags)
@@ -29,7 +30,7 @@ class Gmod
     launchFileContents = """
                         ./srcds_run \
                         -console \
-                        -game garrysmod \
+                        -game #{flags.internal_name} \
                         +map #{flags.map} \
                         +maxplayers #{flags.players} \
                         +host_workshop_collection #{flags.collection_id} \
@@ -41,10 +42,10 @@ class Gmod
     execSync("touch #{launchFilePath}")
     execSync("echo '#{launchFileContents}' >> #{launchFilePath}")
     execSync("chmod +x #{launchFilePath}")
+  @createLogFile: (flags) ->
+    execSync("touch #{flags.path}/console.log")
   @backupFile: (file) ->
     execSync("touch #{file}")
     execSync("rm -f #{file}.backup")
     execSync("mv #{file} #{file}.backup")
-  @createLogFile: (flags) ->
-    execSync("touch #{flags.path}/console.log")
 module.exports = Gmod

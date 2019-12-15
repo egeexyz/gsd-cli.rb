@@ -18,7 +18,7 @@ class Gmod
                        WantedBy=default.target
                        [Service]
                        Type=simple
-                       ExecStart=#{flags.path}/launch.sh
+                       ExecStart=/bin/bash #{flags.path}/launch.sh
                        """
     execSync("echo '#{unitFileContents}' >> #{unit_path}")
   @createLaunchScript: (flags) ->
@@ -38,6 +38,7 @@ class Gmod
     execSync("rm -f #{launchFilePath}")
     execSync("touch #{launchFilePath}")
     execSync("echo '#{launchFileContents}' >> #{launchFilePath}")
+    execSync("chmod +x #{launchFilePath}")
   @backupFile: (file) ->
     execSync("touch #{file}")
     execSync("rm -f #{file}.backup")

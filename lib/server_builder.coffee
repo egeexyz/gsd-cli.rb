@@ -1,5 +1,5 @@
-Gmod = require("./gmod")
-Tf2 = require("./tf2")
+Gmod = require("./games/gmod")
+Tf2 = require("./games/tf2")
 
 class GameServer
   @install: (flags) ->

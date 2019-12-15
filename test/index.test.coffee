@@ -23,12 +23,21 @@ describe 'gsd-cli install', ->
 
   it "should support Garrys Mod", ->
     assert.ok(sdout.includes('Installing, please wait'))
+
   it "should create a systemd unit file", ->
     unitFileContents = execSync("cat /home/#{process.env.USER}/.config/systemd/user/#{game}.service")
     assert.ok(unitFileContents.includes('gmod-server'))
+
   it "should create a launch script", ->
-    unitFileContents = execSync("cat /home/#{process.env.USER}/.config/systemd/user/#{game}.service")
-    assert.ok(unitFileContents.includes('gmod-server'))
+    launchScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh")
+    assert.ok(launchScriptContents.includes('garrysmod'))
+
   it "should backup the launch script", ->
-    unitFileContents = execSync("cat /home/#{process.env.USER}/.config/systemd/user/#{game}.service")
-    assert.ok(unitFileContents.includes('gmod-server'))
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh.backup")
+    assert.ok(backupScriptContents.includes('garrysmod'))
+
+  it "should not duplicate scripts", ->
+    launchScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh")
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh.backup")
+    assert.ok(launchScriptContents.toString().match(/garrysmod/gm).length == 1)
+    assert.ok(backupScriptContents.toString().match(/garrysmod/gm).length == 1)

@@ -1,9 +1,9 @@
-GameServer   = require("./game_server")
+GenericServer   = require("../generic_server")
 { execSync } = require("child_process")
 
-class Gmod
+class Gmod extends GenericServer
   @install: (flags) ->
-    execSync("mkdir -p /home/#{process.env.USER}/#{flags.name}-server")
+    super(flags)
     install_cmd = "steamcmd +login #{flags.steam_login} +force_install_dir #{flags.path} +app_update #{flags.app_id} validate +quit"
     execSync(install_cmd) unless flags.dryrun == true
     this.createUnitFile(flags)
@@ -43,9 +43,7 @@ class Gmod
     execSync("echo '#{launchFileContents}' >> #{launchFilePath}")
     execSync("chmod +x #{launchFilePath}")
   @createLogFile: (flags) ->
-    execSync("touch #{flags.path}/console.log")
+    super(flags)
   @backupFile: (file) ->
-    execSync("touch #{file}")
-    execSync("rm -f #{file}.backup")
-    execSync("mv #{file} #{file}.backup")
+    super(file)
 module.exports = Gmod

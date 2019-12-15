@@ -1,4 +1,4 @@
-GameServer   = require("./game_server")
+GameServer   = require("../server_builder")
 { execSync } = require("child_process")
 
 class Tf2

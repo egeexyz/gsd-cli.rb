@@ -1,5 +1,5 @@
 { Command, flags } = require('@oclif/command')
-GameServer = require("../games/game_server")
+GameServer = require("../server_builder")
 { execSync } = require 'child_process'
 
 class InstallCommand extends Command

@@ -6,14 +6,7 @@ class InstallCommand extends Command
   run: ->
     { flags } = this.parse(InstallCommand)
     flags.path = "/home/#{process.env.USER}/#{flags.name}-server" if !flags.path
-    this.install()
-  install: ->
-    this.log("You appear to want to install #{flags.name} at path: #{flags.path}")
-    this.log(flags)
-    execSync("rm -f /home/#{process.env.USER}/.config/systemd/user/#{flags.name}.service")
-    execSync("touch /home/#{process.env.USER}/.config/systemd/user/#{flags.name}.service")
-    gameServer = GameServer.install flags
-    console.log gameServer
+    GameServer.install(flags)
 
 InstallCommand.description = "install a dedicated game server as a daemon"
 

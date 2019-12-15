@@ -1,9 +1,8 @@
-gsd-cli
+gsd-cli https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master
 =======
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/gsd-cli.svg)](https://npmjs.org/package/gsd-cli)
-[![License](https://img.shields.io/npm/l/gsd-cli.svg)](https://github.com/egee-irl/gsd-cli/blob/master/package.json)
+[![Discord](https://discordapp.com/api/guilds/183740337976508416/widget.png?style=shield)](https://discord.gg/EMbcgR8)
 
 <!-- toc -->
 * [Usage](#usage)
@@ -25,7 +24,7 @@ USAGE
 <!-- usagestop -->
 ## Commands
 <!-- commands -->
-- [gsd-cli](#gsd-cli)
+- [gsd-cli https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master](#gsd-cli-httpstravis-ciorgegeeiogsd-clisvgbranchmaster)
   - [Usage](#usage)
   - [Commands](#commands)
     - [gsd-cli hello](#gsd-cli-hello)

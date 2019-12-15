@@ -16,7 +16,7 @@ describe 'installation process', ->
   execSync("mkdir -p /home/#{process.env.USER}/.config/systemd/user")
 
   it "should create a log file", ->
-    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/console.log")
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/garrysmod/console.log")
     assert.ok(!backupScriptContents.includes('No such file or directory'))
 
   it "should create a systemd unit file", ->
@@ -33,4 +33,4 @@ describe 'installation process', ->
 
   it "should not duplicate launch script", ->
     launchScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh")
-    assert.ok(launchScriptContents.toString().match(/garrysmod/gm).length == 1)
+    assert.ok(launchScriptContents.toString().match(/-game garrysmod/gm).length == 1)

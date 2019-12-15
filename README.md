@@ -1,4 +1,4 @@
-gsd-cli https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master
+gsd-cli [![Build Status](https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master)](https://travis-ci.org/Egeeio/gsd-cli)
 =======
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
@@ -24,7 +24,7 @@ USAGE
 <!-- usagestop -->
 ## Commands
 <!-- commands -->
-- [gsd-cli https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master](#gsd-cli-httpstravis-ciorgegeeiogsd-clisvgbranchmaster)
+- [gsd-cli <img src="https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master" alt="Build Status">](#gsd-cli-img-src%22httpstravis-ciorgegeeiogsd-clisvgbranchmaster%22-alt%22build-status%22)
   - [Usage](#usage)
   - [Commands](#commands)
     - [gsd-cli hello](#gsd-cli-hello)

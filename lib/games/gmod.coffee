@@ -7,6 +7,7 @@ class Gmod
     execSync(install_cmd) unless flags.dryrun == true
     this.createUnitFile(flags)
     this.createLaunchScript(flags)
+    this.createLogFile(flags)
     return "Installing, please wait"
   @createUnitFile: (flags) ->
     unit_path = "/home/#{process.env.USER}/.config/systemd/user/#{flags.name}.service"
@@ -18,6 +19,7 @@ class Gmod
                        WantedBy=default.target
                        [Service]
                        Type=simple
+                       WorkingDirectory=#{flags.path}
                        ExecStart=/bin/bash #{flags.path}/launch.sh
                        """
     execSync("echo '#{unitFileContents}' >> #{unit_path}")
@@ -43,4 +45,6 @@ class Gmod
     execSync("touch #{file}")
     execSync("rm -f #{file}.backup")
     execSync("mv #{file} #{file}.backup")
+  @createLogFile: (flags) ->
+    execSync("touch #{flags.path}/console.log")
 module.exports = Gmod

@@ -25,6 +25,10 @@ describe 'gsd-cli install', ->
     sdout = execSync("node ./bin/run install -d -n #{game}")
     assert.ok(sdout.includes('Installing, please wait'))
 
+  it "should create a log file", ->
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/console.log")
+    assert.ok(!backupScriptContents.includes('No such file or directory'))
+
   it "should create a systemd unit file", ->
     unitFileContents = execSync("cat /home/#{process.env.USER}/.config/systemd/user/#{game}.service")
     assert.ok(unitFileContents.includes('gmod-server'))

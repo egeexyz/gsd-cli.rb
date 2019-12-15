@@ -17,11 +17,12 @@ describe 'gsd-cli api', ->
 
 describe 'gsd-cli install', ->
   game = 'gmod'
-  path = "/home/#{process.env.USER}/.config/systemd/user"
-  execSync("mkdir -p #{path}")
-  sdout = execSync("node ./bin/run install -d -n #{game}")
+  script = './srcds_run -console -game garrysmod +map gm_construct +maxplayers 16 +host_workshop_collection 1838303608 -condebug & /usr/bin/tail -f ./console.log'
+  execSync("mkdir -p /home/#{process.env.USER}/.config/systemd/user")
+  execSync("mkdir -p /home/#{process.env.USER}/#{game}-server")
 
   it "should support Garrys Mod", ->
+    sdout = execSync("node ./bin/run install -d -n #{game}")
     assert.ok(sdout.includes('Installing, please wait'))
 
   it "should create a systemd unit file", ->
@@ -34,10 +35,8 @@ describe 'gsd-cli install', ->
 
   it "should backup the launch script", ->
     backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh.backup")
-    assert.ok(backupScriptContents.includes('garrysmod'))
+    assert.ok(!backupScriptContents.includes('No such file or directory'))
 
-  it "should not duplicate scripts", ->
+  it "should not duplicate launch script", ->
     launchScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh")
-    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh.backup")
     assert.ok(launchScriptContents.toString().match(/garrysmod/gm).length == 1)
-    assert.ok(backupScriptContents.toString().match(/garrysmod/gm).length == 1)

@@ -1,5 +1,5 @@
 { execSync } = require 'child_process'
-assert   = require('assert')
+assert       = require('assert')
 
 describe 'gsd-cli api', ->
   it 'should include an Install command', ->

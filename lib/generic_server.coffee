@@ -1,5 +1,5 @@
 { execSync } = require("child_process")
-Chalk = require("chalk")
+Chalk        = require("chalk")
 
 class GenericServer
   @install: (flags) ->

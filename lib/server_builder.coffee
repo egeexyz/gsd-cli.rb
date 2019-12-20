@@ -32,6 +32,6 @@ class GameServer
         SrcdsServer.install(flags)
       # when "sdtd" then return "Installing, please wait"
       else console.warn "That game isn't supported yet"
-    console.info(Chalk.green("Installation of #{flags.name} complete! 🚀"))
+    console.info(Chalk.green.bold("Installation of #{flags.name} complete! 🚀"))
 
 module.exports = GameServer

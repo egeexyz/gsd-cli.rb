@@ -1,9 +1,9 @@
-{ execSync } = require("child_process")
 Chalk        = require("chalk")
+{ execSync } = require("child_process")
 
 class GenericServer
   @install: (flags) ->
-    console.info(Chalk.blue("Installing, please wait... ⏳"))
+    console.info(Chalk.blue.bold("Installing, please wait... ⏳"))
     execSync("mkdir -p /home/#{process.env.USER}/#{flags.name}-server")
   @createUnitFile: (flags) ->
     unit_path = "/home/#{process.env.USER}/.config/systemd/user/#{flags.name}.service"

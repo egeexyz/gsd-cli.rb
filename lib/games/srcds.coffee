@@ -1,5 +1,5 @@
-{ execSync } = require("child_process")
-GenericServer   = require("./generic_server")
+{ execSync }    = require("child_process")
+GenericServer   = require("../generic_server")
 
 class SrcdsServer extends GenericServer
   @install: (flags) ->

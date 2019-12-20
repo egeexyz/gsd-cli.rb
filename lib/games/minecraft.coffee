@@ -1,10 +1,13 @@
-GameServer   = require("../server_builder")
-{ execSync } = require("child_process")
+GenericServer   = require("../generic_server")
+{ execSync }    = require("child_process")
 
-class Tf2
+class Minecraft extends GenericServer
+  
   @install: (flags) ->
     super(flags)
-    return "Install Complete!"
+    buildToolsUrl = "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+    installPath = "/home/#{process.env.USER}/#{flags.name}-server"
+    execSync("wget #{buildToolsUrl} -o #{installPath}")
   @createUnitFile: (flags) ->
     super(flags)
   @createLaunchScript: (flags) ->
@@ -13,4 +16,4 @@ class Tf2
     super(flags)
   @backupFile: (file) ->
     super(file)
-module.exports = Tf2
+module.exports = Minecraft

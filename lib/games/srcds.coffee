@@ -1,12 +1,15 @@
-{ execSync }    = require("child_process")
 GenericServer   = require("../generic_server")
+{ execSync }    = require("child_process")
 
 class SrcdsServer extends GenericServer
   @install: (flags) ->
     super(flags)
-    execSync("mkdir -p /home/#{process.env.USER}/#{flags.name}-server/#{flags.internal_name}")
+
     install_cmd = "steamcmd +login #{flags.steam_login} +force_install_dir #{flags.path} +app_update #{flags.app_id} validate +quit"
+
+    execSync("mkdir -p /home/#{process.env.USER}/#{flags.name}-server/#{flags.internal_name}")
     execSync(install_cmd) unless flags.dryrun == true
+
     this.createUnitFile(flags)
     this.createLaunchScript(flags)
     this.createLogFile(flags)

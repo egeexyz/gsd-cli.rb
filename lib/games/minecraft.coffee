@@ -1,5 +1,5 @@
 Chalk           = require("chalk")
-GenericServer   = require("../generic_server")
+GenericServer   = require("./generic")
 { execSync }    = require("child_process")
 
 class Minecraft extends GenericServer
@@ -7,7 +7,7 @@ class Minecraft extends GenericServer
     super(flags)
     this.downloadBuildTools(flags)
     console.log(Chalk.blue.bold("Running Spigot BuildTools.jar. This will take a while... ⏳"))
-    console.log(execSync("#{flags.javaExec}", {"cwd": "#{flags.installPath}"}).toString()) unless flags.dryrun == true
+    console.log(execSync("java -Xmx1024M -jar BuildTools.jar", {"cwd": "#{flags.installPath}"}).toString()) unless flags.dryrun == true
     this.createUnitFile(flags)
     this.createLaunchScript(flags)
     this.postInstall(flags)

@@ -8,6 +8,3 @@ describe 'gsd-cli api', ->
   it 'should include an Update command', ->
     api = execSync('node ./bin/run')
     assert.ok api.includes 'update'
-  it 'should include a Launch command', ->
-    api = execSync('node ./bin/run')
-    assert.ok api.includes 'launch'

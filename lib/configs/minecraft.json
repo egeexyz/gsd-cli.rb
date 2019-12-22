@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "user": "gsd",
+    "game": "minecraft"
+  },
+  "version": "1.15.1",
+  "javaParams": "-Xms1G -Xmx2G -server"
+}

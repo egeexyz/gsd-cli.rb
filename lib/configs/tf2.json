@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "user": "gsd",
+    "game": "tf"
+  },
+  "appid": "232250",
+  "players": "24",
+  "default_map": "ctf_turbine",
+  "srcdsParams": "+sv_pure 1",
+  "steamUserName": "anonymous",
+  "steamPassword": ""
+}

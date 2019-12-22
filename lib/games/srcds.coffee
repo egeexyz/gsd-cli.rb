@@ -4,10 +4,8 @@ GenericServer   = require("./generic")
 class SrcdsServer extends GenericServer
   @install: (flags) ->
     super(flags)
-
-    install_cmd = "steamcmd +login #{flags.steam_login} +force_install_dir #{flags.path} +app_update #{flags.app_id} validate +quit"
-
-    execSync("mkdir -p /home/#{process.env.USER}/#{flags.name}-server/#{flags.internal_name}")
+    steamLogin = "+login #{flags.config.steamUserName} #{flags.config.steamPassword}"
+    install_cmd = "steamcmd #{steamLogin} +force_install_dir #{flags.path} +app_update #{flags.config.appId} validate +quit"
     execSync(install_cmd) unless flags.dryrun == true
 
     this.createUnitFile(flags)
@@ -19,16 +17,16 @@ class SrcdsServer extends GenericServer
     launchFileContents = """
                       ./srcds_run \
                       -console \
-                      -game #{flags.internal_name} \
-                      +map #{flags.map} \
-                      +maxplayers #{flags.players} \
-                      #{flags.custom_params} \
+                      -game #{flags.config.meta.game} \
+                      +map #{flags.config.defaultMap} \
+                      +maxplayers #{flags.config.players} \
+                      #{flags.config.srcdsParams} \
                       -condebug & \
-                      /usr/bin/tail -f #{flags.path}/#{flags.internal_name}/console.log
+                      /usr/bin/tail -f #{flags.path}/#{flags.config.meta.game}/console.log
                         """
     super(flags, launchFileContents)
   @createLogFile: (flags) ->
-    execSync("touch #{flags.path}/#{flags.internal_name}/console.log")
+    execSync("touch #{flags.path}/#{flags.config.meta.game}/console.log")
   @backupFile: (file) ->
     execSync("touch #{file}")
     execSync("rm -f #{file}.backup")

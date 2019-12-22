@@ -1,3 +1,5 @@
+fs                 = require("fs")
+Chalk              = require("chalk")
 GameServer         = require("../server_builder")
 { Command, flags } = require('@oclif/command')
 { execSync }       = require 'child_process'
@@ -5,14 +7,23 @@ GameServer         = require("../server_builder")
 class InstallCommand extends Command
   run: ->
     { flags } = this.parse(InstallCommand)
-    flags.path = "/home/#{process.env.USER}/#{flags.name}-server" if !flags.path
+    try
+      content = JSON.parse(fs.readFileSync(flags.file))
+      flags.config = content
+    catch e
+      this.error(Chalk.red.bold("Error parsing config file: #{e}"))
+      process.exit
+    
+    flags.path = "/home/#{flags.config.meta.user}/#{flags.config.meta.game}-server"
+    
+    this.log "server will be installed to #{flags.path}"
     GameServer.install(flags)
 
 InstallCommand.description = "install a dedicated game server as a daemon"
 
 InstallCommand.flags = {
-  name:   flags.string( {char: 'n', description: 'game server to install', required: true}),
-  path:   flags.string( {char: 'p', description: 'path the game server will be installed to'}),
+  name:   flags.string( {char: 'n', description: 'game server to install'}),
+  file:   flags.string( {char: 'f', description: 'path to the config file'}),
   dryrun: flags.boolean({char: 'd', description: 'test installing a server without actually installing it'}),
 }
 

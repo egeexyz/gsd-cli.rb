@@ -4,13 +4,13 @@ Chalk        = require("chalk")
 class GenericServer
   @install: (flags) ->
     console.info(Chalk.blue.bold("Installing, please wait... ⏳"))
-    execSync("mkdir -p /home/#{process.env.USER}/#{flags.name}-server")
+    execSync("mkdir -p /home/#{flags.config.meta.user}/#{flags.config.meta.game}-server/#{flags.config.meta.game}")
   @createUnitFile: (flags) ->
-    unit_path = "/home/#{process.env.USER}/.config/systemd/user/#{flags.name}.service"
+    unit_path = "/home/#{flags.config.meta.user}/.config/systemd/user/#{flags.config.meta.game}.service"
     unitFileContents = """
                        [Unit]
                        After=network.target
-                       Description=Daemon for #{flags.name} dedicated server
+                       Description=Daemon for #{flags.config.meta.name} dedicated server
                        [Install]
                        WantedBy=default.target
                        [Service]

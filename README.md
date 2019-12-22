@@ -1,8 +1,11 @@
-gsd-cli v2 [![Build Status](https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master)](https://travis-ci.org/Egeeio/gsd-cli)
-=======
+# gsd-cli v2 [![Build Status](https://travis-ci.org/Egeeio/gsd-cli.svg?branch=master)](https://travis-ci.org/Egeeio/gsd-cli)
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Discord](https://discordapp.com/api/guilds/183740337976508416/widget.png?style=shield)](https://discord.gg/EMbcgR8)
+
+A CLI tool for deploying dedicated game servers as systemd units (daemons).
+
+This repo is for gsd-cli version 2.x. This version of the cli is written in CoffeeScript and can be downloaded as a global module from [npm](https://www.npmjs.com/package/gsd-cli).
 
 <!-- toc -->
 
@@ -11,14 +14,12 @@ gsd-cli v2 [![Build Status](https://travis-ci.org/Egeeio/gsd-cli.svg?branch=mast
 <!-- usage -->
 ```sh-session
 $ npm install -g gsd-cli
-running command...
-$ gsd-cli COMMAND
-running command...
++ gsd-cli
 $ gsd-cli (-v|--version)
 gsd-cli/0.1.0 linux-x64 node-v12.13.0
 $ gsd-cli --help [COMMAND]
 USAGE
-  $ gsd-cli COMMAND
+  $ gsd-cli [COMMAND]
 ...
 ```
 <!-- usagestop -->

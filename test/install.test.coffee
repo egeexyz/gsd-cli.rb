@@ -7,12 +7,14 @@ describe 'supported games', ->
     filePath = execSync("readlink -f ./configs/gmod.json")
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
-  # it "should support Team Fortress 2", ->
-  #   sdout = execSync("node ./bin/run install -d -n tf2")
-  #   assert.ok(sdout.includes("Installing, please wait"))
-  # it "should support Minecraft", ->
-  #   sdout = execSync("node ./bin/run install -d -n tf2")
-  #   assert.ok(sdout.includes("Installing, please wait"))
+  it "should support Team Fortress 2", ->
+    filePath = execSync("readlink -f ./configs/tf2.json")
+    sdout = execSync("node ./bin/run install -d -f #{filePath}")
+    assert.ok(sdout.includes("Installing, please wait"))
+  it "should support Minecraft", ->
+    filePath = execSync("readlink -f ./configs/minecraft.json")
+    sdout = execSync("node ./bin/run install -d -f #{filePath}")
+    assert.ok(sdout.includes("Installing, please wait"))
 
 describe 'installation process', ->
   game = 'gmod'

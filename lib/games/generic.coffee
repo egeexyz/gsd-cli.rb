@@ -10,7 +10,7 @@ class GenericServer
     unitFileContents = """
                        [Unit]
                        After=network.target
-                       Description=Daemon for #{flags.config.meta.name} dedicated server
+                       Description=Daemon for #{flags.config.meta.game} dedicated server
                        [Install]
                        WantedBy=default.target
                        [Service]

@@ -3,10 +3,10 @@
     "user": "gsd",
     "game": "garrysmod"
   },
-  "appid": "4020",
+  "appId": "4020",
   "players": "16",
-  "default_map": "gm_construct",
+  "defaultMap": "gm_construct",
   "srcdsParams": "+host_workshop_collection 1838303608",
-  "steam_login": "anonymous",
-  "steam_password": ""
+  "steamUserName": "anonymous",
+  "steamPassword": ""
 }

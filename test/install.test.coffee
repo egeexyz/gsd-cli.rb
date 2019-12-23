@@ -18,11 +18,11 @@ describe 'supported games', ->
 
 describe 'installation process', ->
   game = "garrysmod"
-  script = "./srcds_run -console -game #{garrysmod} +map gm_construct +maxplayers 16 +host_workshop_collection 1838303608 -condebug & /usr/bin/tail -f ./console.log"
+  script = "./srcds_run -console -game #{game} +map gm_construct +maxplayers 16 +host_workshop_collection 1838303608 -condebug & /usr/bin/tail -f ./console.log"
   execSync("mkdir -p /home/#{process.env.USER}/.config/systemd/user")
 
   it "should create a log file", ->
-    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/#{garrysmod}/console.log")
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/#{game}/console.log")
     assert.ok(!backupScriptContents.includes('No such file or directory'))
 
   it "should create a systemd unit file", ->
@@ -31,7 +31,7 @@ describe 'installation process', ->
 
   it "should create a launch script", ->
     launchScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh")
-    assert.ok(launchScriptContents.includes('#{garrysmod}'))
+    assert.ok(launchScriptContents.includes("#{game}"))
 
   it "should backup the launch script", ->
     backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh.backup")
@@ -39,4 +39,4 @@ describe 'installation process', ->
 
   it "should not duplicate launch script", ->
     launchScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/launch.sh")
-    assert.ok(launchScriptContents.toString().match(/-game #{garrysmod}/gm).length == 1)
+    assert.ok(launchScriptContents.toString().match(/-game garrysmod/gm).length == 1)

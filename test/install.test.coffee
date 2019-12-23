@@ -4,11 +4,15 @@ assert       = require('assert')
 
 describe 'supported games', ->
   it "should support Garrys Mod", ->
-    sdout = execSync("node ./bin/run install -d -n gmod")
+    filePath = execSync("readlink -f ./configs/gmod.json")
+    sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
-  it "should support Team Fortress 2", ->
-    sdout = execSync("node ./bin/run install -d -n tf2")
-    assert.ok(sdout.includes("Installing, please wait"))
+  # it "should support Team Fortress 2", ->
+  #   sdout = execSync("node ./bin/run install -d -n tf2")
+  #   assert.ok(sdout.includes("Installing, please wait"))
+  # it "should support Minecraft", ->
+  #   sdout = execSync("node ./bin/run install -d -n tf2")
+  #   assert.ok(sdout.includes("Installing, please wait"))
 
 describe 'installation process', ->
   game = 'gmod'

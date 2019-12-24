@@ -4,7 +4,7 @@ Chalk        = require("chalk")
 class GenericServer
   @install: (flags) ->
     console.info(Chalk.blue.bold("Installing, please wait... ⏳"))
-    execSync("mkdir -p /home/#{flags.config.meta.user}/#{flags.config.meta.game}-server/#{flags.config.meta.game}")
+    execSync("mkdir -p /home/#{flags.config.meta.user}/#{flags.config.meta.game}-server")
   @createUnitFile: (flags) ->
     unit_path = "/home/#{flags.config.meta.user}/.config/systemd/user/#{flags.config.meta.game}.service"
     unitFileContents = """

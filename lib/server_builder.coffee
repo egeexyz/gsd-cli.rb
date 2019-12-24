@@ -6,9 +6,6 @@ class GameServer
   @install: (flags) ->
     switch flags.config.meta.game
       when "minecraft"
-        flags.version     = "1.15.1"
-        flags.installPath = "/home/#{process.env.USER}/#{flags.name}-server"
-        flags.javaExec    = "java -Xmx1024M -jar BuildTools.jar --rev #{flags.version}"
         MinecraftServer.install(flags)
       # when "rust" then return "Installing, please wait"
       when "garrysmod"

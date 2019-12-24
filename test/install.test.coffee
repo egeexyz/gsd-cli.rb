@@ -14,10 +14,10 @@ describe 'supported games', ->
 
   ## Double Check "dryrun" for this test
   
-  # it "should support Minecraft", ->
-  #   filePath = execSync("readlink -f ./configs/minecraft.json")
-  #   sdout = execSync("node ./bin/run install -d -f #{filePath}")
-  #   assert.ok(sdout.includes("Installing, please wait"))
+  it "should support Minecraft", ->
+    filePath = execSync("readlink -f ./configs/minecraft.json")
+    sdout = execSync("node ./bin/run install -d -f #{filePath}")
+    assert.ok(sdout.includes("Installing, please wait"))
 
 describe 'installation process', ->
   game = "garrysmod"

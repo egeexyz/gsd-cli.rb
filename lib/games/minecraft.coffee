@@ -5,8 +5,8 @@ GenericServer   = require("./generic")
 class Minecraft extends GenericServer
   @install: (flags) ->
     super(flags)
-    this.downloadBuildTools(flags)
     console.log(Chalk.blue.bold("Running Spigot BuildTools.jar. This will take a while... ⏳"))
+    this.downloadBuildTools(flags) unless flags.dryrun == true
     console.log(execSync("java -Xmx1024M -jar BuildTools.jar", {"cwd": "#{flags.path}"}).toString()) unless flags.dryrun == true
     this.createUnitFile(flags)
     this.createLaunchScript(flags)

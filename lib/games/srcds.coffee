@@ -26,6 +26,7 @@ class SrcdsServer extends GenericServer
                         """
     super(flags, launchFileContents)
   @createLogFile: (flags) ->
+    execSync("mkdir -p #{flags.path}/#{flags.config.meta.game}/console.log")
     execSync("touch #{flags.path}/#{flags.config.meta.game}/console.log")
   @backupFile: (file) ->
     execSync("touch #{file}")

@@ -1,5 +1,6 @@
 Chalk           = require("chalk")
 RustServer     = require("./games/rust")
+SdtdServer     = require("./games/sdtd")
 SrcdsServer     = require("./games/srcds")
 MinecraftServer = require("./games/minecraft")
 
@@ -14,7 +15,8 @@ class GameServer
         SrcdsServer.install(flags)
       when "tf"
         SrcdsServer.install(flags)
-      # when "sdtd" then return "Installing, please wait"
+      when "sdtd"
+        SdtdServer.install(flags)
       else console.warn "That game isn't supported yet"
     console.info(Chalk.green.bold("Installation of #{flags.config.meta.game} complete! 🚀"))
 

@@ -15,6 +15,14 @@ describe 'supported games', ->
     filePath = execSync("readlink -f ./configs/minecraft.json")
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
+  it "should support Rust", ->
+    filePath = execSync("readlink -f ./configs/rust.json")
+    sdout = execSync("node ./bin/run install -d -f #{filePath}")
+    assert.ok(sdout.includes("Installing, please wait"))
+  it "should support 7 Days To Die", ->
+    filePath = execSync("readlink -f ./configs/sdtd.json")
+    sdout = execSync("node ./bin/run install -d -f #{filePath}")
+    assert.ok(sdout.includes("Installing, please wait"))
 
 describe 'installation process', ->
   game = "garrysmod"

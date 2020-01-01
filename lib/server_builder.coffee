@@ -1,4 +1,5 @@
 Chalk           = require("chalk")
+RustServer     = require("./games/rust")
 SrcdsServer     = require("./games/srcds")
 MinecraftServer = require("./games/minecraft")
 
@@ -7,7 +8,8 @@ class GameServer
     switch flags.config.meta.game
       when "minecraft"
         MinecraftServer.install(flags)
-      # when "rust" then return "Installing, please wait"
+      when "rust"
+        RustServer.install(flags)
       when "garrysmod"
         SrcdsServer.install(flags)
       when "tf"

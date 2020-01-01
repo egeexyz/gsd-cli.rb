@@ -3,9 +3,9 @@
     "user": "travis",
     "game": "rust"
   },
-  "appId": "4020",
+  "appId": "258550",
   "ip": "0.0.0.0",
-  "password": "_",
+  "rconPassword": "_",
   "rconPort": "28016",
   "gamePort": "28015",
   "steamUserName": "anonymous",

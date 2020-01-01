@@ -10,20 +10,20 @@ class RustServer extends GenericServer
 
     this.createUnitFile(flags)
     this.createLaunchScript(flags)
-    this.createLogFile(flags)
   @createUnitFile: (flags) ->
     super(flags)
   @createLaunchScript: (flags) ->
     ## Because of the export LD_LIBRARY_PATH bullshit, this is way more work than it looks
     launchFileContents = """
-                      ./srcds_run \
-                      -console \
-                      -game #{flags.config.meta.game} \
-                      +map #{flags.config.defaultMap} \
-                      +maxplayers #{flags.config.players} \
-                      #{flags.config.srcdsParams} \
-                      -condebug & \
-                      /usr/bin/tail -f #{flags.path}/#{flags.config.meta.game}/console.log
+                        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:#{flags.path}/RustDedicated_Data/Plugins/x86_64
+                        ./RustDedicated \
+                        +server.ip #{flags.config.ip} \
+                        +server.port #{flags.config.gamePort} \
+                        +server.identity rust \
+                        +rcon.web 1 \
+                        +rcon.ip #{flags.config.ip} \
+                        +rcon.port #{flags.config.rconPort} \
+                        +rcon.password #{flags.config.rconPassword}
                         """
     super(flags, launchFileContents)
   @createLogFile: (flags) ->
@@ -32,4 +32,5 @@ class RustServer extends GenericServer
     execSync("touch #{file}")
     execSync("rm -f #{file}.backup")
     execSync("mv #{file} #{file}.backup")
-module.exports = SrcdsServer
+
+module.exports = RustServer

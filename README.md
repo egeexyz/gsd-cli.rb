@@ -7,19 +7,17 @@ A CLI tool for deploying dedicated game servers as systemd units (daemons).
 
 This repo is for gsd-cli version 2.x. This version of the cli is written in CoffeeScript and can be downloaded as a global module from [npm](https://www.npmjs.com/package/gsd-cli).
 
-<!-- toc -->
-
-<!-- tocstop -->
 ## Usage
 <!-- usage -->
 ```sh-session
 $ npm install -g gsd-cli
-+ gsd-cli
-$ gsd-cli (-v|--version)
-gsd-cli/0.1.0 linux-x64 node-v12.13.0
+$ gsd-cli COMMAND
+running command...
+$ gsd-cli (-v|--version|version)
+gsd-cli/0.4.0 linux-x64 node-v12.13.0
 $ gsd-cli --help [COMMAND]
 USAGE
-  $ gsd-cli [COMMAND]
+  $ gsd-cli COMMAND
 ...
 ```
 <!-- usagestop -->
@@ -56,11 +54,11 @@ USAGE
 
 OPTIONS
   -d, --dryrun     test installing a server without actually installing it
-  -n, --name=name  (required) game server to install
-  -p, --path=path  path the game server will be installed to
+  -f, --file=file  path to the config file
+  -n, --name=name  game server to install
 ```
 
-_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v0.1.0/dist/commands/install.js)_
+_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v0.4.0/dist/commands/install.js)_
 
 ## `gsd-cli update`
 
@@ -75,5 +73,5 @@ OPTIONS
   -p, --path=path  path the game server is installed at
 ```
 
-_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v0.1.0/dist/commands/update.js)_
+_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v0.4.0/dist/commands/update.js)_
 <!-- commandsstop -->

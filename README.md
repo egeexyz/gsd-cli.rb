@@ -55,7 +55,6 @@ USAGE
 OPTIONS
   -d, --dryrun     test installing a server without actually installing it
   -f, --file=file  path to the config file
-  -n, --name=name  game server to install
 ```
 
 _See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.1/dist/commands/install.js)_

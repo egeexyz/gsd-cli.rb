@@ -34,10 +34,6 @@
   InstallCommand.description = "install a dedicated game server as a daemon";
 
   InstallCommand.flags = {
-    name: flags.string({
-      char: 'n',
-      description: 'game server to install'
-    }),
     file: flags.string({
       char: 'f',
       description: 'path to the config file'

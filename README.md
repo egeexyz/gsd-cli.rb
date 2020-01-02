@@ -58,7 +58,7 @@ OPTIONS
   -n, --name=name  game server to install
 ```
 
-_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.0.0/dist/commands/install.js)_
+_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.0.0/lib/commands/install.coffee)_
 
 ## `gsd-cli update`
 
@@ -73,5 +73,5 @@ OPTIONS
   -p, --path=path  path the game server is installed at
 ```
 
-_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.0.0/dist/commands/update.js)_
+_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.0.0/lib/commands/update.coffee)_
 <!-- commandsstop -->

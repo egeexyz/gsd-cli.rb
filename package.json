@@ -1,6 +1,6 @@
 {
   "name": "gsd-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "egee-irl @egee-irl",
   "bin": {
     "gsd-cli": "./bin/run"

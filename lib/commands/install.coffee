@@ -8,17 +8,13 @@ class InstallCommand extends Command
   run: ->
     { flags } = this.parse(InstallCommand)
     try
-      content = JSON.parse(fs.readFileSync(flags.file))
-      flags.config = content
+      jsonConfig = JSON.parse(fs.readFileSync(flags.file))
+      flags.config = jsonConfig
     catch e
       this.error(Chalk.red.bold("Error parsing config file: #{e}"))
       process.exit
     
     flags.path = "/home/#{flags.config.meta.user}/#{flags.config.meta.game}-server"
-    # execSync("touch #{flags.path}/cache.json")
-    # execSync("echo > #{JSON.stringify(content)}")
-    # fs.writeFile "#{flags.path}/cache.json", JSON.stringify(content), (err) =>
-    #   throw err if err
     this.log "server will be installed to #{flags.path}"
     GameServer.install(flags)
 

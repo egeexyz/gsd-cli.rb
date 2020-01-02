@@ -29,6 +29,10 @@ describe 'installation process', ->
   script = "./srcds_run -console -game #{game} +map gm_construct +maxplayers 16 +host_workshop_collection 1838303608 -condebug & /usr/bin/tail -f ./console.log"
   execSync("mkdir -p /home/#{process.env.USER}/.config/systemd/user")
 
+  it "should create a cache of the input json file", ->
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/#{game}/cache.json")
+    assert.ok(!backupScriptContents.includes('No such file or directory'))
+
   it "should create a log file", ->
     backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/#{game}/console.log")
     assert.ok(!backupScriptContents.includes('No such file or directory'))

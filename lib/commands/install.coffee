@@ -15,7 +15,8 @@ class InstallCommand extends Command
       process.exit
     
     flags.path = "/home/#{flags.config.meta.user}/#{flags.config.meta.game}-server"
-    
+    fs.writeFile "#{flags.path}/cache.json", JSON.stringify(content), (err) =>
+      throw err if err
     this.log "server will be installed to #{flags.path}"
     GameServer.install(flags)
 

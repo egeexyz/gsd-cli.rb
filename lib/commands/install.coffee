@@ -21,7 +21,6 @@ class InstallCommand extends Command
 InstallCommand.description = "install a dedicated game server as a daemon"
 
 InstallCommand.flags = {
-  name:   flags.string( {char: 'n', description: 'game server to install'}),
   file:   flags.string( {char: 'f', description: 'path to the config file'}),
   dryrun: flags.boolean({char: 'd', description: 'test installing a server without actually installing it'}),
 }

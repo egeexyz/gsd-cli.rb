@@ -1,3 +1,4 @@
+fs           = require("fs")
 Chalk        = require("chalk")
 { execSync } = require("child_process")
 
@@ -5,6 +6,7 @@ class GenericServer
   @install: (flags) ->
     console.info(Chalk.blue.bold("Installing, please wait... ⏳"))
     execSync("mkdir -p /home/#{flags.config.meta.user}/#{flags.config.meta.game}-server")
+    this.createCache(flags)
   @createUnitFile: (flags) ->
     unit_path = "/home/#{flags.config.meta.user}/.config/systemd/user/#{flags.config.meta.game}.service"
     unitFileContents = """
@@ -35,4 +37,7 @@ class GenericServer
     execSync("touch #{file}")
     execSync("rm -f #{file}.backup")
     execSync("mv #{file} #{file}.backup")
+  @createCache: (flags) ->
+    fs.writeFile "#{flags.path}/cache.json", JSON.stringify(flags), (err) =>
+      throw err if err
 module.exports = GenericServer

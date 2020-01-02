@@ -1,6 +1,6 @@
-{ execSync } = require 'child_process'
-install      = require("../dist/commands/install")
 assert       = require('assert')
+install      = require("../dist/commands/install")
+{ execSync } = require 'child_process'
 
 describe 'supported games', ->
   it "should support Garrys Mod", ->

@@ -30,11 +30,11 @@ describe 'installation process', ->
   execSync("mkdir -p /home/#{process.env.USER}/.config/systemd/user")
 
   it "should create a cache of the input json file", ->
-    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/#{game}/cache.json")
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/cache.json")
     assert.ok(!backupScriptContents.includes('No such file or directory'))
 
   it "should create a log file", ->
-    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/console.log")
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/#{game}/console.log")
     assert.ok(!backupScriptContents.includes('No such file or directory'))
 
   it "should create a systemd unit file", ->

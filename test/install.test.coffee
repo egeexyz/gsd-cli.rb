@@ -34,7 +34,7 @@ describe 'installation process', ->
     assert.ok(!backupScriptContents.includes('No such file or directory'))
 
   it "should create a log file", ->
-    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/#{game}/console.log")
+    backupScriptContents = execSync("cat /home/#{process.env.USER}/#{game}-server/console.log")
     assert.ok(!backupScriptContents.includes('No such file or directory'))
 
   it "should create a systemd unit file", ->

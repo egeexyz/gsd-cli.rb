@@ -14,7 +14,7 @@ $ npm install -g gsd-cli
 $ gsd-cli COMMAND
 running command...
 $ gsd-cli (-v|--version|version)
-gsd-cli/1.1.2 linux-x64 node-v12.13.0
+gsd-cli/1.1.3 linux-x64 node-v12.13.0
 $ gsd-cli --help [COMMAND]
 USAGE
   $ gsd-cli COMMAND
@@ -57,7 +57,7 @@ OPTIONS
   -f, --file=file  path to the config file
 ```
 
-_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.2/dist/commands/install.js)_
+_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.3/dist/commands/install.js)_
 
 ## `gsd-cli update`
 
@@ -72,5 +72,5 @@ OPTIONS
   -p, --path=path  path the game server is installed at
 ```
 
-_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.2/dist/commands/update.js)_
+_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.3/dist/commands/update.js)_
 <!-- commandsstop -->

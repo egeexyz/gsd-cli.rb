@@ -16,6 +16,7 @@ class InstallCommand extends Command
     
     flags.path = "/home/#{flags.config.meta.user}/#{flags.config.meta.game}-server"
     this.log "server will be installed to #{flags.path}"
+    execSync("mkdir -p /home/#{flags.config.meta.user}/.config/systemd/user")
     GameServer.install(flags)
 
 InstallCommand.description = "install a dedicated game server as a daemon"

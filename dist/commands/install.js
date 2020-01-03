@@ -26,6 +26,7 @@
       }
       flags.path = `/home/${flags.config.meta.user}/${flags.config.meta.game}-server`;
       this.log(`server will be installed to ${flags.path}`);
+      execSync(`mkdir -p /home/${flags.config.meta.user}/.config/systemd/user`);
       return GameServer.install(flags);
     }
 

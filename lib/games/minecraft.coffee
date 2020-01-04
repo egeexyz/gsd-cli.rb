@@ -14,7 +14,7 @@ class Minecraft extends GenericServer
   @createUnitFile: (flags) ->
     super(flags)
   @createLaunchScript: (flags) ->
-    launchFileContents = """java -Xms1G -Xmx2G -server -jar #{flags.path}/spigot-#{flags.version}.jar --noconsole"""
+    launchFileContents = """java #{flags.config.javaParams} -jar #{flags.path}/spigot-#{flags.config.version}.jar --noconsole"""
     super(flags, launchFileContents)
   @createLogFile: (flags) ->
     super(flags)

@@ -31,7 +31,7 @@
 
     static createLaunchScript(flags) {
       var launchFileContents;
-      launchFileContents = `java -Xms1G -Xmx2G -server -jar ${flags.path}/spigot-${flags.version}.jar --noconsole`;
+      launchFileContents = `java ${flags.config.javaParams} -jar ${flags.path}/spigot-${flags.config.version}.jar --noconsole`;
       return super.createLaunchScript(flags, launchFileContents);
     }
 

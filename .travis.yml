@@ -9,3 +9,9 @@ script:
   - ./bin/run --help
   - npm test
 
+deploy:
+  provider: npm
+  email: $npm_email
+  api_key: $npm_auth
+  on:
+    tags: true

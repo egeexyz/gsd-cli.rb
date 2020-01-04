@@ -27,23 +27,6 @@ USAGE
 * [`gsd-cli install`](#gsd-cli-install)
 * [`gsd-cli update`](#gsd-cli-update)
 
-## `gsd-cli help [COMMAND]`
-
-display help for gsd-cli
-
-```
-USAGE
-  $ gsd-cli help [COMMAND]
-
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.2/src/commands/help.ts)_
-
 ## `gsd-cli install`
 
 install a dedicated game server as a daemon
@@ -73,4 +56,22 @@ OPTIONS
 ```
 
 _See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.3/dist/commands/update.js)_
+
+## `gsd-cli help [COMMAND]`
+
+display help for gsd-cli
+
+```
+USAGE
+  $ gsd-cli help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.2/src/commands/help.ts)_
+
 <!-- commandsstop -->

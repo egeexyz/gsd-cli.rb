@@ -12,6 +12,6 @@ deploy:
   email: brian@egee.io
   api_key:
     secure: QF37N3PdfwFvV4rkiUZ/EhoPCR1FQFuV3OwRbKWMetwcXT81/I87xQo9+g4QbtLh5S4rBrmrKL1oWziNeCKMLG+4l1wXaK/z+p8+qF6fNol82JhGmTJduhiqZJK6yfkscD6ZW+NavO1kCt00j+4knT3wL3roGfxDdG7o0iPG5PK7FJiodwD46v5Vnu6pY2SQ/ZH/gv6x2G2vP7e/wluJvUuldpTKeERYBCk4pD1OCyHgYGEZabn2ZYJJWbs8WuLmEr9GtsPrAWJr7dOzrHVlDQhD9IEi3YRrnkI5rB0CYHFBZuc09SyE+1euFaO1fPCsiaASpSO6da9zVFjh0fa8OJeXT1tVh7DaXcxvAuFe6nRKU+TOal8Xq6Vm8D3x/YSmrfhAc1DzwSn6V5vej3SYxjWemZrOeMSOdEBvcyuOBr94sGe6pqnbMnO4mfQZnmbvOfr0L76Z119JW2Z0optB6oiBg0rpn6Wml+yUF+l7DSUxEdkYGSjg27J1tgOjsrmhu4X+BlGLvWF4+HLPCqeBRTJr2bqlav4VrifdR4ApcD/b9VrWTXijDgznC71SWEoSC8/69U3cH9kdr+MoH92DF/F0apD9qw82qLb3cIN3+97MmI4LLXLYDB2vgFP2aBInk4qn/PEiLh5pJO34NHaJb1e8wNH1rNWE2TrL8IwC+d4=
-  # on:
-  #   tags: true
-  #   repo: Egeeio/gsd-cli
+  on:
+    tags: true
+    repo: Egeeio/gsd-cli

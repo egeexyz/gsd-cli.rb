@@ -13,9 +13,10 @@
     "chalk": "^3.0.0"
   },
   "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
     "chai": "^4.2.0",
-    "coffeescript": "^2.4.1",
     "coffeelint": "^2.1.0",
+    "coffeescript": "^2.4.1",
     "globby": "^10.0.1",
     "mocha": "^6.2.2",
     "qunit": "^2.9.3",

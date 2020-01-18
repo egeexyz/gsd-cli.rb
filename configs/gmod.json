@@ -1,7 +1,8 @@
 {
   "meta": {
     "user": "travis",
-    "game": "garrysmod"
+    "game": "garrysmod",
+    "type": "steamcmd"
   },
   "appId": "4020",
   "players": "16",

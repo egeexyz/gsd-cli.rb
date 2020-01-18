@@ -1,7 +1,8 @@
 {
   "meta": {
     "user": "travis",
-    "game": "sdtd"
+    "game": "sdtd",
+    "type": "steamcmd"
   },
   "appId": "294420",
   "steamUserName": "anonymous",

@@ -1,7 +1,7 @@
 { exec, spawn } = require 'child_process'
 
 build = () ->
-  exec 'coffee --compile --map --output dist/ lib/'
+  exec 'coffee --compile --map --output dist/ src/'
 
 clean = () ->
   exec 'rm -rf dist/*'

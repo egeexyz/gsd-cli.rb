@@ -13,9 +13,7 @@ class BootstrapCommand extends Command
     configFiles = await fs.readdir("#{srcPath}/configs")
 
     replaceName = (file) -> exec("sed -i \"s/travis/#{process.env.USER}/\" #{srcPath}/configs/#{file}")
-    replaceName file for file in configFiles
-
-    # configFiles.forEach(file) -> replaceName(file)
+    configFiles.forEach(file) -> replaceName(file)
 
 BootstrapCommand.description = "Bootstrap some game config files"
 

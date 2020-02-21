@@ -2,7 +2,7 @@ fs                 = require("fs").promises
 Chalk              = require("chalk")
 GameServer         = require("../server_builder")
 { Command, flags } = require('@oclif/command')
-{ execSync, exec }       = require 'child_process'
+{ execSync, exec, spawn }       = require 'child_process'
 
 class BootstrapCommand extends Command
   run: ->
@@ -12,8 +12,8 @@ class BootstrapCommand extends Command
 
     configFiles = await fs.readdir("#{srcPath}/configs")
 
-    replaceName = (file) -> exec("sed -i \"s/travis/#{process.env.USER}/\" #{srcPath}/configs/#{file}")
-    configFiles.forEach(file) -> replaceName(file)
+    replaceName = (file) -> execSync("sed -i \"s/travis/#{process.env.USER}/\" #{srcPath}/configs/#{file}")
+    configFiles.forEach((file) -> replaceName(file))
 
 BootstrapCommand.description = "Bootstrap some game config files"
 

@@ -14,7 +14,7 @@ $ npm install -g gsd-cli
 $ gsd-cli COMMAND
 running command...
 $ gsd-cli (-v|--version|version)
-gsd-cli/1.1.3 linux-x64 node-v12.13.0
+gsd-cli/1.2.0 linux-x64 node-v12.13.0
 $ gsd-cli --help [COMMAND]
 USAGE
   $ gsd-cli COMMAND
@@ -23,39 +23,21 @@ USAGE
 <!-- usagestop -->
 ## Commands
 <!-- commands -->
+* [`gsd-cli bootstrap`](#gsd-cli-bootstrap)
 * [`gsd-cli help [COMMAND]`](#gsd-cli-help-command)
 * [`gsd-cli install`](#gsd-cli-install)
 * [`gsd-cli update`](#gsd-cli-update)
 
-## `gsd-cli install`
+## `gsd-cli bootstrap`
 
-install a dedicated game server as a daemon
-
-```
-USAGE
-  $ gsd-cli install
-
-OPTIONS
-  -d, --dryrun     test installing a server without actually installing it
-  -f, --file=file  path to the config file
-```
-
-_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.3/dist/commands/install.js)_
-
-## `gsd-cli update`
-
-Updates an installed dedicated game server
+Bootstrap some game config files
 
 ```
 USAGE
-  $ gsd-cli update
-
-OPTIONS
-  -n, --name=name  game server to update
-  -p, --path=path  path the game server is installed at
+  $ gsd-cli bootstrap
 ```
 
-_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.1.3/dist/commands/update.js)_
+_See code: [dist/commands/bootstrap.js](https://github.com/Egeeio/gsd-cli/blob/v1.2.0/dist/commands/bootstrap.js)_
 
 ## `gsd-cli help [COMMAND]`
 
@@ -74,4 +56,33 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.2/src/commands/help.ts)_
 
+## `gsd-cli install`
+
+install a dedicated game server as a daemon
+
+```
+USAGE
+  $ gsd-cli install
+
+OPTIONS
+  -d, --dryrun     test installing a server without actually installing it
+  -f, --file=file  path to the config file
+```
+
+_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.2.0/dist/commands/install.js)_
+
+## `gsd-cli update`
+
+Updates an installed dedicated game server
+
+```
+USAGE
+  $ gsd-cli update
+
+OPTIONS
+  -n, --name=name  game server to update
+  -p, --path=path  path the game server is installed at
+```
+
+_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.2.0/dist/commands/update.js)_
 <!-- commandsstop -->

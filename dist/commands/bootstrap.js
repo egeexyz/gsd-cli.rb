@@ -25,7 +25,8 @@
         var filePath;
         filePath = `${tmpPath}/${gameLookup[name]}`;
         execSync(`sed -i "s/USER_NAME/${process.env.USER}/" ${filePath}`);
-        return execSync(`cp -f ${filePath} ${process.env.PWD}`);
+        execSync(`cp -f ${filePath} ${process.env.PWD}`);
+        return this.log(Chalk.blue(`Created '${flags.name}' config file at: ${process.env.PWD}/${filePath}`));
       }
 
       run() {
@@ -48,14 +49,14 @@
       minecraft: 'minecraft.json',
       rust: 'rust.json',
       sdtd: 'sdtd.json',
-      tf2: 'tf2'
+      tf2: 'tf2.json'
     };
 
     return BootstrapCommand;
 
   }).call(this);
 
-  BootstrapCommand.description = "Bootstrap some game config files";
+  BootstrapCommand.description = "Creates a default gsd game configuration file and places it in the current directory.";
 
   BootstrapCommand.flags = {
     name: flags.string({

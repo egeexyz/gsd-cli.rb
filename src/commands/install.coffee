@@ -18,6 +18,7 @@ class InstallCommand extends Command
     else if flags.name
       execSync("node ./bin/run bootstrap -n #{flags.name}")
       flags.file = "#{process.env.PWD}/#{flags.name}.json"
+      this.log(Chalk.blue("Created '#{flags.name}' config file at: #{process.env.PWD}/#{flags.file}"))
     try
       jsonConfig = this.configParser(flags)
     catch e
@@ -29,7 +30,7 @@ class InstallCommand extends Command
     this.flagParser(flags)
     GameServer.install(flags)
 
-InstallCommand.description = "install a dedicated game server as a daemon"
+InstallCommand.description = "Installs a dedicated game server using a config file or a name with default settings."
 
 InstallCommand.flags = {
   name:   flags.string( {char: 'n', description: 'name of the server to install'}),

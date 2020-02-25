@@ -12,24 +12,45 @@
 
   ({execSync, exec, spawn} = require('child_process'));
 
-  BootstrapCommand = class BootstrapCommand extends Command {
-    async run() {
-      var configFiles, replaceName, srcPath;
-      srcPath = `/home/${process.env.USER}/.local/gsd-cli`;
-      execSync(`rm -rf ${srcPath}`);
-      execSync(`git clone https://github.com/Egeeio/gsd-cli.git ${srcPath}`);
-      configFiles = (await fs.readdir(`${srcPath}/configs`));
-      replaceName = function(file) {
-        return execSync(`sed -i "s/travis/${process.env.USER}/" ${srcPath}/configs/${file}`);
-      };
-      return configFiles.forEach(function(file) {
-        return replaceName(file);
-      });
-    }
+  BootstrapCommand = (function() {
+    var gameLookup;
 
-  };
+    class BootstrapCommand extends Command {
+      run() {
+        var filePath, homePath, tmpPath;
+        ({flags} = this.parse(BootstrapCommand));
+        homePath = `/home/${process.env.USER}/gsd-config`;
+        tmpPath = "/tmp/gsd-config";
+        execSync(`rm -rf ${tmpPath}`);
+        execSync(`git clone https://github.com/Egeeio/gsd-config.git ${tmpPath}`);
+        filePath = `${tmpPath}/${gameLookup[flags.name]}`;
+        execSync(`sed -i "s/USER_NAME/${process.env.USER}/" ${filePath}`);
+        execSync(`cp ${filePath} ${process.env.PWD}`);
+        return console.log(execSync(`cat ${process.env.PWD}/${gameLookup[flags.name]}`).toString());
+      }
+
+    };
+
+    gameLookup = {
+      gmod: 'gmod.json',
+      minecraft: 'minecraft.json',
+      rust: 'rust.json',
+      sdtd: 'sdtd.json',
+      tf2: 'tf2'
+    };
+
+    return BootstrapCommand;
+
+  }).call(this);
 
   BootstrapCommand.description = "Bootstrap some game config files";
+
+  BootstrapCommand.flags = {
+    name: flags.string({
+      char: 'n',
+      description: 'name of the server to to pull configs for'
+    })
+  };
 
   module.exports = BootstrapCommand;
 

@@ -8,19 +8,19 @@ describe 'supported games', ->
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
   it "should support Team Fortress 2", ->
-    filePath = execSync("readlink -f ./configs/tf2.json")
+    filePath = execSync("readlink -f ./test/configs/tf2.json")
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
   it "should support Minecraft", ->
-    filePath = execSync("readlink -f ./configs/minecraft.json")
+    filePath = execSync("readlink -f ./test/configs/minecraft.json")
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
   it "should support Rust", ->
-    filePath = execSync("readlink -f ./configs/rust.json")
+    filePath = execSync("readlink -f ./test/configs/rust.json")
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
   it "should support 7 Days To Die", ->
-    filePath = execSync("readlink -f ./configs/sdtd.json")
+    filePath = execSync("readlink -f ./test/configs/sdtd.json")
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
 

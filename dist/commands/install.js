@@ -16,8 +16,8 @@
     flagParser(flags) {
       var e, installData, jsonConfig;
       if (flags.file && flags.name) {
-        this.error(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."));
-        return process.exit;
+        this.log(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."));
+        return process.exit();
       } else if (flags.file) {
         try {
           jsonConfig = JSON.parse(fs.readFileSync(flags.file));
@@ -27,8 +27,8 @@
           execSync(`mkdir -p /home/${flags.config.meta.user}/.config/systemd/user`);
         } catch (error) {
           e = error;
-          this.error(Chalk.red.bold(`Error parsing config file: ${e}`));
-          process.exit;
+          this.log(Chalk.red.bold(`Error parsing config file: ${e}`));
+          process.exit();
         }
         return jsonConfig;
       } else {

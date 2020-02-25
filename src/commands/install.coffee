@@ -7,8 +7,8 @@ GameServer         = require("../server_builder")
 class InstallCommand extends Command
   flagParser: (flags) ->
     if flags.file && flags.name
-      this.error(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."))
-      process.exit
+      this.log(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."))
+      process.exit()
     else if flags.file
       try
         jsonConfig = JSON.parse(fs.readFileSync(flags.file))
@@ -17,8 +17,8 @@ class InstallCommand extends Command
         this.log "server will be installed to #{flags.path}"
         execSync("mkdir -p /home/#{flags.config.meta.user}/.config/systemd/user")
       catch e
-        this.error(Chalk.red.bold("Error parsing config file: #{e}"))
-        process.exit
+        this.log(Chalk.red.bold("Error parsing config file: #{e}"))
+        process.exit()
       return jsonConfig
     else
       installData = flags.name

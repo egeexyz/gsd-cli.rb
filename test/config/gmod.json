@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "user": "travis",
+    "game": "garrysmod",
+    "type": "steamcmd"
+  },
+  "appId": "4020",
+  "players": "16",
+  "defaultMap": "gm_construct",
+  "srcdsParams": "+host_workshop_collection 1838303608",
+  "steamUserName": "anonymous",
+  "steamPassword": ""
+}

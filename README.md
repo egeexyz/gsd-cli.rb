@@ -23,10 +23,13 @@ USAGE
 <!-- usagestop -->
 ## Commands
 <!-- commands -->
-* [`gsd-cli bootstrap`](#gsd-cli-bootstrap)
-* [`gsd-cli help [COMMAND]`](#gsd-cli-help-command)
-* [`gsd-cli install`](#gsd-cli-install)
-* [`gsd-cli update`](#gsd-cli-update)
+- [gsd-cli v2 ![Build Status](https://travis-ci.org/Egeeio/gsd-cli)](#gsd-cli-v2-img-src%22httpstravis-ciorgegeeiogsd-cli%22-alt%22build-status%22)
+  - [Usage](#usage)
+  - [Commands](#commands)
+  - [`gsd-cli bootstrap`](#gsd-cli-bootstrap)
+  - [`gsd-cli help [COMMAND]`](#gsd-cli-help-command)
+  - [`gsd-cli install`](#gsd-cli-install)
+  - [`gsd-cli update`](#gsd-cli-update)
 
 ## `gsd-cli bootstrap`
 
@@ -35,6 +38,9 @@ Bootstrap some game config files
 ```
 USAGE
   $ gsd-cli bootstrap
+
+OPTIONS
+  -n, --name=name  name of the server to to pull configs for
 ```
 
 _See code: [dist/commands/bootstrap.js](https://github.com/Egeeio/gsd-cli/blob/v1.2.0/dist/commands/bootstrap.js)_
@@ -67,6 +73,7 @@ USAGE
 OPTIONS
   -d, --dryrun     test installing a server without actually installing it
   -f, --file=file  path to the config file
+  -n, --name=name  name of the server to install
 ```
 
 _See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.2.0/dist/commands/install.js)_

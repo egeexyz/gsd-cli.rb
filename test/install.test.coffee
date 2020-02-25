@@ -4,7 +4,7 @@ install      = require("../dist/commands/install")
 
 describe 'supported games', ->
   it "should support Garrys Mod", ->
-    filePath = execSync("readlink -f ./configs/gmod.json")
+    filePath = execSync("readlink -f ./test/configs/gmod.json")
     sdout = execSync("node ./bin/run install -d -f #{filePath}")
     assert.ok(sdout.includes("Installing, please wait"))
   it "should support Team Fortress 2", ->

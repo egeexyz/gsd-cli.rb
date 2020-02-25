@@ -13,9 +13,24 @@
   ({execSync} = require('child_process'));
 
   InstallCommand = class InstallCommand extends Command {
+    flagParser(flags) {
+      var installData;
+      if (flags.file && flags.name) {
+        this.error(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."));
+        return process.exit;
+      } else if (flags.file) {
+        installData = flags.file;
+        return installData;
+      } else {
+        installData = flags.name;
+        return installData;
+      }
+    }
+
     run() {
       var e, jsonConfig;
       ({flags} = this.parse(InstallCommand));
+      this.flagParser(flags);
       try {
         jsonConfig = JSON.parse(fs.readFileSync(flags.file));
         flags.config = jsonConfig;
@@ -35,6 +50,10 @@
   InstallCommand.description = "install a dedicated game server as a daemon";
 
   InstallCommand.flags = {
+    name: flags.string({
+      char: 'n',
+      description: 'name of the server to install'
+    }),
     file: flags.string({
       char: 'f',
       description: 'path to the config file'

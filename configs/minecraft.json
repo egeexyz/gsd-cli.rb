@@ -1,9 +1,0 @@
-{
-  "meta": {
-    "user": "travis",
-    "game": "minecraft",
-    "type": "other"
-  },
-  "version": "1.15.1",
-  "javaParams": "-Xms1G -Xmx2G -server"
-}

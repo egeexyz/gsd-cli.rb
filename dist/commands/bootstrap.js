@@ -13,23 +13,35 @@
   ({execSync, exec, spawn} = require('child_process'));
 
   BootstrapCommand = (function() {
-    var gameLookup;
+    var gameLookup, tmpPath;
 
     class BootstrapCommand extends Command {
-      run() {
-        var filePath, homePath, tmpPath;
-        ({flags} = this.parse(BootstrapCommand));
-        homePath = `/home/${process.env.USER}/gsd-config`;
-        tmpPath = "/tmp/gsd-config";
+      downloadFile() {
         execSync(`rm -rf ${tmpPath}`);
-        execSync(`git clone https://github.com/Egeeio/gsd-config.git ${tmpPath}`);
-        filePath = `${tmpPath}/${gameLookup[flags.name]}`;
+        return execSync(`git clone https://github.com/Egeeio/gsd-config.git ${tmpPath} --quiet`);
+      }
+
+      transformConfig(name) {
+        var filePath;
+        filePath = `${tmpPath}/${gameLookup[name]}`;
         execSync(`sed -i "s/USER_NAME/${process.env.USER}/" ${filePath}`);
-        execSync(`cp ${filePath} ${process.env.PWD}`);
-        return console.log(execSync(`cat ${process.env.PWD}/${gameLookup[flags.name]}`).toString());
+        return execSync(`cp -f ${filePath} ${process.env.PWD}`);
+      }
+
+      run() {
+        ({flags} = this.parse(BootstrapCommand));
+        if (gameLookup[flags.name]) {
+          this.downloadFile();
+          return this.transformConfig(flags.name);
+        } else {
+          this.log(Chalk.red.bold(`Unable to find '${flags.name}' in supported games list.`));
+          return process.exit();
+        }
       }
 
     };
+
+    tmpPath = "/tmp/gsd-config";
 
     gameLookup = {
       gmod: 'gmod.json',

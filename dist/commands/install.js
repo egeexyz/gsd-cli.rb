@@ -13,28 +13,32 @@
   ({execSync} = require('child_process'));
 
   InstallCommand = class InstallCommand extends Command {
+    configParser(flags) {
+      var jsonConfig;
+      jsonConfig = JSON.parse(fs.readFileSync(flags.file));
+      flags.config = jsonConfig;
+      flags.path = `/home/${flags.config.meta.user}/${flags.config.meta.game}-server`;
+      this.log(`server will be installed to ${flags.path}`);
+      return execSync(`mkdir -p /home/${flags.config.meta.user}/.config/systemd/user`);
+    }
+
     flagParser(flags) {
-      var e, installData, jsonConfig;
+      var e, jsonConfig;
       if (flags.file && flags.name) {
         this.log(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."));
-        return process.exit();
-      } else if (flags.file) {
-        try {
-          jsonConfig = JSON.parse(fs.readFileSync(flags.file));
-          flags.config = jsonConfig;
-          flags.path = `/home/${flags.config.meta.user}/${flags.config.meta.game}-server`;
-          this.log(`server will be installed to ${flags.path}`);
-          execSync(`mkdir -p /home/${flags.config.meta.user}/.config/systemd/user`);
-        } catch (error) {
-          e = error;
-          this.log(Chalk.red.bold(`Error parsing config file: ${e}`));
-          process.exit();
-        }
-        return jsonConfig;
-      } else {
-        installData = flags.name;
-        return installData;
+        process.exit();
+      } else if (flags.name) {
+        execSync(`node ./bin/run bootstrap -n ${flags.name}`);
+        flags.file = `${process.env.PWD}/${flags.name}.json`;
       }
+      try {
+        jsonConfig = this.configParser(flags);
+      } catch (error) {
+        e = error;
+        this.log(Chalk.red.bold(`Error parsing config file: ${e}`));
+        process.exit();
+      }
+      return jsonConfig;
     }
 
     run() {

@@ -5,6 +5,7 @@ GameServer         = require("../server_builder")
 { execSync, exec, spawn }       = require 'child_process'
 
 class BootstrapCommand extends Command
+  tmpPath = "/tmp/gsd-config"
   gameLookup = {
     gmod: 'gmod.json',
     minecraft: 'minecraft.json',
@@ -12,18 +13,23 @@ class BootstrapCommand extends Command
     sdtd: 'sdtd.json',
     tf2: 'tf2'
   }
-  run: ->
-    { flags } = this.parse(BootstrapCommand)
-    homePath = "/home/#{process.env.USER}/gsd-config"
-    tmpPath = "/tmp/gsd-config"
+  downloadFile: () ->
     execSync("rm -rf #{tmpPath}")
-    execSync("git clone https://github.com/Egeeio/gsd-config.git #{tmpPath}")
-    filePath = "#{tmpPath}/#{gameLookup[flags.name]}"
-
+    execSync("git clone https://github.com/Egeeio/gsd-config.git #{tmpPath} --quiet")
+  transformConfig: (name) ->
+    filePath = "#{tmpPath}/#{gameLookup[name]}"
 
     execSync("sed -i \"s/USER_NAME/#{process.env.USER}/\" #{filePath}")
-    execSync("cp #{filePath} #{process.env.PWD}")
-    console.log (execSync("cat #{process.env.PWD}/#{gameLookup[flags.name]}").toString())
+    execSync("cp -f #{filePath} #{process.env.PWD}")
+  run: ->
+    { flags } = this.parse(BootstrapCommand)
+
+    if gameLookup[flags.name]
+      this.downloadFile()
+      this.transformConfig(flags.name)
+    else
+      this.log(Chalk.red.bold("Unable to find '#{flags.name}' in supported games list."))
+      process.exit()
 
 BootstrapCommand.description = "Bootstrap some game config files"
 

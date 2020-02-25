@@ -11,9 +11,9 @@ Currently supported game servers:
 
 * minecraft
 * rust
-* 7 days to die
-* garry's mod
-* team fortress 2
+* 7 days to die[sdtd]
+* garry's mod[gmod]
+* team fortress 2[tf2]
 
 ## Usage
 <!-- usage -->
@@ -31,14 +31,17 @@ USAGE
 <!-- usagestop -->
 ## Commands
 <!-- commands -->
-* [`gsd-cli bootstrap`](#gsd-cli-bootstrap)
-* [`gsd-cli help [COMMAND]`](#gsd-cli-help-command)
-* [`gsd-cli install`](#gsd-cli-install)
-* [`gsd-cli update`](#gsd-cli-update)
+- [gsd-cli v2 ![Build Status](https://travis-ci.org/Egeeio/gsd-cli)](#gsd-cli-v2-img-src%22httpstravis-ciorgegeeiogsd-cli%22-alt%22build-status%22)
+  - [Usage](#usage)
+  - [Commands](#commands)
+  - [`gsd-cli bootstrap`](#gsd-cli-bootstrap)
+  - [`gsd-cli help [COMMAND]`](#gsd-cli-help-command)
+  - [`gsd-cli install`](#gsd-cli-install)
+  - [`gsd-cli update`](#gsd-cli-update)
 
 ## `gsd-cli bootstrap`
 
-Bootstrap some game config files
+Creates a default gsd game configuration file and places it in the current directory.
 
 ```
 USAGE
@@ -69,7 +72,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.2
 
 ## `gsd-cli install`
 
-install a dedicated game server as a daemon
+Installs a dedicated game server using a config file or a name with default settings.
 
 ```
 USAGE

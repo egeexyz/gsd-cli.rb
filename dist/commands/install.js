@@ -14,13 +14,23 @@
 
   InstallCommand = class InstallCommand extends Command {
     flagParser(flags) {
-      var installData;
+      var e, installData, jsonConfig;
       if (flags.file && flags.name) {
         this.error(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."));
         return process.exit;
       } else if (flags.file) {
-        installData = flags.file;
-        return installData;
+        try {
+          jsonConfig = JSON.parse(fs.readFileSync(flags.file));
+          flags.config = jsonConfig;
+          flags.path = `/home/${flags.config.meta.user}/${flags.config.meta.game}-server`;
+          this.log(`server will be installed to ${flags.path}`);
+          execSync(`mkdir -p /home/${flags.config.meta.user}/.config/systemd/user`);
+        } catch (error) {
+          e = error;
+          this.error(Chalk.red.bold(`Error parsing config file: ${e}`));
+          process.exit;
+        }
+        return jsonConfig;
       } else {
         installData = flags.name;
         return installData;
@@ -28,20 +38,8 @@
     }
 
     run() {
-      var e, jsonConfig;
       ({flags} = this.parse(InstallCommand));
       this.flagParser(flags);
-      try {
-        jsonConfig = JSON.parse(fs.readFileSync(flags.file));
-        flags.config = jsonConfig;
-      } catch (error) {
-        e = error;
-        this.error(Chalk.red.bold(`Error parsing config file: ${e}`));
-        process.exit;
-      }
-      flags.path = `/home/${flags.config.meta.user}/${flags.config.meta.game}-server`;
-      this.log(`server will be installed to ${flags.path}`);
-      execSync(`mkdir -p /home/${flags.config.meta.user}/.config/systemd/user`);
       return GameServer.install(flags);
     }
 

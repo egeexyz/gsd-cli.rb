@@ -16,7 +16,7 @@ class InstallCommand extends Command
       this.log(Chalk.red.bold("Using -f and -n flags together is not supported. Use one or the other."))
       process.exit()
     else if flags.name
-      execSync("node ./bin/run bootstrap -n #{flags.name}")
+      execSync("gsd-cli bootstrap -n #{flags.name}")
       flags.file = "#{process.env.PWD}/#{flags.name}.json"
       this.log(Chalk.blue("Created '#{flags.name}' config file at: #{process.env.PWD}/#{flags.file}"))
     try

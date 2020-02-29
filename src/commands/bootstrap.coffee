@@ -22,7 +22,7 @@ class BootstrapCommand extends Command
 
     execSync("sed -i \"s/USER_NAME/#{process.env.USER}/\" #{filePath}")
     execSync("cp -f #{filePath} #{process.env.PWD}")
-    this.log(Chalk.blue("Created '#{flags.name}' config file at: #{process.env.PWD}/#{filePath}"))
+    this.log(Chalk.blue("Created '#{flags.name}' config file at: #{process.env.PWD}/#{flags.name}.json"))
   run: ->
     { flags } = this.parse(BootstrapCommand)
 

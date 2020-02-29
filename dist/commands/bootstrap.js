@@ -26,7 +26,7 @@
         filePath = `${tmpPath}/${gameLookup[name]}`;
         execSync(`sed -i "s/USER_NAME/${process.env.USER}/" ${filePath}`);
         execSync(`cp -f ${filePath} ${process.env.PWD}`);
-        return this.log(Chalk.blue(`Created '${flags.name}' config file at: ${process.env.PWD}/${filePath}`));
+        return this.log(Chalk.blue(`Created '${flags.name}' config file at: ${process.env.PWD}/${flags.name}.json`));
       }
 
       run() {
@@ -49,7 +49,8 @@
       minecraft: 'minecraft.json',
       rust: 'rust.json',
       sdtd: 'sdtd.json',
-      tf2: 'tf2.json'
+      tf2: 'tf2.json',
+      scp: 'scp.json'
     };
 
     return BootstrapCommand;

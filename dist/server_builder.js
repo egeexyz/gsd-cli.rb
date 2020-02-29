@@ -30,6 +30,9 @@
         case "sdtd":
           SdtdServer.install(flags);
           break;
+        case "scp":
+          SdtdServer.install(flags);
+          break;
         default:
           console.warn("That game isn't supported yet");
       }

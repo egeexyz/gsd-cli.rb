@@ -17,6 +17,8 @@ class GameServer
         SrcdsServer.install(flags)
       when "sdtd"
         SdtdServer.install(flags)
+      when "scp"
+        SdtdServer.install(flags)
       else console.warn "That game isn't supported yet"
     console.info(Chalk.green.bold("Installation of #{flags.config.meta.game} complete! 🚀"))
 

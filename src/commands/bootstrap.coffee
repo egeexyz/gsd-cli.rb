@@ -11,7 +11,8 @@ class BootstrapCommand extends Command
     minecraft: 'minecraft.json',
     rust: 'rust.json',
     sdtd: 'sdtd.json',
-    tf2: 'tf2.json'
+    tf2: 'tf2.json',
+    scp: 'scp.json'
   }
   downloadFile: () ->
     execSync("rm -rf #{tmpPath}")

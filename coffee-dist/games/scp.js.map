@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "scp.js",
+  "sourceRoot": "../..",
+  "sources": [
+    "src/games/scp.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA,aAAA,EAAA,SAAA,EAAA;;EAAA,aAAA,GAAkB,OAAA,CAAQ,WAAR;;EAClB,CAAA,CAAE,QAAF,CAAA,GAAkB,OAAA,CAAQ,eAAR,CAAlB;;EAEM,YAAN,MAAA,UAAA,QAAwB,cAAxB;IACY,OAAT,OAAS,CAAC,KAAD,CAAA;AACR,UAAA,WAAA,EAAA;WADD,CAAA,OACC,CAAM,KAAN;MACA,UAAA,GAAa,CAAA,OAAA,CAAA,CAAU,KAAK,CAAC,MAAM,CAAC,aAAvB,EAAA,CAAA,CAAwC,KAAK,CAAC,MAAM,CAAC,aAArD,CAAA;MACb,WAAA,GAAc,CAAA,SAAA,CAAA,CAAY,UAAZ,CAAuB,oBAAvB,CAAA,CAA6C,KAAK,CAAC,IAAnD,CAAwD,aAAxD,CAAA,CAAuE,KAAK,CAAC,MAAM,CAAC,KAApF,CAA0F,eAA1F;MACd,IAA6B,KAAK,CAAC,MAAN,KAAgB,IAA7C;eAAA,QAAA,CAAS,WAAT,EAAA;;IAJQ;;EADZ;;EAOA,MAAM,CAAC,OAAP,GAAiB;AAVjB",
+  "sourcesContent": [
+    "GenericServer   = require(\"./generic\")\n{ execSync }    = require(\"child_process\")\n\nclass ScpServer extends GenericServer\n  @install: (flags) ->\n    super(flags)\n    steamLogin = \"+login #{flags.config.steamUserName} #{flags.config.steamPassword}\"\n    install_cmd = \"steamcmd #{steamLogin} +force_install_dir #{flags.path} +app_update #{flags.config.appId} validate +quit\"\n    execSync(install_cmd) unless flags.dryrun == true\n\nmodule.exports = ScpServer\n"
+  ]
+}

@@ -1,6 +1,7 @@
 const fs = require('fs')
 const Chalk = require('chalk')
-// const GameServer = require('../server_builder')
+const GameList = require('./../games')
+const SteamCmdServer = require('./../builders/steamcmd')
 const { Command, flags } = require('@oclif/command')
 const { execSync } = require('child_process')
 
@@ -13,29 +14,34 @@ class InstallCommand extends Command {
     execSync('mkdir -p /home/#{flags.config.meta.user}/.config/systemd/user')
   }
 
-  flagParser (flags) {
-    const jsonConfig = this.configParser(flags)
-    if (flags.file && flags.name) {
-      this.log(Chalk.red.bold('Using -f and -n flags together is not supported. Use one or the other.'))
-      process.exit()
-    } else if (flags.name) {
-      execSync('gsd-cli bootstrap -n #{flags.name}')
-      flags.file = '#{process.env.PWD}/#{flags.name}.json'
-      this.log(Chalk.blue("Created '#{flags.name}' config file at: #{process.env.PWD}/#{flags.file}"))
+  nameChanger (game) {
+    switch (game.name) {
+      case 'tf2':
+        game.name = 'tf'
+        break
     }
-    try {
-      this.log('uh')
-    } catch (e) {
-      this.log(Chalk.red.bold('Error parsing config file: #{e}'))
+  }
+
+  gameBuilder (flags) {
+    const game = GameList.filter((item) => { return flags.name === item.name }).pop()
+    if (game) {
+      this.nameChanger(game)
+      game.user = process.env.USER
+      game.path = `/home/${game.user}/${game.name}-server`
+      if (flags.dryrun) {
+        game.dryrun = true
+        this.log('Not installing - Creating files & folders only.')
+      }
+      return game
+    } else {
+      this.log('Game not supported')
       process.exit()
     }
-    return jsonConfig
   }
 
   run () {
     const { flags } = this.parse(InstallCommand)
-    this.flagParser(flags)
-    // GameServer.install(flags)
+    SteamCmdServer.install(this.gameBuilder(flags))
   }
 }
 
@@ -43,7 +49,6 @@ InstallCommand.description = 'Installs a dedicated game server using a config fi
 
 InstallCommand.flags = {
   name: flags.string({ char: 'n', description: 'name of the server to install' }),
-  file: flags.string({ char: 'f', description: 'path to the config file' }),
   dryrun: flags.boolean({ char: 'd', description: 'test installing a server without actually installing it' })
 }
 

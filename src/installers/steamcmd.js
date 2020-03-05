@@ -9,24 +9,28 @@ class SteamCmd extends BaseInstaller {
     super(game)
     this.appId = game.appId
     this.backend = game.backend
-    this.steamUserName = game.steamUserName
-    this.steamPassword = game.steamPassword
+    if (game.steamPassword) {
+      this.steamUserName = game.steamUserName
+      this.steamPassword = game.steamPassword
+    } else {
+      this.steamUserName = 'anonymous'
+      this.steamPassword = ''
+    }
   }
 
   install () {
-    this.steamUserName = 'anonymous'
-    this.steamPassword = ''
     const steamLogin = `+login ${this.steamUserName} ${this.steamPassword}`
     const installCmd = `steamcmd ${steamLogin} +force_install_dir ${this.path} +app_update ${this.appId} validate +quit`
 
-    super.install(this)
-    super.createUnitFile(this)
-    super.createLaunchScript(`${this.launchParams}`)
+    super.createDirectories()
+    super.createUnitFile()
+    super.createLaunchScript()
 
     if (this.dryrun) {
       console.log(Chalk.yellow('Dryrun mode enabled -- Creating files & folders only.'))
       return
     }
+    console.info(Chalk.blue.bold('Installing, please wait... ⏳'))
     execSync(installCmd)
     this.postInstall()
   }

@@ -51,24 +51,8 @@ USAGE
 <!-- usagestop -->
 ## Commands
 <!-- commands -->
-* [`gsd-cli bootstrap`](#gsd-cli-bootstrap)
 * [`gsd-cli help [COMMAND]`](#gsd-cli-help-command)
 * [`gsd-cli install`](#gsd-cli-install)
-* [`gsd-cli update`](#gsd-cli-update)
-
-## `gsd-cli bootstrap`
-
-Creates a default gsd game configuration file and places it in the current directory.
-
-```
-USAGE
-  $ gsd-cli bootstrap
-
-OPTIONS
-  -n, --name=name  name of the server to to pull configs for
-```
-
-_See code: [dist/commands/bootstrap.js](https://github.com/Egeeio/gsd-cli/blob/v1.3.5/dist/commands/bootstrap.js)_
 
 ## `gsd-cli help [COMMAND]`
 
@@ -101,20 +85,5 @@ OPTIONS
   -n, --name=name  name of the server to install
 ```
 
-_See code: [dist/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.3.5/dist/commands/install.js)_
-
-## `gsd-cli update`
-
-Updates an installed dedicated game server
-
-```
-USAGE
-  $ gsd-cli update
-
-OPTIONS
-  -n, --name=name  game server to update
-  -p, --path=path  path the game server is installed at
-```
-
-_See code: [dist/commands/update.js](https://github.com/Egeeio/gsd-cli/blob/v1.3.5/dist/commands/update.js)_
+_See code: [src/commands/install.js](https://github.com/Egeeio/gsd-cli/blob/v1.3.5/src/commands/install.js)_
 <!-- commandsstop -->

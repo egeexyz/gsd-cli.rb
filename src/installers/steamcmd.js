@@ -23,9 +23,9 @@ class SteamCmd extends BaseInstaller {
 
     if (this.dryrun) {
       console.log(Chalk.yellow('Dryrun mode enabled -- Creating files & folders only.'))
-      enableLogging(this.path, this.name)
       return
     }
+    enableLogging(this.path, this.name)
     execSync(installCmd)
   }
 }

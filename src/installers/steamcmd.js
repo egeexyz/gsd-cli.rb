@@ -1,7 +1,8 @@
 const Chalk = require('chalk')
 const BaseInstaller = require('./base')
-const { execSync, exec } = require('child_process')
+const { execSync } = require('child_process')
 const { enableLogging } = require('./backends/srcds')
+const { downloadMultiAdmin } = require('./backends/scp')
 
 class SteamCmd extends BaseInstaller {
   constructor (game) {
@@ -25,8 +26,19 @@ class SteamCmd extends BaseInstaller {
       console.log(Chalk.yellow('Dryrun mode enabled -- Creating files & folders only.'))
       return
     }
-    enableLogging(this.path, this.name)
     execSync(installCmd)
+    this.postInstall()
+  }
+
+  postInstall () {
+    switch (this.backend) {
+      case 'srcds':
+        enableLogging(this.path, this.name)
+        break
+      case 'scp':
+        downloadMultiAdmin(this.path)
+        break
+    }
   }
 }
 

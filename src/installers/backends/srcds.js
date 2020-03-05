@@ -1,4 +1,4 @@
-const { execSync, exec } = require('child_process')
+const { exec } = require('child_process')
 
 const enableLogging = (installPath, gameName) => {
   const logFilePath = `${installPath}/${gameName}`

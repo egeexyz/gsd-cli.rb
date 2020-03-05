@@ -1,7 +1,7 @@
 const fs = require('fs')
 const Chalk = require('chalk')
 const GameList = require('../supported-games')
-const SteamCmdServer = require('./../builders/steamcmd')
+const SteamCmd = require('../installers/steamcmd')
 const { Command, flags } = require('@oclif/command')
 const { execSync } = require('child_process')
 
@@ -38,8 +38,8 @@ class InstallCommand extends Command {
 
   run () {
     const { flags } = this.parse(InstallCommand)
-    const steamCmdServer = new SteamCmdServer(this.gameBuilder(flags))
-    steamCmdServer.install()
+    const steamCmd = new SteamCmd(this.gameBuilder(flags))
+    steamCmd.install()
   }
 }
 

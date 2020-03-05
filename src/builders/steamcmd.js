@@ -1,3 +1,4 @@
+const Chalk = require('chalk')
 const BaseServer = require('./base')
 const { exec } = require('child_process')
 
@@ -10,10 +11,11 @@ class SteamCmdServer extends BaseServer {
 
     super.install(game)
     super.createUnitFile(game)
-    super.createLaunchScript(game, `${game.launchParams} & /usr/bin/tail -f ${game.path}/console.log`)
+    super.createLaunchScript(game, `${game.launchParams} & /usr/bin/tail -f ${game.path}/${game.name}/console.log`)
     exec(`mkdir -p ${game.path}/${game.name}`)
     exec(`touch ${game.path}/${game.name}/console.log`)
     if (game.dryrun) {
+      console.log(Chalk.yellow('Dryrun mode enabled -- Creating files & folders only.'))
       return
     }
     exec(installCmd)

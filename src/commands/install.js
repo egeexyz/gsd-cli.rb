@@ -28,13 +28,10 @@ class InstallCommand extends Command {
       this.nameChanger(game)
       game.user = process.env.USER
       game.path = `/home/${game.user}/${game.name}-server`
-      if (flags.dryrun) {
-        game.dryrun = true
-        this.log('Not installing - Creating files & folders only.')
-      }
+      game.dryrun = flags.dryrun
       return game
     } else {
-      this.log('Game not supported')
+      this.log(`${flags.name} not supported`)
       process.exit()
     }
   }

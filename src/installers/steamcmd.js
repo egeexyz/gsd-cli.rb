@@ -8,6 +8,7 @@ class SteamCmd extends BaseInstaller {
   constructor (game) {
     super(game)
     this.appId = game.appId
+    this.backend = game.backend
     this.steamUserName = game.steamUserName
     this.steamPassword = game.steamPassword
   }

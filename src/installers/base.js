@@ -5,6 +5,7 @@ class BaseInstaller {
     this.user = game.user
     this.name = game.name
     this.path = game.path
+    this.dryrun = game.dryrun
     this.launchParams = game.launchParams
   }
 

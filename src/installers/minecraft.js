@@ -19,7 +19,7 @@ class Minecraft extends BaseInstaller {
       console.log(Chalk.yellow('Dryrun mode enabled -- Creating files & folders only.'))
       return
     }
-    // this.buildSpigot()
+    this.buildSpigot()
     this.addJar()
   }
 

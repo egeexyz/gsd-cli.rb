@@ -21,6 +21,7 @@ class Minecraft extends BaseInstaller {
     }
     this.buildSpigot()
     this.addJar()
+    fs.writeFile(`${this.path}/eula.txt`, 'true')
   }
 
   buildSpigot () {

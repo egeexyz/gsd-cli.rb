@@ -17,9 +17,11 @@ class InstallCommand extends Command {
   nameChanger (game) {
     switch (game.name) {
       case 'tf2':
+        this.log('internal name changed to tf')
         game.name = 'tf'
         break
       case 'gmod':
+        this.log('internal name changed to garrysmod')
         game.name = 'garrysmod'
         break
     }

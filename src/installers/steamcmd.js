@@ -32,7 +32,7 @@ class SteamCmd extends BaseInstaller {
       return
     }
     console.info(Chalk.blue.bold('Installing, please wait... ⏳'))
-    // execSync(installCmd)
+    execSync(installCmd)
     this.postInstall()
   }
 

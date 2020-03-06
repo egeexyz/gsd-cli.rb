@@ -32,7 +32,7 @@ const SupportedGames = [
     installer: 'steamcmd',
     backend: 'unity',
     appId: 294420,
-    launchParams: './7DaysToDieServer.x86_64 -quit -batchmode -nographics -dedicated'
+    launchParams: './7DaysToDieServer.x86_64 -quit -batchmode -nographics -dedicated \\'
   }
 ]
 

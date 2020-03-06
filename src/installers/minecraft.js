@@ -26,12 +26,12 @@ class Minecraft extends BaseInstaller {
   buildSpigot () {
     console.info(Chalk.blue.bold(`Building Spigot ${this.version}, this will take a while... ⏳`))
     this.downloadBuildTools(this.path)
-    console.log(execSync('java -Xmx1024M -jar BuildTools.jar --nogui', { cwd: this.path }).toString())
+    console.log(execSync('java -Xmx1024M -jar BuildTools.jar', { cwd: this.path }).toString())
   }
 
   async addJar () {
     const launchScript = await fs.readFile(`${this.path}/launch.sh`, 'utf8')
-    await fs.writeFile(`${this.path}/launch.sh`, `${launchScript}-jar ${this.path}/spigot-${this.version}.jar`)
+    await fs.writeFile(`${this.path}/launch.sh`, `${launchScript}-jar ${this.path}/spigot-${this.version}.jar  --nogui`)
   }
 
   downloadBuildTools (path) {

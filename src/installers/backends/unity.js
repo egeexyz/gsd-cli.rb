@@ -11,7 +11,7 @@ const unityPostInstall = async (game) => {
     case 'sdtd':
       fs.writeFile(`${game.path}/console.log`, '')
       unityExport = 'export LD_LIBRARY_PATH=.'
-      launchScript = `${launchScript} -configfile=${game.path}/serverconfig.xml\n & /usr/bin/tail -f ${game.path}/console.log`
+      launchScript = `${launchScript} -configfile=${game.path}/serverconfig.xml\\\n & /usr/bin/tail -f ${game.path}/console.log`
       break
   }
 

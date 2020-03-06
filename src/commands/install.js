@@ -19,6 +19,9 @@ class InstallCommand extends Command {
       case 'tf2':
         game.name = 'tf'
         break
+      case 'gmod':
+        game.name = 'garrysmod'
+        break
     }
   }
 

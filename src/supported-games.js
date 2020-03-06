@@ -11,14 +11,14 @@ const SupportedGames = [
     installer: 'steamcmd',
     backend: 'srcds',
     appId: 232250,
-    launchParams: './srcds_run -console -game tf +map ctf_turbine +maxplayers 24 +sv_pure 1 -condebug'
+    launchParams: './srcds_run -console -game tf +map ctf_turbine +maxplayers 24 +sv_pure 1 -condebug &'
   },
   {
     name: 'gmod',
     installer: 'steamcmd',
     backend: 'srcds',
     appId: 4020,
-    launchParams: './srcds_run -console -game garrysmod +map gm_construct +maxplayers 16 -condebug'
+    launchParams: './srcds_run -console -game garrysmod +map gm_construct +maxplayers 16 -condebug &'
   },
   {
     name: 'rust',

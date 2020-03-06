@@ -1,5 +1,9 @@
 const { exec } = require('child_process')
 
+const srcdsPostInstall = (game) => {
+  enableLogging(game.path, game.name)
+}
+
 const enableLogging = (installPath, gameName) => {
   const logFilePath = `${installPath}/${gameName}`
   exec(`mkdir -p ${logFilePath}`)
@@ -7,4 +11,4 @@ const enableLogging = (installPath, gameName) => {
   exec(`echo '& /usr/bin/tail -f ${logFilePath}/console.log' >> ${installPath}/launch.sh`)
 }
 
-module.exports = { enableLogging }
+module.exports = srcdsPostInstall

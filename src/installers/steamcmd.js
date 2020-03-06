@@ -1,8 +1,9 @@
 const Chalk = require('chalk')
 const BaseInstaller = require('./base')
 const { execSync } = require('child_process')
-const { enableLogging } = require('./backends/srcds')
-const { downloadMultiAdmin } = require('./backends/scp')
+const unityPostInstall = require('./backends/unity')
+const srcdsPostInstall = require('./backends/srcds')
+const scpPostInstall = require('./backends/scp')
 
 class SteamCmd extends BaseInstaller {
   constructor (game) {
@@ -31,17 +32,20 @@ class SteamCmd extends BaseInstaller {
       return
     }
     console.info(Chalk.blue.bold('Installing, please wait... ⏳'))
-    execSync(installCmd)
+    // execSync(installCmd)
     this.postInstall()
   }
 
   postInstall () {
     switch (this.backend) {
       case 'srcds':
-        enableLogging(this.path, this.name)
+        srcdsPostInstall(this)
         break
       case 'scp':
-        downloadMultiAdmin(this.path)
+        scpPostInstall(this)
+        break
+      case 'unity':
+        unityPostInstall(this)
         break
     }
   }

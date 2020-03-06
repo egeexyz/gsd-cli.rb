@@ -24,8 +24,8 @@ class Minecraft extends BaseInstaller {
   }
 
   buildSpigot () {
-    console.info(Chalk.blue.bold(`Building Spigot ${this.version}, this will take a while... ⏳`))
     this.downloadBuildTools(this.path)
+    console.info(Chalk.blue.bold(`Building Spigot ${this.version}, this will take a while... ⏳`))
     console.log(execSync('java -Xmx1024M -jar BuildTools.jar', { cwd: this.path }).toString())
   }
 

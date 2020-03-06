@@ -1,7 +1,8 @@
 const fs = require('fs')
 const Chalk = require('chalk')
 const GameList = require('../supported-games')
-const SteamCmd = require('../installers/steamcmd')
+const SteamCmdInstaller = require('../installers/steamcmd')
+const MinecraftInstaller = require('../installers/minecraft')
 const { Command, flags } = require('@oclif/command')
 
 class InstallCommand extends Command {
@@ -32,10 +33,20 @@ class InstallCommand extends Command {
     }
   }
 
+  install (game) {
+    switch (game.installer) {
+      case 'steamcmd':
+        new SteamCmdInstaller(game).install()
+        break
+      case 'minecraft':
+        new MinecraftInstaller(game).install()
+        break
+    }
+  }
+
   run () {
     const { flags } = this.parse(InstallCommand)
-    const steamCmd = new SteamCmd(this.gameBuilder(flags))
-    steamCmd.install()
+    this.install(this.gameBuilder(flags))
   }
 }
 

@@ -33,6 +33,12 @@ const SupportedGames = [
     backend: 'unity',
     appId: 294420,
     launchParams: './7DaysToDieServer.x86_64 -quit -batchmode -nographics -dedicated \\'
+  },
+  {
+    name: 'minecraft',
+    installer: 'minecraft',
+    version: '1.15.2',
+    launchParams: 'java -Xms1G -Xmx2G -server--nogui \\'
   }
 ]
 

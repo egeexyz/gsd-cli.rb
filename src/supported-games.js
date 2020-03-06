@@ -38,7 +38,7 @@ const SupportedGames = [
     name: 'minecraft',
     installer: 'minecraft',
     version: '1.15.2',
-    launchParams: 'java -Xms1G -Xmx2G -server--nogui \\'
+    launchParams: 'java -Xms1G -Xmx2G -server \\'
   }
 ]
 

@@ -9,6 +9,7 @@ const unityPostInstall = async (game) => {
       unityExport = `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${game.path}/RustDedicated_Data/Plugins/x86_64`
       break
     case 'sdtd':
+      fs.writeFile(`${game.path}/console.log`, '')
       unityExport = 'export LD_LIBRARY_PATH=.'
       launchScript = `${launchScript} -configfile=${game.path}/serverconfig.xml\n & /usr/bin/tail -f ${game.path}/console.log`
       break

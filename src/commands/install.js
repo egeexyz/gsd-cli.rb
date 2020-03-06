@@ -3,17 +3,8 @@ const Chalk = require('chalk')
 const GameList = require('../supported-games')
 const SteamCmd = require('../installers/steamcmd')
 const { Command, flags } = require('@oclif/command')
-const { execSync } = require('child_process')
 
 class InstallCommand extends Command {
-  configParser (flags) {
-    const jsonConfig = JSON.parse(fs.readFileSync(flags.file))
-    flags.config = jsonConfig
-    flags.path = '/home/#{flags.config.meta.user}/#{flags.config.meta.game}-server'
-    this.log('server will be installed to #{flags.path}')
-    execSync('mkdir -p /home/#{flags.config.meta.user}/.config/systemd/user')
-  }
-
   nameChanger (game) {
     switch (game.name) {
       case 'tf2':

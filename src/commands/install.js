@@ -1,6 +1,7 @@
 const fs = require('fs')
 const Chalk = require('chalk')
 const GameList = require('../supported-games')
+const TerrariaInstaller = require('../installers/tshock')
 const SteamCmdInstaller = require('../installers/steamcmd')
 const MinecraftInstaller = require('../installers/minecraft')
 const { Command, flags } = require('@oclif/command')
@@ -40,6 +41,9 @@ class InstallCommand extends Command {
         break
       case 'minecraft':
         new MinecraftInstaller(game).install()
+        break
+      case 'tshock':
+        new TerrariaInstaller(game).install()
         break
     }
   }

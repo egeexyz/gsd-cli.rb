@@ -39,6 +39,12 @@ const SupportedGames = [
     installer: 'minecraft',
     version: '1.15.2',
     launchParams: 'java -Xms1G -Xmx2G -server \\'
+  },
+  {
+    name: 'terraria',
+    installer: 'tshock',
+    version: '4.3.26',
+    launchParams: 'mono ./TerrariaServer.exe -config launch.cfg'
   }
 ]
 

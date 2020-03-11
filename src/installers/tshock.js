@@ -25,14 +25,7 @@ class TShock extends BaseInstaller {
 
   async createConfigFile () {
     const launchScript = await fs.readFile(`${this.path}/launch.sh`, 'utf8')
-    await fs.writeFile(`${this.path}/launch.cfg`, `maxplayers=8
-    worldpath=/home/egee/terraria-server/worlds
-    world=/home/egee/terraria-server/worlds/world01.wld
-    port=7777
-    password=egeeio
-    autocreate=1
-    difficulty=0
-    worldname=YEET`)
+    await fs.writeFile(`${this.path}/launch.cfg`, `maxplayers=8\nworldpath=${this.path}/worlds\nworld=${this.path}/worlds/world01.wld\nport=7777\npassword=_\nautocreate=1\ndifficulty=0\nworldname=YEET`)
   }
 
   downloadTshock () {

@@ -1,19 +1,19 @@
 [tool.poetry]
 name = "gsd-cli"
-version = "0.1.1"
+version = "0.1.0"
 description = ""
 authors = ["egee-irl <brian@egee.io>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
 Click = "^7.1.1"
-cleo = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+pylint = "^2.4.4"
 
 [tool.poetry.scripts]
-gsd-cli = "gsd_cli.hello:hello"
+gsd-cli = "gsdcli.gsdcli:gsdcli"
 
 [build-system]
 requires = ["poetry>=0.12"]

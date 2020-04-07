@@ -1,0 +1,13 @@
+---
+gmod:
+    name: garrysmod
+    installer: steamcmd
+    backend: scp
+    appId: 996560
+    launchParams: 'mono ./MultiAdmin.exe'
+tf2:
+    name: tf
+    installer: steamcmd
+    backend: srdcs
+    appId: 232250
+    launchParams: './srcds_run -console -game tf +map ctf_turbine +maxplayers 24 +sv_pure 1 -condebug &'

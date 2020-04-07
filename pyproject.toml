@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "gsd-cli"
-version = "0.1.0"
-description = ""
+name = "gsdcli"
+version = "0.1.1"
+description = "A cli for installing game servers"
 authors = ["egee-irl <brian@egee.io>"]
 
 [tool.poetry.dependencies]

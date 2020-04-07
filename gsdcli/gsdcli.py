@@ -20,12 +20,12 @@ def install(name):
 @gsdcli.command()
 @click.argument('name')
 def update(name):
-    print(f'Updating {name}')
+    print(f'Not implemented yet.')
 
 # Private Functions
 
 def parseSupported(name):
-    serverYaml = open('./gsdcli/_servers.yaml') # This needs to be fixed
+    serverYaml = open(f'{os.path.dirname(__file__)}/_servers.yaml')
     serverList = yaml.load(serverYaml, Loader=yaml.FullLoader)
     serverObj = serverList.get(name)
     if serverObj :

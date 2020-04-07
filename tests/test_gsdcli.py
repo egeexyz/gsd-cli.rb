@@ -1,4 +1,4 @@
-from gsd_cli import __version__
+from gsdcli import __version__
 
 
 def test_version():

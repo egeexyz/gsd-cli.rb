@@ -2,9 +2,9 @@
 gmod:
     name: garrysmod
     installer: steamcmd
-    backend: scp
-    appId: 996560
-    launchParams: 'mono ./MultiAdmin.exe'
+    backend: srdcs
+    appId: 4020
+    launchParams: './srcds_run -console -game garrysmod +map gm_construct +maxplayers 16 -condebug &'
 tf2:
     name: tf
     installer: steamcmd

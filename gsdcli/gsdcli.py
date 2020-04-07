@@ -16,12 +16,16 @@ def install(name):
         createDirectories(serverObj)
     createLaunchScript(serverObj)
     createUnitFile(serverObj)
-    steamCmdInstall(serverObj)
+
+    if serverObj.get('backend') == 'srdcs':
+        srdcsInstall(serverObj)
+    else:
+        exit(f"{serverObj.get('backend')} not supported yet.")
 
 @gsdcli.command()
 @click.argument('name')
 def update(name):
-    print(f'Not implemented yet.')
+    exit(f'{name} not supported')
 
 # Private Functions
 
@@ -76,3 +80,15 @@ def steamCmdInstall(serverObj):
     steamLogin = steamLoginParser(serverObj)
     installCmd = f"{steamLogin} +force_install_dir {serverObj.get('install-path')} +app_update {serverObj.get('appId')} validate +quit"
     os.system(f'steamcmd {installCmd}')
+
+def srdcsInstall(serverObj):
+    steamCmdInstall(serverObj)
+    logFilePath = f"{serverObj.get('install-path')}/{serverObj.get('name')}/console.log"
+    launchFilePath = f"{serverObj.get('install-path')}/launch.sh"
+
+    logFile = open(logFilePath, 'a')
+    logFile.close()
+    
+    launchFile = open(launchFilePath, 'a')
+    launchFile.write(f"\ntail -f {logFilePath}")
+    launchFile.close()

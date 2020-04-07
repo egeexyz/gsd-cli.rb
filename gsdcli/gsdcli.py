@@ -16,6 +16,7 @@ def install(name):
         createDirectories(serverObj)
     createLaunchScript(serverObj)
     createUnitFile(serverObj)
+    steamCmdInstall(serverObj)
 
 @gsdcli.command()
 @click.argument('name')
@@ -64,3 +65,14 @@ def createUnitFile(serverObj):
     launchFile = open(unitFilePath, "w+")
     launchFile.write(f"[Unit]\nAfter=network.target\nDescription=Daemon for {serverObj.get('friendly-name')} dedicated server\n[Install]\nWantedBy=default.target\n[Service]\nType=simple\nWorkingDirectory={serverObj.get('install-path')}\nExecStart=/bin/bash {serverObj.get('install-path')}/launch.sh")
     launchFile.close()
+
+def steamLoginParser(serverObj):
+    if not serverObj.get('steamUserName'):
+        serverObj.update({'steamUserName' : 'anonymous'})
+        serverObj.update({'steamPassword' : ''})
+    return f"+login {serverObj.get('steamUserName')} {serverObj.get('steamPassword')}"
+
+def steamCmdInstall(serverObj):
+    steamLogin = steamLoginParser(serverObj)
+    installCmd = f"{steamLogin} +force_install_dir {serverObj.get('install-path')} +app_update {serverObj.get('appId')} validate +quit"
+    os.system(f'steamcmd {installCmd}')

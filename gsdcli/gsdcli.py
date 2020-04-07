@@ -2,6 +2,7 @@ import os
 import yaml 
 import click
 import getpass
+import urllib.request
 
 @click.group()
 def gsdcli():
@@ -22,12 +23,7 @@ def install(name):
     else:
         exit(f"{serverObj.get('backend')} not supported yet.")
 
-@gsdcli.command()
-@click.argument('name')
-def update(name):
-    exit(f'{name} not supported')
-
-# Private Functions
+##### Private Functions #####
 
 def parseSupported(name):
     serverYaml = open(f'{os.path.dirname(__file__)}/_servers.yaml')

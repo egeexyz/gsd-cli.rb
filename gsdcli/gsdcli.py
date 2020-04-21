@@ -20,6 +20,12 @@ def install(name):
 
     if serverObj.get('backend') == 'srdcs':
         srdcsInstall(serverObj)
+    elif serverObj.get('backend') == 'scp':
+        steamCmdInstall(serverObj)
+        urllib.request.urlretrieve('https://github.com/Grover-c13/MultiAdmin/releases/download/3.2.5/MultiAdmin.exe', f"{serverObj.get('install-path')}/MultiAdmin.exe")
+    elif serverObj.get('backend') == 'unity':
+        steamCmdInstall(serverObj)
+        urllib.request.urlretrieve('https://github.com/Grover-c13/MultiAdmin/releases/download/3.2.5/MultiAdmin.exe', f"{serverObj.get('install-path')}/MultiAdmin.exe")
     else:
         exit(f"{serverObj.get('backend')} not supported yet.")
 
@@ -88,3 +94,13 @@ def srdcsInstall(serverObj):
     launchFile = open(launchFilePath, 'a')
     launchFile.write(f"\ntail -f {logFilePath}")
     launchFile.close()
+
+def unityHandler(serverObj):
+    if serverObj.get('name') == 'rust':
+        pass
+    elif serverObj.get('name') == 'sdtd':
+        pass
+
+if __name__ == "__main__":
+    # For Snapcraft
+    gsdcli()

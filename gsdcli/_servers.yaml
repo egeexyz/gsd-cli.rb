@@ -13,7 +13,19 @@ tf2:
     launchParams: './srcds_run -console -game tf +map ctf_turbine +maxplayers 24 +sv_pure 1 -condebug &'
 scp:
     name: scp
-    installer: scp
+    installer: steamcmd
     backend: srdcs
     appId: 996560
     launchParams: 'mono ./MultiAdmin.exe'
+rust:
+    name: rust
+    installer: steamcmd
+    backend: unity
+    appId: 258550
+    launchParams: './RustDedicated +server.ip 0.0.0.0 +server.port 28015 +server.identity rust +rcon.web 1 +rcon.ip 0.0.0.0 +rcon.port 28016 +rcon.password _'
+sdtd:
+    name: sdtd
+    installer: steamcmd
+    backend: srdcs
+    appId: 294420
+    launchParams: './7DaysToDieServer.x86_64 -quit -batchmode -nographics -dedicated'

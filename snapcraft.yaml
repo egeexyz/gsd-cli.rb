@@ -1,0 +1,23 @@
+name: gsd-cli
+version: git
+summary: The gsd-cli
+description: |
+  Basically yes
+base: core18
+confinement: classic
+grade: stable
+
+apps:
+  gsd-cli:
+    command: bin/gsd-cli
+    environment:
+      LANG: 'C.UTF-8'
+      LC_ALL: 'C.UTF-8'
+
+parts:
+  gsd-cli:
+    plugin: python
+    source: .
+    python-packages:
+      - Click
+      - pyyaml
